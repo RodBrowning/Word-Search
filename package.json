@@ -5,7 +5,8 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "deploy-gh-pages": "sh deploy.sh"
   },
   "dependencies": {
     "cross-fetch": "^3.1.5",
