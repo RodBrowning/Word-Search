@@ -1,7 +1,25 @@
 {
-  "name": "currency",
+  "name": "name",
   "private": true,
   "version": "0.0.0",
+  "type": "commonjs",
+  "description": "Some desc.",
+  "author": "Rodrigo da Silva Moura",
+  "email": "rodrigo.browning@gmail.com",
+  "url": "https://github.com/RodBrowning",
+  "license": "license",
+  "homepage": "project host url",
+  "repository": {
+    "type": "git",
+    "url": "REPO link"
+  },
+  "bugs": {
+    "url": "REPO issues link"
+  },
+  "engines": {
+    "npm": ">=8.4.1",
+    "node": ">=16.10.0"
+  },
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
