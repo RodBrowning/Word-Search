@@ -1,0 +1,86 @@
+@import '/src/scss/variables/colors';
+@import '/src/scss/fonts';
+
+.App {
+  background-color: rgba(0, 0, 0, 0.1);
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  grid-template-rows: 60px 1fr 60px;
+  height: 100vh;
+
+  header,
+  .panel,
+  footer {
+    background-color: rgba(0, 0, 0, 0.2);
+    grid-column: 1 / 13;
+    align-items: center;
+  }
+
+  header,
+  .panel {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    .inner-header,
+    .inner-panel {
+      display: flex;
+      justify-content: space-between;
+      grid-column: 1 / 12;
+      grid-column-gap: 24px;
+    }
+  }
+
+  header {
+    background-color: rgba(0, 0, 0, 0.3);
+    padding: 12px 24px;
+    .inner-header {
+      background-color: rgba(0, 0, 0, 0.2);
+      height: 100%;
+      .logo {
+        width: 70px;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.4);
+      }
+      nav {
+        width: 200px;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+      }
+    }
+  }
+
+  .panel {
+    background-color: rgba(0, 0, 0, 0.2);
+    padding: 40px 24px;
+    .inner-panel {
+      background-color: rgba(0, 0, 0, 0.6);
+      height: 100%;
+      aside {
+        background-color: rgba(0, 0, 0, 0.3);
+        height: 100%;
+        width: 450px;
+      }
+      main {
+        background-color: rgba(0, 0, 0, 0.1);
+        height: 100%;
+        width: 100%;
+      }
+    }
+  }
+
+  footer {
+    display: flex;
+    justify-content: space-between;
+    background-color: rgba(0, 0, 0, 0.4);
+    padding: 12px 24px;
+    .copyright {
+      width: 200px;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.4);
+    }
+    .social-media {
+      width: 200px;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.8);
+    }
+  }
+}
