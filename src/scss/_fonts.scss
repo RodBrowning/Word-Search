@@ -1,0 +1,44 @@
+p {
+  font-family: 'Tai Heritage Pro';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 21px;
+  line-height: 32px;
+  color: $black-75;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: 'Lato';
+  font-style: normal;
+  line-height: 30px;
+  color: $black;
+}
+h1 {
+  font-weight: 700;
+  font-size: 49px;
+}
+h2 {
+  font-weight: 700;
+  font-size: 39px;
+}
+h3 {
+  font-weight: 300;
+  font-size: 31px;
+}
+h4 {
+  font-weight: 700;
+  font-size: 25px;
+}
+h5 {
+  font-weight: 700;
+  font-size: 20px;
+}
+h6 {
+  font-weight: 700;
+  font-size: 16px;
+}
