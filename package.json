@@ -1,20 +1,20 @@
 {
-  "name": "name",
-  "private": true,
-  "version": "0.0.0",
+  "name": "Word Search",
+  "private": false,
+  "version": "1.0.0",
   "type": "commonjs",
   "description": "Some desc.",
   "author": "Rodrigo da Silva Moura",
   "email": "rodrigo.browning@gmail.com",
   "url": "https://github.com/RodBrowning",
-  "license": "license",
-  "homepage": "project host url",
+  "license": "MIT",
+  "homepage": "https://github.com/RodBrowning/Word-Search",
   "repository": {
     "type": "git",
-    "url": "REPO link"
+    "url": "https://github.com/RodBrowning/Word-Search.git"
   },
   "bugs": {
-    "url": "REPO issues link"
+    "url": "https://github.com/RodBrowning/Word-Search/issues"
   },
   "engines": {
     "npm": ">=8.4.1",
@@ -27,7 +27,6 @@
     "deploy-gh-pages": "sh deploy.sh"
   },
   "dependencies": {
-    "cross-fetch": "^3.1.5",
     "react": "^18.0.0",
     "react-dom": "^18.0.0"
   },
