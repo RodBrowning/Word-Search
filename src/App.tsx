@@ -18,6 +18,9 @@ const App = () => {
         </div>
       </header>
       <div className="panel">
+        <div className="bg-decoration">
+          <div className="inner-bg-decoration" />
+        </div>
         <div className="inner-panel">
           <aside></aside>
           <main></main>
