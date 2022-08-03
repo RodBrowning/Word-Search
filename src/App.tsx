@@ -32,10 +32,10 @@ const App = () => {
         </div>
         <div className="social-media">
           <div className="img">
-            <img src="/assets/instagram.svg" alt="github" />
+            <img src="/assets/github.svg" alt="github" />
           </div>
           <div className="img">
-            <img src="/assets/github.svg" alt="github" />
+            <img src="/assets/instagram.svg" alt="github" />
           </div>
           <div className="img">
             <img src="/assets/whatsapp.svg" alt="github" />
