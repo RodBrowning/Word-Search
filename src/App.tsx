@@ -1,14 +1,12 @@
 import './App.scss';
 
-import logo from '../public/logo.svg';
-
 const App = () => {
   return (
     <div className="App">
       <header>
         <div className="inner-header">
           <div className="logo">
-            <img src={logo} alt="" />
+            <img src="/logo.svg" alt="" />
           </div>
           <nav>
             <a href="/" className="active">
@@ -26,8 +24,20 @@ const App = () => {
         </div>
       </div>
       <footer>
-        <div className="copyright"></div>
-        <div className="social-media"></div>
+        <div className="copyright">
+          <p>Copyright © 2022. Todos os direitos reservados. Desenvolvido por Rodrigo Moura.</p>
+        </div>
+        <div className="social-media">
+          <div className="img">
+            <img src="/assets/instagram.svg" alt="github" />
+          </div>
+          <div className="img">
+            <img src="/assets/github.svg" alt="github" />
+          </div>
+          <div className="img">
+            <img src="/assets/whatsapp.svg" alt="github" />
+          </div>
+        </div>
       </footer>
     </div>
   );
