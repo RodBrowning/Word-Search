@@ -1,5 +1,15 @@
+$heading-font: 'Lato';
+$text-font: 'Tai Heritage Pro';
+
+$h1-size: 49px;
+$h2-size: 39px;
+$h3-size: 31px;
+$h4-size: 25px;
+$h5-size: 20px;
+$h6-size: 16px;
+
 p {
-  font-family: 'Tai Heritage Pro';
+  font-family: $text-font;
   font-style: normal;
   font-weight: 400;
   font-size: 21px;
@@ -13,32 +23,39 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: 'Lato';
+  font-family: $heading-font;
   font-style: normal;
   line-height: 30px;
   color: $black;
 }
 h1 {
   font-weight: 700;
-  font-size: 49px;
+  font-size: h1-size;
 }
 h2 {
   font-weight: 700;
-  font-size: 39px;
+  font-size: $h2-size;
 }
 h3 {
   font-weight: 300;
-  font-size: 31px;
+  font-size: $h3-size;
 }
 h4 {
   font-weight: 700;
-  font-size: 25px;
+  font-size: $h4-size;
 }
 h5 {
   font-weight: 700;
-  font-size: 20px;
+  font-size: $h5-size;
 }
 h6 {
   font-weight: 700;
-  font-size: 16px;
+  font-size: $h6-size;
+}
+
+a {
+  font-family: $heading-font;
+  font-size: $h6-size;
+  font-weight: 700;
+  text-decoration: none;
 }

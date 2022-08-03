@@ -1,12 +1,22 @@
 import './App.scss';
 
+import logo from '../public/logo.svg';
+
 const App = () => {
   return (
     <div className="App">
       <header>
         <div className="inner-header">
-          <div className="logo"></div>
-          <nav></nav>
+          <div className="logo">
+            <img src={logo} alt="" />
+          </div>
+          <nav>
+            <a href="/" className="active">
+              Inicio
+            </a>
+            <a href="#">Sobre</a>
+            <a href="#">Contato</a>
+          </nav>
         </div>
       </header>
       <div className="panel">
