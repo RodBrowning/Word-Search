@@ -101,18 +101,36 @@
           padding-inline-start: 0px;
           margin: 0;
           button {
+            position: relative;
             display: flex;
             padding: 0;
             border: 0;
+            cursor: pointer;
             background-color: transparent;
             transition: all 0.15s ease-in-out;
             &:hover,
             &.active {
-              cursor: pointer;
               transform: scale(0.9);
-              svg > path {
-                fill: $primary;
+              &:before {
+                width: 200%;
+                height: 200%;
               }
+              svg > path {
+                fill: $tertiary;
+              }
+            }
+            &:before {
+              position: absolute;
+              content: '';
+              top: 50%;
+              left: 50%;
+              transform: translate(-50%, -50%);
+              width: 0;
+              height: 0;
+              border-radius: 50%;
+              z-index: -1;
+              background: $primary;
+              transition: all 0.15s ease-in-out;
             }
             svg > path {
               transition: all 0.15s ease-in-out;
