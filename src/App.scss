@@ -120,15 +120,16 @@
           }
         }
         .words {
-          position: relative;
           .word-list {
+            position: relative;
+            height: 100%;
             &::before {
               position: absolute;
               left: 0;
               content: '';
               width: 7px;
+              height: 100%;
               border-radius: 50px;
-              height: calc(100% + 14px);
               background-color: $primary;
             }
             ul {
@@ -231,15 +232,6 @@
           background-color: $tertiary;
           transition: all 0.25s ease-in-out;
         }
-        svg {
-          position: relative;
-          top: 0;
-          transition: all 0.25s ease-in-out;
-          path {
-            fill: $tertiary;
-            transition: all 0.25s ease-in-out;
-          }
-        }
         &:hover {
           &::before {
             background-color: $primary;
@@ -252,13 +244,17 @@
             top: 50%;
             transform: translateY(-50%) scale(1.5);
             path {
-              fill: $tertiary;
-            }
-          }
-          &:hover {
-            svg > path {
               fill: $primary;
             }
+          }
+        }
+        svg {
+          position: relative;
+          top: 0;
+          transition: all 0.25s ease-in-out;
+          path {
+            fill: $tertiary;
+            transition: all 0.25s ease-in-out;
           }
         }
       }
