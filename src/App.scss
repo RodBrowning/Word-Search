@@ -327,8 +327,8 @@
             opacity: 0;
           }
           svg {
-            top: 50%;
-            transform: translateY(-50%) scale(1.5);
+            height: 100%;
+            transform: scale(1.5);
             path {
               fill: $primary;
             }
