@@ -2,7 +2,7 @@ import './App.scss';
 
 const App = () => {
   const table = () => {
-    const board = Array(15)
+    return Array(15)
       .fill(0)
       .map(() => {
         return new Array(30).fill('*');
@@ -11,20 +11,20 @@ const App = () => {
         return fArr.map(() => {
           return String.fromCharCode(Math.floor(65 + Math.random() * (90 - 65 + 1)));
         });
+      })
+      .map((row) => {
+        return (
+          <tr>
+            {row.map((cell) => {
+              return (
+                <td>
+                  <h6>{cell}</h6>
+                </td>
+              );
+            })}
+          </tr>
+        );
       });
-    return board.map((row) => {
-      return (
-        <tr>
-          {row.map((cell) => {
-            return (
-              <td>
-                <h6>{cell}</h6>
-              </td>
-            );
-          })}
-        </tr>
-      );
-    });
   };
 
   return (

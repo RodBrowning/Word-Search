@@ -181,6 +181,8 @@
               background-color: white;
               border-collapse: collapse;
               border-radius: 16px;
+              cursor: pointer;
+              user-select: none;
               --inner-padding: 4px;
               tr {
                 &:first-child {
