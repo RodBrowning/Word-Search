@@ -1,6 +1,32 @@
 import './App.scss';
 
 const App = () => {
+  const table = () => {
+    const board = Array(15)
+      .fill(0)
+      .map(() => {
+        return new Array(30).fill('*');
+      })
+      .map((fArr) => {
+        return fArr.map(() => {
+          return String.fromCharCode(Math.floor(65 + Math.random() * (90 - 65 + 1)));
+        });
+      });
+    return board.map((row) => {
+      return (
+        <tr>
+          {row.map((cell) => {
+            return (
+              <td>
+                <h6>{cell}</h6>
+              </td>
+            );
+          })}
+        </tr>
+      );
+    });
+  };
+
   return (
     <div className="App">
       <header>
@@ -89,7 +115,25 @@ const App = () => {
               </div>
             </div>
           </aside>
-          <main></main>
+          <main>
+            <div className="board">
+              <div className="table-container">
+                <table>
+                  <tbody>{table()}</tbody>
+                </table>
+              </div>
+              <div className="placar">
+                <div className="pontos">
+                  <h4>
+                    <span>01</span> <span>Pontos</span>
+                  </h4>
+                </div>
+                <div className="nivel">
+                  <span>Nivel</span> <span>01</span>
+                </div>
+              </div>
+            </div>
+          </main>
         </div>
       </div>
       <footer>
