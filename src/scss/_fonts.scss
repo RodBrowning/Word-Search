@@ -27,6 +27,7 @@ h6 {
   font-style: normal;
   line-height: 30px;
   color: $black;
+  margin: 0;
 }
 h1 {
   font-weight: 700;
@@ -37,8 +38,12 @@ h2 {
   font-size: $h2-size;
 }
 h3 {
-  font-weight: 300;
+  font-weight: 700;
   font-size: $h3-size;
+  &.thin {
+    font-weight: 300;
+    font-size: $h3-size;
+  }
 }
 h4 {
   font-weight: 700;

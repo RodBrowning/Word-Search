@@ -87,13 +87,79 @@
     padding-bottom: 40px;
     z-index: 0;
     .inner-panel {
-      background-color: rgba(0, 0, 0, 0.6);
       height: 100%;
       z-index: 2;
       aside {
-        background-color: rgba(0, 0, 0, 0.3);
         height: 100%;
         width: 450px;
+        display: flex;
+        flex-direction: column;
+        gap: 24px;
+        menu {
+          display: flex;
+          gap: 24px;
+          padding-inline-start: 0px;
+          margin: 0;
+          button {
+            display: flex;
+            padding: 0;
+            border: 0;
+            background-color: transparent;
+            transition: all 0.15s ease-in-out;
+            &:hover,
+            &.active {
+              cursor: pointer;
+              transform: scale(0.9);
+              svg > path {
+                fill: $primary;
+              }
+            }
+            svg > path {
+              transition: all 0.15s ease-in-out;
+            }
+          }
+        }
+        .words {
+          position: relative;
+          .word-list {
+            &::before {
+              position: absolute;
+              left: 0;
+              content: '';
+              width: 7px;
+              border-radius: 50px;
+              height: calc(100% + 14px);
+              background-color: $primary;
+            }
+            ul {
+              padding-left: 15px;
+              margin: 0;
+              margin-top: 40px;
+              list-style: none;
+              li {
+                margin-bottom: 8px;
+                &:last-child {
+                  margin-bottom: 0px;
+                }
+                span {
+                  position: relative;
+                  display: inline-block;
+                  &.found::before {
+                    position: absolute;
+                    left: 0;
+                    top: 50%;
+                    transform: translateY(-50%);
+                    content: '';
+                    width: 100%;
+                    height: 5px;
+                    background-color: $secondary;
+                    z-index: -1;
+                  }
+                }
+              }
+            }
+          }
+        }
       }
       main {
         background-color: rgba(0, 0, 0, 0.1);
