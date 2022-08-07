@@ -1,5 +1,6 @@
 $heading-font: 'Lato';
 $text-font: 'Tai Heritage Pro';
+$text-font-size: 21px;
 
 $h1-size: 49px;
 $h2-size: 39px;
@@ -12,7 +13,7 @@ p {
   font-family: $text-font;
   font-style: normal;
   font-weight: 400;
-  font-size: 21px;
+  font-size: $text-font-size;
   line-height: 32px;
   color: $black-75;
 }
