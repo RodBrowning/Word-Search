@@ -67,6 +67,9 @@
           }
         }
       }
+      nav.mobile {
+        display: none;
+      }
     }
   }
 
@@ -276,6 +279,9 @@
         padding-bottom: 92px;
         .contact-text {
           grid-column: 2 / 7;
+          a:hover {
+            text-decoration: underline;
+          }
         }
         .contact-form {
           grid-column: 8 / 12;
@@ -292,7 +298,7 @@
             font-size: $h5-size;
             color: $black-75;
             &:last-child {
-              flex-grow: 2;
+              width: 100%;
             }
             input,
             textarea {
@@ -347,6 +353,9 @@
         .about-sample {
           grid-column: 8 / 12;
           align-self: center;
+          span.under-bar {
+            display: none;
+          }
           .board {
             border-width: 4px 6px 6px 4px;
             border-style: solid;
@@ -364,34 +373,40 @@
               cursor: pointer;
               user-select: none;
               --inner-padding: 4px;
-              tr {
-                &:first-child {
-                  td {
-                    border-top: 0px;
-                    padding-top: var(--inner-padding);
-                  }
+              tbody {
+                display: block;
+                &.mobile {
+                  display: none;
                 }
-                &:last-child {
-                  td {
-                    border-bottom: 0px;
-                    padding-bottom: var(--inner-padding);
-                  }
-                }
-                td {
-                  border: 1px solid black;
-                  width: 35px;
-                  height: 25px;
-                  text-align: center;
+                tr {
                   &:first-child {
-                    border-left: 0px;
-                    padding-left: var(--inner-padding);
+                    td {
+                      border-top: 0px;
+                      padding-top: var(--inner-padding);
+                    }
                   }
                   &:last-child {
-                    border-right: 0px;
-                    padding-right: var(--inner-padding);
+                    td {
+                      border-bottom: 0px;
+                      padding-bottom: var(--inner-padding);
+                    }
                   }
-                  h6 {
-                    line-height: unset;
+                  td {
+                    border: 1px solid black;
+                    width: 35px;
+                    height: 25px;
+                    text-align: center;
+                    &:first-child {
+                      border-left: 0px;
+                      padding-left: var(--inner-padding);
+                    }
+                    &:last-child {
+                      border-right: 0px;
+                      padding-right: var(--inner-padding);
+                    }
+                    h6 {
+                      line-height: unset;
+                    }
                   }
                 }
               }
@@ -423,7 +438,7 @@
       left: 0;
       width: 100%;
       height: calc(100% + 60px);
-      filter: drop-shadow(-40px 0px 14px $black-25);
+      filter: drop-shadow(-16px 0px 13px $black-25);
       .inner-bg-decoration {
         width: 100%;
         height: 100%;

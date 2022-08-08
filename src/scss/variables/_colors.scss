@@ -4,12 +4,7 @@ $tertiary: #ffe8c6;
 $quaternary: #ffd08d;
 $gradient: linear-gradient(90deg, #ff8c1a 0%, #ffd08d 100%);
 $main-bg-gradient: linear-gradient(90deg, rgba(255, 140, 26, 0.4) 0%, rgba(255, 208, 141, 0.4) 100%);
-$vertical-gradient: linear-gradient(
-  180deg,
-  rgb(255, 140, 26) 0%,
-  rgb(255, 208, 141) 70%,
-  rgba(255, 208, 141, 0.1) 100%
-);
+$vertical-gradient: linear-gradient(180deg, rgb(255, 140, 26) 0%, rgba(255, 208, 141, 0.8) 100%);
 
 $black: #0d0701;
 $black-75: rgba(13, 7, 1, 0.75);

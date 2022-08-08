@@ -1,4 +1,5 @@
 import './App.scss';
+import './App-mobile.scss';
 
 const App = () => {
   const table = (rows: number, columns: number) => {
@@ -40,6 +41,27 @@ const App = () => {
             </a>
             <a href="#">Sobre</a>
             <a href="#">Contato</a>
+          </nav>
+          <nav className="mobile">
+            <svg width="30" height="25" viewBox="0 0 30 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect
+                opacity="0.75"
+                width="29"
+                height="7"
+                rx="3.5"
+                transform="matrix(1 0 0.0777065 0.996976 0 0)"
+                fill="#FFE8C6"
+              />
+              <rect opacity="0.75" y="8.97882" width="29" height="7" rx="3.5" fill="#FFE8C6" />
+              <rect opacity="0.75" y="17.9788" width="29" height="7" rx="3.5" fill="#FFE8C6" />
+            </svg>
+            <menu>
+              <a href="/" className="active">
+                Inicio
+              </a>
+              <a href="#">Sobre</a>
+              <a href="#">Contato</a>
+            </menu>
           </nav>
         </div>
       </header>
@@ -118,7 +140,7 @@ const App = () => {
           <main>
             <div className="board">
               <table>
-                <tbody>{table(15, 30)}</tbody>
+                <tbody>{table(15, 15)}</tbody>
               </table>
             </div>
             <div className="placar">
@@ -141,6 +163,7 @@ const App = () => {
             <p>
               Oi. Eu sou Rodrigo Moura e trabalho como desenvolvedor web desde 2020. Este é um dos meus projetos de
               portfólio. Você poderá encontrar mais detalhes do seu desenvolvimento no Github:
+              <br />
               <a href="https://github.com/RodBrowning/Word-Search" target="_black">
                 https://github.com/RodBrowning/Word-Search
               </a>
@@ -158,7 +181,7 @@ const App = () => {
             </label>
             <label htmlFor="mensagem">
               Mensagem
-              <textarea rows={4} cols={50} name="mensagem" />
+              <textarea rows={4} cols={20} name="mensagem" />
             </label>
             <button type="submit">
               <span>
@@ -202,9 +225,13 @@ const App = () => {
             </p>
           </div>
           <div className="about-sample">
+            <span className="under-bar">
+              <h1>Caça-palavras</h1>
+            </span>
             <div className="board">
               <table>
                 <tbody>{table(15, 10)}</tbody>
+                <tbody className="mobile">{table(8, 13)}</tbody>
               </table>
             </div>
           </div>
@@ -212,7 +239,7 @@ const App = () => {
       </div>
       <footer>
         <div className="copyright">
-          <p>Copyright © 2022. Todos os direitos reservados. Desenvolvido por Rodrigo Moura.</p>
+          <p>Copyright © 2022. Todos os direitos reservados. Desenvolvido por Rodrigo&nbsp;Moura.</p>
         </div>
         <div className="social-media">
           <div className="img">
