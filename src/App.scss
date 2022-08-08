@@ -84,9 +84,9 @@
       z-index: 2;
       display: grid;
       grid-template-columns: repeat(12, 1fr);
+      grid-column: 1 / 13;
+      grid-column-gap: 20px;
       &-game {
-        grid-column: 1 / 13;
-        grid-column-gap: 20px;
         padding-top: 40px;
         padding-bottom: 40px;
         aside {
@@ -184,127 +184,98 @@
           grid-column: 4 / 12;
           height: 100%;
           .board {
-            display: flex;
-            flex-direction: column;
-            flex-wrap: wrap;
-            align-content: flex-end;
-            .table-container {
-              border-width: 4px 6px 6px 4px;
-              border-style: solid;
-              border-color: $primary;
-              border-radius: 20px;
-              box-shadow: 2px 2px 2px $black-25;
-              overflow: hidden;
-              table {
-                background-color: white;
-                border-collapse: collapse;
-                border-radius: 16px;
-                cursor: pointer;
-                user-select: none;
-                --inner-padding: 4px;
-                tr {
+            border-width: 4px 6px 6px 4px;
+            border-style: solid;
+            border-color: $primary;
+            border-radius: 20px;
+            box-shadow: 2px 2px 2px $black-25;
+            overflow: hidden;
+            margin-left: auto;
+            width: fit-content;
+            table {
+              width: 100%;
+              background-color: white;
+              border-collapse: collapse;
+              border-radius: 16px;
+              cursor: pointer;
+              user-select: none;
+              --inner-padding: 4px;
+              tr {
+                &:first-child {
+                  td {
+                    border-top: 0px;
+                    padding-top: var(--inner-padding);
+                  }
+                }
+                &:last-child {
+                  td {
+                    border-bottom: 0px;
+                    padding-bottom: var(--inner-padding);
+                  }
+                }
+                td {
+                  border: 1px solid black;
+                  width: 35px;
+                  height: 25px;
+                  text-align: center;
                   &:first-child {
-                    td {
-                      border-top: 0px;
-                      padding-top: var(--inner-padding);
-                    }
+                    border-left: 0px;
+                    padding-left: var(--inner-padding);
                   }
                   &:last-child {
-                    td {
-                      border-bottom: 0px;
-                      padding-bottom: var(--inner-padding);
-                    }
+                    border-right: 0px;
+                    padding-right: var(--inner-padding);
                   }
-                  td {
-                    border: 1px solid black;
-                    width: 35px;
-                    height: 25px;
-                    text-align: center;
-                    &:first-child {
-                      border-left: 0px;
-                      padding-left: var(--inner-padding);
-                    }
-                    &:last-child {
-                      border-right: 0px;
-                      padding-right: var(--inner-padding);
-                    }
-                    h6 {
-                      line-height: unset;
-                    }
+                  h6 {
+                    line-height: unset;
                   }
                 }
               }
             }
-            .placar {
-              position: relative;
-              font-family: 'Lato';
-              text-align: right;
-              margin-top: 54px;
-              &:before {
-                content: '';
-                position: absolute;
-                right: -16px;
-                height: 100%;
-                width: 12px;
-                background: $vertical-gradient;
-                border-radius: 50px;
-              }
-              .pontos {
-                span {
-                  font-weight: 700;
-                  &:first-child {
-                    font-size: $h1-size;
-                    color: $primary;
-                  }
-                  &:last-child {
-                    font-size: $h3-size;
-                    color: $black;
-                  }
+          }
+          .placar {
+            position: relative;
+            font-family: 'Lato';
+            text-align: right;
+            margin-top: 54px;
+            &:before {
+              content: '';
+              position: absolute;
+              right: -16px;
+              height: 100%;
+              width: 12px;
+              background: $vertical-gradient;
+              border-radius: 50px;
+            }
+            .pontos {
+              span {
+                font-weight: 700;
+                &:first-child {
+                  font-size: $h1-size;
+                  color: $primary;
+                }
+                &:last-child {
+                  font-size: $h3-size;
+                  color: $black;
                 }
               }
-              .nivel {
-                margin-top: 16px;
-                span {
-                  font-size: $h4-size;
-                  color: $secondary;
-                  font-weight: 700;
-                }
+            }
+            .nivel {
+              margin-top: 16px;
+              span {
+                font-size: $h4-size;
+                color: $secondary;
+                font-weight: 700;
               }
             }
           }
         }
       }
       &-contact {
-        grid-column: 1 / 13;
-        grid-column-gap: 20px;
         padding-top: 92px;
         padding-bottom: 92px;
         .contact-text {
           grid-column: 2 / 7;
-          span {
-            position: relative;
-            &::before {
-              position: absolute;
-              content: '';
-              width: 30%;
-              height: 6px;
-              left: 0;
-              bottom: -24px;
-              border-radius: 8px;
-              background-color: $primary;
-            }
-            h1 {
-              margin-bottom: 56px;
-            }
-          }
-          p,
-          a {
-            color: $black;
-          }
-          a:hover {
-            color: $primary;
-            text-decoration: underline;
-          }
         }
         .contact-form {
           grid-column: 8 / 12;
@@ -368,6 +339,81 @@
         }
       }
       &-about {
+        padding-top: 92px;
+        padding-bottom: 92px;
+        .about-text {
+          grid-column: 2 / 7;
+        }
+        .about-sample {
+          grid-column: 8 / 12;
+          align-self: center;
+          .board {
+            border-width: 4px 6px 6px 4px;
+            border-style: solid;
+            border-color: $primary;
+            border-radius: 20px;
+            box-shadow: 2px 2px 2px $black-25;
+            overflow: hidden;
+            margin-left: auto;
+            width: fit-content;
+            table {
+              width: 100%;
+              background-color: white;
+              border-collapse: collapse;
+              border-radius: 16px;
+              cursor: pointer;
+              user-select: none;
+              --inner-padding: 4px;
+              tr {
+                &:first-child {
+                  td {
+                    border-top: 0px;
+                    padding-top: var(--inner-padding);
+                  }
+                }
+                &:last-child {
+                  td {
+                    border-bottom: 0px;
+                    padding-bottom: var(--inner-padding);
+                  }
+                }
+                td {
+                  border: 1px solid black;
+                  width: 35px;
+                  height: 25px;
+                  text-align: center;
+                  &:first-child {
+                    border-left: 0px;
+                    padding-left: var(--inner-padding);
+                  }
+                  &:last-child {
+                    border-right: 0px;
+                    padding-right: var(--inner-padding);
+                  }
+                  h6 {
+                    line-height: unset;
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+      .under-bar {
+        position: relative;
+        &::before {
+          position: absolute;
+          content: '';
+          width: 30%;
+          height: 6px;
+          left: 0;
+          bottom: -24px;
+          border-radius: 8px;
+          background-color: $primary;
+        }
+        h1 {
+          margin-bottom: 56px;
+        }
       }
     }
     .bg-decoration {

@@ -1,11 +1,11 @@
 import './App.scss';
 
 const App = () => {
-  const table = () => {
-    return Array(15)
+  const table = (rows: number, columns: number) => {
+    return Array(rows)
       .fill(0)
       .map(() => {
-        return new Array(30).fill('*');
+        return new Array(columns).fill('*');
       })
       .map((fArr) => {
         return fArr.map(() => {
@@ -117,27 +117,25 @@ const App = () => {
           </aside>
           <main>
             <div className="board">
-              <div className="table-container">
-                <table>
-                  <tbody>{table()}</tbody>
-                </table>
+              <table>
+                <tbody>{table(15, 30)}</tbody>
+              </table>
+            </div>
+            <div className="placar">
+              <div className="pontos">
+                <h4>
+                  <span>01</span> <span>Pontos</span>
+                </h4>
               </div>
-              <div className="placar">
-                <div className="pontos">
-                  <h4>
-                    <span>01</span> <span>Pontos</span>
-                  </h4>
-                </div>
-                <div className="nivel">
-                  <span>Nivel</span> <span>01</span>
-                </div>
+              <div className="nivel">
+                <span>Nivel</span> <span>01</span>
               </div>
             </div>
           </main>
         </div>
         <div className="inner-panel inner-panel-contact">
           <div className="contact-text">
-            <span>
+            <span className="under-bar">
               <h1>Contacte me</h1>
             </span>
             <p>
@@ -177,7 +175,40 @@ const App = () => {
             </button>
           </form>
         </div>
-        {/* <div className="inner-panel inner-panel-about"></div> */}
+        <div className="inner-panel inner-panel-about">
+          <div className="about-text">
+            <span className="under-bar">
+              <h1>Caça-palavras</h1>
+            </span>
+            <p>
+              O jogo de caça-palavras, ou sopa de letras, é um passatempo que consiste de letras arranjadas
+              aparentemente aleatórias em uma grade quadrada ou retangular.
+            </p>
+            <p>
+              O objetivo do jogo é encontrar e circundar as palavras escondidas na grade tão rapidamente quanto
+              possível.
+            </p>
+            <p>
+              As palavras são arranjadas normalmente de modo que possam ser lidas da esquerda para a direita, de cima
+              para baixo e na diagonal, sendo que em passatempos de maior dificuldade também pode ocorrer o oposto.
+            </p>
+            <p>
+              Algumas vezes uma lista de palavras escondidas é fornecida, mas os passatempos mais desafiadores podem
+              fazer com que o jogador descubra-as.
+            </p>
+            <p>
+              A maioria dos passatempos de caça-palavras tem também um tema comum a qual todas as palavras escondidas
+              estão relacionadas.
+            </p>
+          </div>
+          <div className="about-sample">
+            <div className="board">
+              <table>
+                <tbody>{table(15, 10)}</tbody>
+              </table>
+            </div>
+          </div>
+        </div>
       </div>
       <footer>
         <div className="copyright">
