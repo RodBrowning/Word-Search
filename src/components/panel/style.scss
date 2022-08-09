@@ -1,0 +1,56 @@
+@import '../../scss/variables/colors';
+@import '../../scss/fonts';
+
+.panel {
+  $header-footer-height: 60px;
+
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  grid-column-gap: 20px;
+  align-content: flex-start;
+  align-items: center;
+  padding: 0 24px;
+  min-height: calc(100% - ($header-footer-height * 2));
+  background: $main-bg-gradient;
+  z-index: 0;
+  .inner-panel {
+    grid-column-gap: 20px;
+    z-index: 2;
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    grid-column: 1 / 13;
+    grid-column-gap: 20px;
+    .under-bar {
+      position: relative;
+      &::before {
+        position: absolute;
+        content: '';
+        width: 30%;
+        height: 6px;
+        left: 0;
+        bottom: -24px;
+        border-radius: 8px;
+        background-color: $primary;
+      }
+      h1 {
+        margin-bottom: 56px;
+      }
+    }
+  }
+  .bg-decoration {
+    position: absolute;
+    z-index: 1;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: calc(100% + 60px);
+    filter: drop-shadow(-16px 0px 13px $black-25);
+    .inner-bg-decoration {
+      width: 100%;
+      height: 100%;
+      background: $tertiary;
+      clip-path: polygon(100% 0, 0% 100%, 100% 100%);
+    }
+  }
+}

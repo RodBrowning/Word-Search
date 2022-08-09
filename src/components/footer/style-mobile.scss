@@ -1,0 +1,28 @@
+@import '../../scss/variables/colors';
+@import '../../scss/fonts';
+
+@media only screen and (max-width: 768px) {
+  footer {
+    flex-direction: column;
+    text-align: center;
+    height: fit-content;
+    gap: 16px;
+    padding: 25px 4px;
+    .social-media {
+      height: fit-content;
+      cursor: pointer;
+      .img {
+        height: 44px;
+        &::before {
+          height: 4px;
+        }
+        svg {
+          width: 32px;
+          height: 32px;
+        }
+      }
+    }
+  }
+}
+@media only screen and (max-width: 360px) {
+}

@@ -1,0 +1,110 @@
+@import '../../scss/variables/colors';
+@import '../../scss/fonts';
+
+@media only screen and (max-width: 768px) {
+  .inner-panel-game {
+    padding-top: 52px;
+    padding-bottom: 52px;
+    aside {
+      grid-column: 1 / 13;
+      margin-bottom: 32px;
+      menu {
+        display: flex;
+        gap: 24px;
+        padding-inline-start: 0px;
+        margin: 0;
+        button {
+          position: relative;
+          display: flex;
+          padding: 0;
+          border: 0;
+          cursor: pointer;
+          background-color: transparent;
+          transition: all 0.15s ease-in-out;
+          &:hover,
+          &.active {
+            transform: scale(0.9);
+            &:before {
+              width: 200%;
+              height: 200%;
+            }
+            svg > path {
+              fill: $tertiary;
+            }
+          }
+          &:before {
+            position: absolute;
+            content: '';
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            z-index: -1;
+            background: $primary;
+            transition: all 0.15s ease-in-out;
+          }
+          svg > path {
+            transition: all 0.15s ease-in-out;
+          }
+        }
+        .config-panel {
+          width: unset;
+        }
+      }
+      .words {
+        .word-list {
+          height: unset;
+          &:before {
+            height: calc(100% + 12px);
+            top: -6px;
+          }
+          ul {
+            display: flex;
+            flex-wrap: wrap;
+            column-gap: 12px;
+          }
+        }
+      }
+    }
+    main {
+      grid-column: 1 / 13;
+      .board {
+        margin: auto;
+      }
+      .placar {
+        width: fit-content;
+        margin: auto;
+        margin-top: 54px;
+        text-align: left;
+        &::before {
+          left: -29px;
+        }
+        .pontos {
+          span {
+            font-weight: 700;
+            &:first-child {
+              font-size: $h1-size;
+              color: $primary;
+            }
+            &:last-child {
+              font-size: $h3-size;
+              color: $black;
+            }
+          }
+        }
+        .nivel {
+          margin-top: 16px;
+          span {
+            font-size: $h4-size;
+            color: $secondary;
+            font-weight: 700;
+          }
+        }
+      }
+    }
+  }
+}
+@media only screen and (max-width: 360px) {
+}

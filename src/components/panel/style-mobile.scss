@@ -1,0 +1,14 @@
+@import '../../scss/variables/colors';
+@import '../../scss/fonts';
+
+@media only screen and (max-width: 768px) {
+  .panel {
+    grid-column-gap: 8px;
+
+    .bg-decoration {
+      filter: drop-shadow(-12px 0px 6px rgba(13, 7, 1, 0.25));
+    }
+  }
+}
+@media only screen and (max-width: 360px) {
+}

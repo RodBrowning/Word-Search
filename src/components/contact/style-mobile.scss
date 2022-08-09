@@ -1,0 +1,38 @@
+@import '../../scss/variables/colors';
+@import '../../scss/fonts';
+
+@media only screen and (max-width: 768px) {
+  .inner-panel-contact {
+    span.under-bar {
+      &:before {
+        left: 50%;
+        transform: translateX(-50%);
+      }
+      h1 {
+        font-size: $h2-size;
+        text-align: center;
+      }
+    }
+    padding-top: 32px;
+    padding-bottom: 64px;
+    .contact-text {
+      grid-column: 1 / 13;
+      br {
+        display: none;
+      }
+    }
+    .contact-form {
+      grid-column: 1 / 13;
+      flex-direction: column;
+    }
+  }
+}
+@media only screen and (max-width: 360px) {
+  .inner-panel-contact {
+    .contact-text {
+      br {
+        display: block !important;
+      }
+    }
+  }
+}

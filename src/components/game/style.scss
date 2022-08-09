@@ -1,0 +1,287 @@
+@import '../../scss/variables/colors';
+@import '../../scss/fonts';
+
+.inner-panel-game {
+  padding-top: 40px;
+  padding-bottom: 40px;
+  aside {
+    grid-column: 1 / 4;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    menu {
+      position: relative;
+      display: flex;
+      gap: 24px;
+      padding-inline-start: 0px;
+      margin: 0;
+      button.action-button {
+        position: relative;
+        display: flex;
+        padding: 0;
+        border: 0;
+        cursor: pointer;
+        background-color: transparent;
+        transition: all 0.15s ease-in-out;
+        &:hover,
+        &.active {
+          transform: scale(0.9);
+          &:before {
+            width: 200%;
+            height: 200%;
+          }
+          svg > path {
+            fill: $tertiary;
+          }
+        }
+        &:before {
+          position: absolute;
+          content: '';
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          width: 0;
+          height: 0;
+          border-radius: 50%;
+          z-index: -1;
+          background: $primary;
+          transition: all 0.15s ease-in-out;
+        }
+        svg > path {
+          transition: all 0.15s ease-in-out;
+        }
+      }
+      .config-panel {
+        position: absolute;
+        content: '';
+        top: 150%;
+        left: 0;
+        width: 320px;
+        padding: 14px 8px;
+        border: 1px solid $black-50;
+        display: flex;
+        flex-direction: column;
+        gap: 24px;
+        z-index: 1;
+        background-color: $tertiary;
+        visibility: hidden;
+        .show-config {
+          visibility: visible;
+        }
+        button {
+          padding: 6px 8px;
+          justify-content: center;
+          align-items: center;
+          background: transparent;
+          border: 1px solid transparent;
+          border-radius: 50px;
+          font-weight: bold;
+          font-size: $h6-size;
+          color: $black-75;
+          cursor: pointer;
+          &:hover {
+            border: 1px solid $black-25;
+            background-color: $black-5;
+          }
+          &.toggle-button {
+            background-color: $black-25;
+            border: 1px solid $black-10;
+            color: $black-50;
+          }
+          &.selected {
+            background: $gradient;
+            border: 1px solid $primary;
+            font-weight: bold;
+            color: $black;
+          }
+        }
+        .level {
+          display: flex;
+          flex-wrap: wrap;
+          row-gap: 8px;
+          h5 {
+            width: 100%;
+          }
+          button {
+            flex: 1;
+          }
+        }
+        .word-list {
+          display: flex;
+          flex-wrap: wrap;
+          column-gap: 8px;
+          h5 {
+            width: unset;
+            flex: 1;
+          }
+          button {
+            padding: 0 24px;
+          }
+          p {
+            margin: 0;
+            font-size: $h6-size;
+            color: $black-75;
+            line-height: 32px;
+            width: 100%;
+          }
+          textarea {
+            width: 100%;
+            border-radius: 4px;
+            border: 1px solid $black-75;
+            background-color: white;
+            padding: 8px;
+            font-family: $heading-font;
+            font-size: $h6-size;
+            &:active,
+            &:focus {
+              outline-style: solid;
+              outline-color: $primary;
+              outline-width: 1px;
+            }
+          }
+        }
+        .subject {
+          .options {
+            display: flex;
+            flex-wrap: wrap;
+            row-gap: 18px;
+            margin-top: 8px;
+          }
+        }
+      }
+    }
+    .words {
+      .word-list {
+        position: relative;
+        height: 100%;
+        &::before {
+          position: absolute;
+          left: 0;
+          content: '';
+          width: 7px;
+          height: 100%;
+          border-radius: 50px;
+          background-color: $primary;
+        }
+        ul {
+          padding-left: 15px;
+          margin: 0;
+          margin-top: 40px;
+          list-style: none;
+          li {
+            margin-bottom: 8px;
+            &:last-child {
+              margin-bottom: 0px;
+            }
+            span {
+              position: relative;
+              display: inline-block;
+              &.found::before {
+                position: absolute;
+                left: 0;
+                top: 50%;
+                transform: translateY(-50%);
+                content: '';
+                width: 100%;
+                height: 5px;
+                background-color: $secondary;
+                z-index: -1;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  main {
+    grid-column: 4 / 12;
+    height: 100%;
+    .board {
+      border-width: 4px 6px 6px 4px;
+      border-style: solid;
+      border-color: $primary;
+      border-radius: 20px;
+      box-shadow: 2px 2px 2px $black-25;
+      overflow: hidden;
+      margin-left: auto;
+      width: fit-content;
+      user-select: none;
+      table {
+        width: 100%;
+        background-color: white;
+        border-collapse: collapse;
+        border-radius: 16px;
+        cursor: pointer;
+        --inner-padding: 4px;
+        tr {
+          &:first-child {
+            td {
+              border-top: 0px;
+              padding-top: var(--inner-padding);
+            }
+          }
+          &:last-child {
+            td {
+              border-bottom: 0px;
+              padding-bottom: var(--inner-padding);
+            }
+          }
+          td {
+            border: 1px solid black;
+            width: 35px;
+            height: 25px;
+            text-align: center;
+            &:first-child {
+              border-left: 0px;
+              padding-left: var(--inner-padding);
+            }
+            &:last-child {
+              border-right: 0px;
+              padding-right: var(--inner-padding);
+            }
+            h6 {
+              line-height: unset;
+            }
+          }
+        }
+      }
+    }
+    .placar {
+      position: relative;
+      font-family: 'Lato';
+      text-align: right;
+      margin-top: 54px;
+      &:before {
+        content: '';
+        position: absolute;
+        right: -16px;
+        height: 100%;
+        width: 12px;
+        background: $vertical-gradient;
+        border-radius: 50px;
+      }
+      .pontos {
+        span {
+          font-weight: 700;
+          &:first-child {
+            font-size: $h1-size;
+            color: $primary;
+          }
+          &:last-child {
+            font-size: $h3-size;
+            color: $black;
+          }
+        }
+      }
+      .nivel {
+        margin-top: 16px;
+        span {
+          font-size: $h4-size;
+          color: $secondary;
+          font-weight: 700;
+        }
+      }
+    }
+  }
+}

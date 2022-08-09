@@ -1,0 +1,73 @@
+@import '../../scss/variables/colors';
+@import '../../scss/fonts';
+
+.inner-panel-about {
+  padding-top: 92px;
+  padding-bottom: 92px;
+  .about-text {
+    grid-column: 2 / 7;
+  }
+  .about-sample {
+    grid-column: 8 / 12;
+    align-self: center;
+    span.under-bar {
+      display: none;
+    }
+    .board {
+      border-width: 4px 6px 6px 4px;
+      border-style: solid;
+      border-color: $primary;
+      border-radius: 20px;
+      box-shadow: 2px 2px 2px $black-25;
+      overflow: hidden;
+      margin-left: auto;
+      width: fit-content;
+      table {
+        width: 100%;
+        background-color: white;
+        border-collapse: collapse;
+        border-radius: 16px;
+        cursor: pointer;
+        user-select: none;
+        --inner-padding: 4px;
+        tbody {
+          display: block;
+          &.mobile {
+            display: none;
+          }
+          tr {
+            &:first-child {
+              td {
+                border-top: 0px;
+                padding-top: var(--inner-padding);
+              }
+            }
+            &:last-child {
+              td {
+                border-bottom: 0px;
+                padding-bottom: var(--inner-padding);
+              }
+            }
+            td {
+              border: 1px solid black;
+              width: 35px;
+              height: 25px;
+              text-align: center;
+              &:first-child {
+                border-left: 0px;
+                padding-left: var(--inner-padding);
+              }
+              &:last-child {
+                border-right: 0px;
+                padding-right: var(--inner-padding);
+              }
+              h6 {
+                line-height: unset;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,68 @@
+@import '../../scss/variables/colors';
+@import '../../scss/fonts';
+
+@media only screen and (max-width: 768px) {
+  header {
+    padding: 0 8px;
+    grid-column-gap: 8px;
+    .inner-header {
+      .logo {
+        img {
+          width: 40px;
+        }
+      }
+      nav {
+        gap: 24px;
+        a {
+          &:hover,
+          &.active {
+            &::before {
+              width: calc(100% + 16px);
+              left: -8px;
+              bottom: -1px;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+@media only screen and (max-width: 360px) {
+  header {
+    padding: 0 24px;
+    .inner-header {
+      grid-column: 1/13 !important;
+      nav {
+        display: none !important;
+      }
+      nav.mobile {
+        position: relative;
+        display: flex !important;
+        height: 100%;
+        padding-right: 8px;
+        > menu {
+          visibility: hidden;
+          position: absolute;
+          bottom: -148px;
+          right: -24px;
+          width: 50vw;
+          padding: 16px;
+          display: flex;
+          flex-direction: column;
+          row-gap: 16px;
+          background-color: $tertiary;
+          border: 1px solid $black-50;
+          &.show-menu {
+            visibility: true;
+          }
+          a {
+            color: $black;
+            &:last-child {
+              margin-bottom: 10px;
+            }
+          }
+        }
+      }
+    }
+  }
+}
