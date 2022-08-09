@@ -83,6 +83,9 @@
                   transition: all 0.15s ease-in-out;
                 }
               }
+              .config-panel {
+                width: unset;
+              }
             }
             .words {
               .word-list {
@@ -249,7 +252,7 @@
             flex-direction: column;
             row-gap: 16px;
             background-color: $tertiary;
-            border: 1px solid $black-75;
+            border: 1px solid $black-50;
             &.show-menu {
               visibility: true;
             }
