@@ -1,6 +1,8 @@
 import './style.scss';
 import './style-mobile.scss';
 
+import { Route, Routes } from 'react-router-dom';
+
 import About from '../about';
 import Contact from '../contact';
 import Game from '../game';
@@ -13,9 +15,11 @@ const Panel: React.FC = () => {
       <div className="bg-decoration">
         <div className="inner-bg-decoration" />
       </div>
-      <Game />
-      <Contact />
-      <About />
+      <Routes>
+        <Route path="/" element={<Game />} />
+        <Route path="contato" element={<Contact />} />
+        <Route path="sobre" element={<About />} />
+      </Routes>
     </div>
   );
 };
