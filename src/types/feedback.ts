@@ -1,6 +1,6 @@
 export default interface IFeedback {
   word: string;
-  direction: 'horizontal' | 'vertical' | 'diagonal';
+  found: boolean;
   position: {
     initial: {
       row: number;
