@@ -11,6 +11,10 @@ export default interface IGameState {
   themes: ITheme | {};
   boardData: {
     board: string[][];
+    boardSize: {
+      column: number;
+      row: number;
+    };
     feedbacks: [IFeedback] | [];
   };
 }

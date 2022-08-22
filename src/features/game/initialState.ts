@@ -12,6 +12,10 @@ const initialState: IGameState = {
   themes: Themes,
   boardData: {
     board: [],
+    boardSize: {
+      column: 0,
+      row: 0,
+    },
     feedbacks: [],
   },
 };
