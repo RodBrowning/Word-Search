@@ -3,7 +3,7 @@
 
 .inner-panel-game {
   padding-top: 40px;
-  padding-bottom: 40px;
+  padding-bottom: 120px;
   aside {
     grid-column: 1 / 4;
     height: 100%;
@@ -154,13 +154,12 @@
     .words {
       .word-list {
         position: relative;
-        height: 100%;
         &::before {
           position: absolute;
           left: 0;
           content: '';
           width: 7px;
-          height: 100%;
+          height: calc(100% + 40px);
           border-radius: 50px;
           background-color: $primary;
         }

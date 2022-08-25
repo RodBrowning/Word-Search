@@ -1,7 +1,7 @@
 interface IConfig {
   boardSize?: {
-    column: number;
-    row: number;
+    columns: number;
+    rows: number;
   };
   numberOfWords?: number;
   words?: string[];

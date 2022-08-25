@@ -5,7 +5,7 @@ import IFeedback from '../types/feedback';
 function SearchWordsGame() {
   const directions = ['horizontal', 'vertical', 'crossedUp', 'crossedDown'];
   let config: IConfig = {
-    boardSize: { column: 15, row: 15 },
+    boardSize: { columns: 15, rows: 15 },
     numberOfWords: undefined,
     words: [
       'um',
@@ -45,31 +45,31 @@ function SearchWordsGame() {
 
   function getEmptyBoard(): string[][] {
     const board = [];
-    const { row, column } = config.boardSize!;
-    for (let i = 0; i < row; i++) {
-      board.push(new Array(column));
+    const { rows, columns } = config.boardSize!;
+    for (let i = 0; i < rows; i++) {
+      board.push(new Array(columns));
     }
     return board;
   }
 
   function getInitialPosition(
-    boardSize: { column: number; row: number },
+    boardSize: { columns: number; rows: number },
     word: string,
     direction: string
   ): { row: number; column: number } {
     let column = 0;
     let row = 0;
     const wordLength = word.length;
-    const availableSpaceX = boardSize.column - wordLength;
-    const availableSpaceY = boardSize.row - wordLength;
+    const availableSpaceX = boardSize.columns - wordLength;
+    const availableSpaceY = boardSize.rows - wordLength;
 
     switch (direction) {
       case 'horizontal':
         column = Math.round(Math.random() * availableSpaceX);
-        row = Math.round(Math.random() * (boardSize.row - 1));
+        row = Math.round(Math.random() * (boardSize.rows - 1));
         break;
       case 'vertical':
-        column = Math.round(Math.random() * (boardSize.column - 1));
+        column = Math.round(Math.random() * (boardSize.columns - 1));
         row = Math.round(Math.random() * availableSpaceY);
         break;
       case 'crossedUp':
@@ -181,7 +181,7 @@ function SearchWordsGame() {
   function setFeedback(initPos: { row: number; column: number }, direction: string, word: string) {
     const lastLetterPosition = getLastLetterPosition(initPos, direction, word);
     feedbacks.push({
-      word,
+      word: word.charAt(0) + word.slice(1).toLowerCase(),
       found: false,
       position: {
         initial: {
@@ -197,16 +197,25 @@ function SearchWordsGame() {
   }
 
   function shuffleWords(words: string[]): string[] {
-    return words.sort(() => {
-      return Math.round(Math.random() * Math.floor(3)) - 1;
-    });
+    const shuffled = words
+      .map((value) => {
+        return { value, sort: Math.random() };
+      })
+      .sort((a, b) => {
+        return a.sort - b.sort;
+      })
+      .map(({ value }) => {
+        return value;
+      });
+
+    return shuffled;
   }
 
   function fillEmptyCells(board: string[][]): string[][] {
     for (let i = 0; i < board.length; i++) {
       for (let j = 0; j < board[i].length; j++) {
         if (!board[i][j]) {
-          const letter = String.fromCharCode(Math.random() * (122 - 97) + 97).toUpperCase();
+          const letter = String.fromCharCode(Math.random() * (90 - 65) + 65);
           board[i][j] = letter;
         }
       }
@@ -215,7 +224,9 @@ function SearchWordsGame() {
   }
 
   function setConfig(pConfig?: IConfig): IConfig {
-    config = { ...config, ...pConfig };
+    const wordsSet = new Set(pConfig?.words);
+    const words = [...wordsSet];
+    config = { ...config, ...pConfig, words };
     return config;
   }
 
@@ -265,7 +276,7 @@ function SearchWordsGame() {
     return feedbacks;
   }
 
-  function getBoardSize(): { column: number; row: number } {
+  function getBoardSize(): { columns: number; rows: number } {
     return config.boardSize!;
   }
 

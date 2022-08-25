@@ -1,42 +1,61 @@
+/* eslint-disable import/order */
+/* eslint-disable no-param-reassign */
+import IGameState from '../../types/state';
 import type { PayloadAction } from '@reduxjs/toolkit';
-// eslint-disable-next-line import/order
+import SearchWordController from '../../utils/SearchWordController';
 import { createSlice } from '@reduxjs/toolkit';
+import initialState from './initialState';
 
-export interface CounterState {
-  value: number;
-}
-
-const initialState: CounterState = {
-  value: 0,
-};
+const SWC = SearchWordController();
 
 export const gameSlice = createSlice({
-  name: 'counter',
+  name: 'gameState',
   initialState,
   reducers: {
-    generateNewBoardData: (state: CounterState) => {
-      // Generate new board and feedbacks state
+    generateNewBoardData: (state: IGameState) => {
+      state.boardData.matchEnded = false;
+      state.gameEnded = false;
+      state.boardData = SWC.getBoardData(state);
     },
-    processWord: (state: CounterState) => {
-      // Update feedback state
-      // Check if game ended
+    processWord: (state: IGameState, payloadAction: PayloadAction) => {
+      // eslint-disable-next-line array-callback-return
+      state = SWC.processWord(state, payloadAction);
+      if (SWC.gameHasEnded(state)) {
+        state.boardData.matchEnded = true;
+        state.matches += 1;
+      }
+      if (state.matches > state.matchesLimit) {
+        state.gameEnded = true;
+      }
+
+      //
     },
-    setDifficulty: (state: CounterState) => {
+    setAvailableSpace: (state: IGameState, payloadAction: { payload: number }) => {
+      state.availableSpace = payloadAction.payload;
+    },
+    setDifficulty: (state: IGameState) => {
       // Updade difficulty
     },
-    setCustomWords: (state: CounterState) => {
+    setCustomWords: (state: IGameState) => {
       // Updade CustomWords
     },
-    setUseCustom: (state: CounterState) => {
+    setUseCustom: (state: IGameState) => {
       // Updade UseCustom
     },
-    setLoadThemes: (state: CounterState) => {
+    setLoadThemes: (state: IGameState) => {
       // Updade loadThemes
     },
   },
 });
 
-export const { generateNewBoardData, processWord, setDifficulty, setCustomWords, setUseCustom, setLoadThemes } =
-  gameSlice.actions;
+export const {
+  generateNewBoardData,
+  processWord,
+  setAvailableSpace,
+  setDifficulty,
+  setCustomWords,
+  setUseCustom,
+  setLoadThemes,
+} = gameSlice.actions;
 
 export default gameSlice.reducer;

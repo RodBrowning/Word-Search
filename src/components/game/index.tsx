@@ -1,36 +1,73 @@
+/* eslint-disable import/order */
 import './style.scss';
 import './style-mobile.scss';
 
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
+import { generateNewBoardData, setAvailableSpace } from '../../features/game/gameSlice';
+import { useDispatch, useSelector } from 'react-redux';
+
+import IGameState from '../../types/state';
+import { RootState } from '../../app/store';
 
 const Contact: React.FC = () => {
-  const table = (rows: number, columns: number) => {
-    return Array(rows)
-      .fill(0)
-      .map(() => {
-        return new Array(columns).fill('*');
-      })
-      .map((fArr) => {
-        return fArr.map(() => {
-          return String.fromCharCode(Math.floor(65 + Math.random() * (90 - 65 + 1)));
-        });
-      })
-      .map((row, i) => {
-        return (
-          // eslint-disable-next-line react/no-array-index-key
-          <tr key={`row-${i}`}>
-            {row.map((cell, j) => {
-              return (
-                // eslint-disable-next-line react/no-array-index-key
-                <td key={`row-${i}-cell-${j}`}>
-                  <h6>{cell}</h6>
-                </td>
-              );
-            })}
-          </tr>
-        );
-      });
+  const availableSizeRef = useRef<HTMLElement>() as React.MutableRefObject<HTMLInputElement>;
+  const gameState = useSelector((state: RootState) => {
+    return state.game;
+  });
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    const availableSpace = availableSizeRef.current?.clientWidth!;
+    dispatch(setAvailableSpace(availableSpace));
+
+    if (gameState.boardData.board.length === 0) {
+      dispatch(generateNewBoardData());
+    }
+  }, []);
+
+  useEffect(() => {
+    console.log(gameState);
+  }, [gameState]);
+
+  useEffect(() => {
+    if (gameState.ended) {
+      alert('Ended');
+    }
+  }, [gameState]);
+
+  const table = (gameState: IGameState) => {
+    return gameState.boardData.board.map((row: string[], i: number) => {
+      return (
+        // eslint-disable-next-line react/no-array-index-key
+        <tr key={`row-${i}`}>
+          {row.map((cell: string, j: number) => {
+            return (
+              // eslint-disable-next-line react/no-array-index-key
+              <td key={`row-${i}-cell-${j}`}>
+                <h6>{cell}</h6>
+              </td>
+            );
+          })}
+        </tr>
+      );
+    });
   };
+
+  const words = (gameState: IGameState) => {
+    return gameState.boardData.feedbacks.map((feedback) => {
+      return (
+        <li key={feedback.word}>
+          <span className={feedback.found ? 'found' : ''}>
+            <h5>{feedback.word}</h5>
+          </span>
+        </li>
+      );
+    });
+  };
+
+  function updateBoard() {
+    dispatch(generateNewBoardData());
+  }
 
   return (
     <div className="inner-panel inner-panel-game">
@@ -44,7 +81,7 @@ const Contact: React.FC = () => {
               />
             </svg>
           </button>
-          <button className="action-button" type="button">
+          <button className="action-button" type="button" onClick={updateBoard}>
             <svg width="21" height="21" viewBox="0 0 21 21" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path
                 d="M10.4912 18.375C6.13011 18.375 2.60967 14.8575 2.60967 10.5C2.60967 6.1425 6.13011 2.625 10.4912 2.625C12.6631 2.625 14.6247 3.535 16.0434 4.9525L12.2427 8.75H21V0L17.9174 3.08C16.0083 1.19 13.3987 0 10.4912 0C4.69391 0 0 4.7075 0 10.5C0 16.2925 4.69391 21 10.4912 21C15.6931 21 20.0017 17.22 20.8249 12.25H18.1626C17.357 15.75 14.2394 18.375 10.4912 18.375Z"
@@ -99,56 +136,28 @@ const Contact: React.FC = () => {
         <div className="words">
           <h3>Palavras</h3>
           <div className="word-list">
-            <ul>
-              <li>
-                <span>
-                  <h5>Gato</h5>
-                </span>
-              </li>
-              <li>
-                <span className="found">
-                  <h5>Cachorro</h5>
-                </span>
-              </li>
-              <li>
-                <span>
-                  <h5>Cavalo</h5>
-                </span>
-              </li>
-              <li>
-                <span>
-                  <h5>Pássaro</h5>
-                </span>
-              </li>
-              <li>
-                <span>
-                  <h5>Peixe</h5>
-                </span>
-              </li>
-              <li>
-                <span>
-                  <h5>Leão</h5>
-                </span>
-              </li>
-            </ul>
+            <ul>{words(gameState)}</ul>
           </div>
         </div>
       </aside>
-      <main>
+      <main ref={availableSizeRef}>
         <div className="board">
           <table>
-            <tbody>{table(15, 15)}</tbody>
+            <tbody>{table(gameState)}</tbody>
             {/* <tbody>{table(15, 30)}</tbody> */}
           </table>
         </div>
         <div className="placar">
           <div className="pontos">
             <h4>
-              <span>01</span> <span>Pontos</span>
+              <span>{String(gameState.points).padStart(2, '0')}</span> <span>Pontos</span>
             </h4>
           </div>
           <div className="nivel">
-            <span>Nível</span> <span>01</span>
+            <span>Nível</span>{' '}
+            <span>
+              {String(gameState.matches).padStart(2, '0')}/{String(gameState.matchesLimit).padStart(2, '0')}
+            </span>
           </div>
         </div>
       </main>

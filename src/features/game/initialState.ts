@@ -3,20 +3,24 @@ import IGameState from '../../types/state';
 import Themes from './themes/themes';
 
 const initialState: IGameState = {
-  level: 1,
-  points: 1,
-  difficult: 'medium',
+  points: 9,
+  difficult: 'normal',
   useCustom: false,
   customWords: [],
   loadThemes: ['animais'],
   themes: Themes,
+  availableSpace: 0,
+  matches: 50,
+  matchesLimit: 50,
+  gameEnded: false,
   boardData: {
     board: [],
     boardSize: {
-      column: 0,
-      row: 0,
+      columns: 0,
+      rows: 0,
     },
     feedbacks: [],
+    matchEnded: false,
   },
 };
 

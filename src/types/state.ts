@@ -2,19 +2,23 @@ import IFeedback from './feedback';
 import ITheme from './theme';
 
 export default interface IGameState {
-  level: number;
   points: number;
-  difficult: string;
+  difficult: 'easy' | 'normal' | 'hard';
   customWords: string[];
   useCustom: boolean;
   loadThemes: string[];
-  themes: ITheme | {};
+  themes: ITheme;
+  availableSpace: number;
+  matches: number;
+  matchesLimit: number;
+  gameEnded: boolean;
   boardData: {
     board: string[][];
     boardSize: {
-      column: number;
-      row: number;
+      columns: number;
+      rows: number;
     };
-    feedbacks: [IFeedback] | [];
+    feedbacks: IFeedback[] | [];
+    matchEnded: boolean;
   };
 }
