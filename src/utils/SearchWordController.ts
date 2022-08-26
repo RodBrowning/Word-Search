@@ -54,11 +54,42 @@ function SearchWordController() {
     boardSize.columns =
       boardSize.columns < defaultInicialSize.minColumns ? defaultInicialSize.minColumns : boardSize.columns;
     boardSize.rows = boardSize.rows < defaultInicialSize.minRows ? defaultInicialSize.minRows : boardSize.rows;
-    // debugger;
+
     return boardSize;
   }
-  /// set numberOfWords
-  function getNumberOfWords(state: IGameState) {}
+
+  function getNumberOfWords(state: IGameState) {
+    const inicialWordNumber = 5;
+    const maxWordsNumber = 20;
+    const wordsToPlace = maxWordsNumber - inicialWordNumber;
+    const reductionPoint = Math.floor(state.matchesLimit * 0.8);
+    const lastMatches = state.matchesLimit - reductionPoint;
+
+    let numberOfWordsToAdd = Math.floor(state.matches / (reductionPoint / wordsToPlace) + inicialWordNumber);
+    numberOfWordsToAdd = numberOfWordsToAdd > maxWordsNumber ? maxWordsNumber : numberOfWordsToAdd;
+
+    // remove words after reductionPoint, in this case 80% of the total game matches.
+    const matchesAfterReductionPoint = lastMatches - (state.matchesLimit - state.matches);
+    const matchesToRemoveOneWord = lastMatches / (wordsToPlace + inicialWordNumber);
+
+    let numberOfWordsToRemove = matchesAfterReductionPoint / matchesToRemoveOneWord;
+    numberOfWordsToRemove = numberOfWordsToRemove < 0 ? 0 : numberOfWordsToRemove;
+
+    let finalNumberOfWords = numberOfWordsToAdd - numberOfWordsToRemove;
+    finalNumberOfWords = finalNumberOfWords < 1 ? 1 : finalNumberOfWords;
+
+    switch (state.difficult) {
+      case 'easy':
+        finalNumberOfWords = Math.ceil(finalNumberOfWords * 1.4);
+        break;
+      case 'normal':
+        finalNumberOfWords = Math.ceil(finalNumberOfWords * 1.2);
+        break;
+      default:
+        break;
+    }
+    return finalNumberOfWords;
+  }
 
   function getBoardData(state: IGameState) {
     const searchWordsGame = SearchWordsGame();
@@ -72,10 +103,10 @@ function SearchWordController() {
     });
     const boardSize = getBoardSize(state);
     const numberOfWords = getNumberOfWords(state);
-    // debugger;
+
     const config = {
       boardSize,
-      numberOfWords: 5,
+      numberOfWords,
       words,
       useCustom: state.useCustom,
       customWords: state.customWords,
