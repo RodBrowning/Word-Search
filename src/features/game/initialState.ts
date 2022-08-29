@@ -5,9 +5,9 @@ import Themes from './themes/themes';
 const initialState: IGameState = {
   points: 9,
   difficult: {
-    current: 'hard',
+    current: 'easy',
     parameters: {
-      ease: {
+      easy: {
         gridShrinkFactor: 0.6,
         wordsGrowthFactor: 1.4,
         wordsLengthFactor: 1.4,

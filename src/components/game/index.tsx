@@ -30,7 +30,7 @@ const Contact: React.FC = () => {
   }, [gameState]);
 
   useEffect(() => {
-    if (gameState.ended) {
+    if (gameState.gameEnded) {
       alert('Ended');
     }
   }, [gameState]);
