@@ -168,6 +168,9 @@
           margin: 0;
           margin-top: 40px;
           list-style: none;
+          &.split {
+            column-width: 100px;
+          }
           li {
             margin-bottom: 8px;
             &:last-child {

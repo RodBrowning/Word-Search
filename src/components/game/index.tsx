@@ -113,7 +113,8 @@ const Contact: React.FC = () => {
               <button type="button" className="toggle-button">
                 Usar Custom
               </button>
-              <p>Separe com espaço. Minimo 20 palavras.</p>
+              <p>Separe com espaço ou virgula.</p>
+              <p>Mínimo 10 palavras.</p>
               <textarea name="word-list" id="word-list" cols={10} rows={8} />
             </div>
             <div className="subject">
@@ -136,7 +137,7 @@ const Contact: React.FC = () => {
         <div className="words">
           <h3>Palavras</h3>
           <div className="word-list">
-            <ul>{words(gameState)}</ul>
+            <ul className={gameState.boardData.feedbacks.length > 12 ? 'split' : ''}>{words(gameState)}</ul>
           </div>
         </div>
       </aside>
