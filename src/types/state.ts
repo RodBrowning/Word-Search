@@ -3,7 +3,16 @@ import ITheme from './theme';
 
 export default interface IGameState {
   points: number;
-  difficult: 'easy' | 'normal' | 'hard';
+  difficult: {
+    current: 'easy' | 'normal' | 'hard';
+    parameters: {
+      [difficult: string]: {
+        gridShrinkFactor: number;
+        wordsGrowthFactor: number;
+        wordsLengthFactor: number;
+      };
+    };
+  };
   customWords: string[];
   useCustom: boolean;
   loadThemes: string[];

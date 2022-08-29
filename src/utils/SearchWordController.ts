@@ -4,7 +4,7 @@ import type { PayloadAction } from '@reduxjs/toolkit';
 /* eslint-disable no-param-reassign */
 import SearchWordsGame from './SearchWordGame';
 
-interface IPayladAction {
+interface IPayloadAction {
   word: any;
   found: boolean;
 }
@@ -34,22 +34,10 @@ function SearchWordController() {
     boardSize.columns = defaultInicialSize.columns + columnsToAdd;
     boardSize.rows = defaultInicialSize.rows + rowsToAdd;
 
-    switch (state.difficult) {
-      case 'easy':
-        boardSize.columns = Math.floor(boardSize.columns * 0.6);
-        boardSize.rows = Math.floor(boardSize.rows * 0.6);
-        break;
-      case 'normal':
-        boardSize.columns = Math.floor(boardSize.columns * 0.8);
-        boardSize.rows = Math.floor(boardSize.rows * 0.8);
-        break;
-      case 'hard':
-        boardSize.columns = Math.floor(boardSize.columns * 1);
-        boardSize.rows = Math.floor(boardSize.rows * 1);
-        break;
-      default:
-        break;
-    }
+    boardSize.columns = Math.floor(
+      boardSize.columns * state.difficult.parameters[state.difficult.current].gridShrinkFactor
+    );
+    boardSize.rows = Math.floor(boardSize.rows * state.difficult.parameters[state.difficult.current].gridShrinkFactor);
 
     boardSize.columns =
       boardSize.columns < defaultInicialSize.minColumns ? defaultInicialSize.minColumns : boardSize.columns;
@@ -78,16 +66,10 @@ function SearchWordController() {
     let finalNumberOfWords = numberOfWordsToAdd - numberOfWordsToRemove;
     finalNumberOfWords = finalNumberOfWords < 1 ? 1 : finalNumberOfWords;
 
-    switch (state.difficult) {
-      case 'easy':
-        finalNumberOfWords = Math.ceil(finalNumberOfWords * 1.4);
-        break;
-      case 'normal':
-        finalNumberOfWords = Math.ceil(finalNumberOfWords * 1.2);
-        break;
-      default:
-        break;
-    }
+    finalNumberOfWords = Math.ceil(
+      finalNumberOfWords * state.difficult.parameters[state.difficult.current].wordsGrowthFactor
+    );
+
     return finalNumberOfWords;
   }
 
@@ -117,18 +99,10 @@ function SearchWordController() {
 
     let currentMaxWordLength = maxWordLength - lettersToReduce;
 
-    switch (state.difficult) {
-      case 'easy':
-        minWordLength = Math.ceil(minWordLength * 1.4);
-        currentMaxWordLength = Math.ceil(currentMaxWordLength * 1.4);
-        break;
-      case 'normal':
-        minWordLength = Math.ceil(minWordLength * 1.2);
-        currentMaxWordLength = Math.ceil(currentMaxWordLength * 1.2);
-        break;
-      default:
-        break;
-    }
+    minWordLength = Math.ceil(minWordLength * state.difficult.parameters[state.difficult.current].wordsLengthFactor);
+    currentMaxWordLength = Math.ceil(
+      currentMaxWordLength * state.difficult.parameters[state.difficult.current].wordsLengthFactor
+    );
 
     if (state.matches > reductionPoint) {
       // eslint-disable-next-line array-callback-return, consistent-return
@@ -158,7 +132,7 @@ function SearchWordController() {
     const config = {
       boardSize,
       numberOfWords,
-      filteredWords,
+      words: filteredWords,
       useCustom: state.useCustom,
       customWords: state.customWords,
     };
@@ -173,7 +147,7 @@ function SearchWordController() {
 
   function processWord(state: IGameState, payloadAction: PayloadAction) {
     // eslint-disable-next-line array-callback-return
-    state.boardData.feedbacks.map((feedback: IPayladAction) => {
+    state.boardData.feedbacks.map((feedback: IPayloadAction) => {
       if (feedback.word === payloadAction.payload) {
         feedback.found = true;
         // processPoints
