@@ -91,6 +91,56 @@ function SearchWordController() {
     return finalNumberOfWords;
   }
 
+  function getWordsByLength(state: IGameState, words: string[]) {
+    const reductionPoint = Math.floor(state.matchesLimit * 0.8);
+    const lastMatches = state.matchesLimit - reductionPoint;
+    const matchesAfterReductionPoint = lastMatches - (state.matchesLimit - state.matches);
+
+    const longestWord = words.reduce((longestString, word) => {
+      if (word.length > longestString) {
+        longestString = word.length;
+      }
+      return longestString;
+    }, 0);
+    const shortestWord = words.reduce((shortestWord, word) => {
+      if (shortestWord === 0 || word.length < shortestWord) {
+        shortestWord = word.length;
+      }
+      return shortestWord;
+    }, 0);
+
+    const maxWordLength = longestWord < 10 ? longestWord : 10;
+    let minWordLength = shortestWord < 4 ? 4 : shortestWord;
+    const lettersToReduceByMatch = (maxWordLength - minWordLength) / lastMatches;
+    let lettersToReduce = Math.floor(lettersToReduceByMatch * matchesAfterReductionPoint);
+    lettersToReduce = lettersToReduce < 0 ? 0 : lettersToReduce;
+
+    let currentMaxWordLength = maxWordLength - lettersToReduce;
+
+    switch (state.difficult) {
+      case 'easy':
+        minWordLength = Math.ceil(minWordLength * 1.4);
+        currentMaxWordLength = Math.ceil(currentMaxWordLength * 1.4);
+        break;
+      case 'normal':
+        minWordLength = Math.ceil(minWordLength * 1.2);
+        currentMaxWordLength = Math.ceil(currentMaxWordLength * 1.2);
+        break;
+      default:
+        break;
+    }
+
+    if (state.matches > reductionPoint) {
+      // eslint-disable-next-line array-callback-return, consistent-return
+      words = words.filter((word) => {
+        if (word.length <= currentMaxWordLength && word.length >= minWordLength) {
+          return word;
+        }
+      });
+    }
+    return words;
+  }
+
   function getBoardData(state: IGameState) {
     const searchWordsGame = SearchWordsGame();
     const words: string[] = [];
@@ -103,11 +153,12 @@ function SearchWordController() {
     });
     const boardSize = getBoardSize(state);
     const numberOfWords = getNumberOfWords(state);
+    const filteredWords = getWordsByLength(state, words);
 
     const config = {
       boardSize,
       numberOfWords,
-      words,
+      filteredWords,
       useCustom: state.useCustom,
       customWords: state.customWords,
     };
