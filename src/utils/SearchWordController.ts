@@ -12,7 +12,8 @@ interface IPayloadAction {
 function SearchWordController() {
   function getBoardSize(state: IGameState) {
     const maxColumnWidth = 24;
-    const maxColumnNumber = Math.floor(state.availableSpace / maxColumnWidth);
+    const maxAvailableColumnNumber = Math.floor(state.availableSpace / maxColumnWidth);
+    const maxColumnNumber = maxAvailableColumnNumber > 37 ? 37 : maxAvailableColumnNumber;
     const maxRowNumber = 30;
     const { matchesLimit } = state;
     const defaultInicialSize = {
