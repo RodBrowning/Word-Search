@@ -3,7 +3,7 @@ import './style-mobile.scss';
 
 import React from 'react';
 
-const Game: React.FC = () => {
+const Contact: React.FC = () => {
   return (
     <div className="inner-panel inner-panel-contact">
       <div className="contact-text">
@@ -51,4 +51,4 @@ const Game: React.FC = () => {
   );
 };
 
-export default Game;
+export default Contact;
