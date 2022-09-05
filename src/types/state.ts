@@ -10,6 +10,7 @@ export default interface IGameState {
         gridShrinkFactor: number;
         wordsGrowthFactor: number;
         wordsLengthFactor: number;
+        pointsByFoundWord: number;
       };
     };
   };

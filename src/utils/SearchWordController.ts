@@ -151,7 +151,7 @@ function SearchWordController() {
     state.boardData.feedbacks.map((feedback: IPayloadAction) => {
       if (feedback.word === payloadAction.payload) {
         feedback.found = true;
-        // processPoints
+        state.points += state.difficult.parameters[state.difficult.current].pointsByFoundWord;
       }
     });
 
