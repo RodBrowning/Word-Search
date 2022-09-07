@@ -21,7 +21,6 @@ const Modal: React.FC<Props> = ({ children, isOpen, setOpenModal }) => {
   modalWrapper.setAttribute('id', 'modal-wrapper');
   modalWrapper.onclick = ({ target }) => {
     if (target === modalWrapper) {
-      rootModal?.removeChild(modalWrapper);
       setOpenModal(false);
     }
   };

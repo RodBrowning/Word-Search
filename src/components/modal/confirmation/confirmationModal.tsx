@@ -17,7 +17,6 @@ const ConfirmationModal: React.FC<Props> = ({ children, isOpen, setOpenModal }) 
   confirmationWrapper.setAttribute('id', 'confirmation-wrapper');
   confirmationWrapper.onclick = ({ target }) => {
     if (target === confirmationWrapper) {
-      confirmationModal?.removeChild(confirmationWrapper);
       setOpenModal(false);
     }
   };
