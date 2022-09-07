@@ -27,14 +27,12 @@ export const gameSlice = createSlice({
       if (state.matches > state.matchesLimit) {
         state.gameEnded = true;
       }
-
-      //
     },
     setAvailableSpace: (state: IGameState, payloadAction: { payload: number }) => {
       state.availableSpace = payloadAction.payload;
     },
-    setDifficulty: (state: IGameState) => {
-      // Updade difficulty
+    setDifficulty: (state: IGameState, payloadAction: { payload: 'easy' | 'normal' | 'hard' }) => {
+      state.difficult.current = payloadAction.payload;
     },
     setCustomWords: (state: IGameState) => {
       // Updade CustomWords
@@ -44,6 +42,10 @@ export const gameSlice = createSlice({
     },
     setLoadThemes: (state: IGameState) => {
       // Updade loadThemes
+    },
+    resetGame: (state: IGameState) => {
+      state.points = 0;
+      state.matches = 0;
     },
   },
 });
@@ -56,6 +58,7 @@ export const {
   setCustomWords,
   setUseCustom,
   setLoadThemes,
+  resetGame,
 } = gameSlice.actions;
 
 export default gameSlice.reducer;

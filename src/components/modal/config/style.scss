@@ -1,4 +1,5 @@
 @import '../../../scss/variables/colors';
+@import '../../../scss/variables/layout';
 @import '../../../scss/fonts';
 
 .config-panel {
@@ -12,7 +13,7 @@
   display: flex;
   flex-direction: column;
   gap: 24px;
-  z-index: 1;
+  z-index: $zModalContent;
   background-color: $tertiary;
   visibility: hidden;
   &.show-config {

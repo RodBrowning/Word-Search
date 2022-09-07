@@ -3,9 +3,9 @@ import IGameState from '../../types/state';
 import Themes from './themes/themes';
 
 const initialState: IGameState = {
-  points: 0,
+  points: 30,
   difficult: {
-    current: 'easy',
+    current: 'normal',
     parameters: {
       easy: {
         gridShrinkFactor: 0.6,
@@ -32,7 +32,7 @@ const initialState: IGameState = {
   loadThemes: ['animais'],
   themes: Themes,
   availableSpace: 0,
-  matches: 0,
+  matches: 30,
   matchesLimit: 50,
   gameEnded: false,
   boardData: {

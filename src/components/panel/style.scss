@@ -1,5 +1,5 @@
 @import '../../scss/variables/colors';
-@import '../../scss/fonts';
+@import '../../scss/variables/layout';
 
 .panel {
   $header-footer-height: 60px;
@@ -16,7 +16,7 @@
   z-index: 0;
   .inner-panel {
     grid-column-gap: 20px;
-    z-index: 2;
+    z-index: $zHeader;
     display: grid;
     grid-template-columns: repeat(12, 1fr);
     grid-column: 1 / 13;
@@ -40,7 +40,7 @@
   }
   .bg-decoration {
     position: absolute;
-    z-index: 1;
+    z-index: $zBGDecoration;
     bottom: 0;
     left: 0;
     width: 100%;

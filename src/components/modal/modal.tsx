@@ -1,11 +1,10 @@
 import './style.scss';
 
-import React, { useEffect } from 'react';
-
+import React from 'react';
 import ReactDOM from 'react-dom';
 
-const root = document.getElementById('root');
 const rootModal = document.getElementById('root-modal');
+const confirmationModal = document.getElementById('confirmation-modal');
 
 interface Props {
   children: React.ReactNode;
@@ -14,21 +13,19 @@ interface Props {
 }
 
 const Modal: React.FC<Props> = ({ children, isOpen, setOpenModal }) => {
+  rootModal!.replaceChildren();
+  confirmationModal!.replaceChildren();
   if (!isOpen) return null;
 
   const modalWrapper = document.createElement('div');
-  modalWrapper.classList.add('modal-wrapper');
-  modalWrapper.style.height = `${root?.offsetHeight}px`;
+  modalWrapper.setAttribute('id', 'modal-wrapper');
   modalWrapper.onclick = ({ target }) => {
     if (target === modalWrapper) {
-      rootModal!.innerHTML = '';
+      rootModal?.removeChild(modalWrapper);
       setOpenModal(false);
     }
   };
-
-  useEffect(() => {
-    rootModal?.appendChild(modalWrapper);
-  }, []);
+  rootModal?.appendChild(modalWrapper);
 
   return ReactDOM.createPortal(children, modalWrapper);
 };

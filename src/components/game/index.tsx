@@ -6,9 +6,9 @@ import React, { useEffect, useRef, useState } from 'react';
 import { generateNewBoardData, setAvailableSpace } from '../../features/game/gameSlice';
 import { useDispatch, useSelector } from 'react-redux';
 
-import ConfigModal from '../model/config';
+import ConfigModal from '../modal/config';
 import IGameState from '../../types/state';
-import Modal from '../model/modal';
+import Modal from '../modal/modal';
 import { RootState } from '../../app/store';
 
 const Game: React.FC = () => {
@@ -90,6 +90,9 @@ const Game: React.FC = () => {
               />
             </svg>
           </button>
+          <Modal isOpen={isConfigModalOpen} setOpenModal={setIsConfigModalOpen}>
+            <ConfigModal setOpenModal={setIsConfigModalOpen} />
+          </Modal>
           <button className="action-button" type="button" onClick={updateBoard}>
             <svg width="21" height="21" viewBox="0 0 21 21" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path
@@ -108,9 +111,6 @@ const Game: React.FC = () => {
               />
             </svg>
           </button>
-          <Modal isOpen={isConfigModalOpen} setOpenModal={setIsConfigModalOpen}>
-            <ConfigModal />
-          </Modal>
         </menu>
         <div className="words">
           <h3>Palavras</h3>
