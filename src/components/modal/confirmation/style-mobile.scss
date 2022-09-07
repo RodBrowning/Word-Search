@@ -1,0 +1,20 @@
+@import '../../../scss/variables/layout';
+@import '../../../scss/variables/colors';
+
+@media only screen and (max-width: 768px) {
+  #confirmation-wrapper {
+    .confirmation-component {
+      .actions-btn {
+        button {
+          color: white;
+          &.confirm {
+            background: darken($success, 15%);
+          }
+          &.cancel {
+            background: darken($error, 15%);
+          }
+        }
+      }
+    }
+  }
+}
