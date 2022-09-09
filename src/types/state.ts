@@ -19,6 +19,7 @@ export default interface IGameState {
   loadThemes: string[];
   themes: ITheme;
   availableSpace: number;
+  matchPoints: number;
   matches: number;
   matchesLimit: number;
   gameEnded: boolean;

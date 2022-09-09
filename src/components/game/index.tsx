@@ -22,7 +22,6 @@ const Game: React.FC = () => {
   useEffect(() => {
     const availableSpace = availableSizeRef.current?.clientWidth!;
     dispatch(setAvailableSpace(availableSpace));
-
     if (gameState.boardData.board.length === 0) {
       dispatch(generateNewBoardData());
     }
@@ -69,6 +68,8 @@ const Game: React.FC = () => {
   };
 
   function updateBoard() {
+    const availableSpace = availableSizeRef.current?.clientWidth!;
+    dispatch(setAvailableSpace(availableSpace));
     dispatch(generateNewBoardData());
   }
 
@@ -129,7 +130,7 @@ const Game: React.FC = () => {
         <div className="placar">
           <div className="pontos">
             <h4>
-              <span>{String(gameState.points).padStart(2, '0')}</span> <span>Pontos</span>
+              <span>{String(gameState.points + gameState.matchPoints).padStart(2, '0')}</span> <span>Pontos</span>
             </h4>
           </div>
           <div className="nivel">

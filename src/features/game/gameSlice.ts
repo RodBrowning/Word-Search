@@ -34,14 +34,20 @@ export const gameSlice = createSlice({
     setDifficulty: (state: IGameState, payloadAction: { payload: 'easy' | 'normal' | 'hard' }) => {
       state.difficult.current = payloadAction.payload;
     },
-    setCustomWords: (state: IGameState) => {
-      // Updade CustomWords
+    setCustomWords: (state: IGameState, payloadAction: { payload: string[] }) => {
+      state.customWords = payloadAction.payload;
     },
-    setUseCustom: (state: IGameState) => {
-      // Updade UseCustom
+    setUseCustom: (state: IGameState, payloadAction: { payload: boolean }) => {
+      state.useCustom = payloadAction.payload;
     },
-    setLoadThemes: (state: IGameState) => {
-      // Updade loadThemes
+    setLoadThemes: (state: IGameState, payloadAction: { payload: string[] }) => {
+      state.loadThemes = payloadAction.payload;
+    },
+    setMatchPoints: (state: IGameState, payloadAction: { payload: number }) => {
+      state.matchPoints += payloadAction.payload;
+    },
+    clearMatchPoints: (state: IGameState) => {
+      state.matchPoints = 0;
     },
     resetGame: (state: IGameState) => {
       state.points = 0;
@@ -59,6 +65,8 @@ export const {
   setUseCustom,
   setLoadThemes,
   resetGame,
+  setMatchPoints,
+  clearMatchPoints,
 } = gameSlice.actions;
 
 export default gameSlice.reducer;

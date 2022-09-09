@@ -32,6 +32,7 @@ const initialState: IGameState = {
   loadThemes: ['animais'],
   themes: Themes,
   availableSpace: 0,
+  matchPoints: 30,
   matches: 30,
   matchesLimit: 50,
   gameEnded: false,
