@@ -9,7 +9,14 @@ const Header: React.FC = () => {
     <header>
       <div className="inner-header">
         <div className="logo">
-          <img src="/logo.svg" alt="" />
+          <NavLink
+            className={({ isActive }) => {
+              return isActive ? 'active' : undefined;
+            }}
+            to="/"
+          >
+            <img src="/logo.svg" alt="" />
+          </NavLink>
         </div>
         <nav>
           <NavLink

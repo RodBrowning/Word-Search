@@ -24,7 +24,7 @@ const ConfigModal: React.FC<Props> = ({ setOpenModal }) => {
 
   return (
     <div className="config-panel show-config">
-      <div className="level">
+      <div className="difficulty">
         <h5>Dificuldade</h5>
         <label htmlFor="easy">
           <input type="radio" name="difficulty-radio" id="easy" />

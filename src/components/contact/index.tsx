@@ -11,14 +11,14 @@ const Contact: React.FC = () => {
           <h1>Contacte me</h1>
         </span>
         <p>
-          Oi. Eu sou Rodrigo Moura e trabalho como desenvolvedor web desde 2020. Este é um dos meus projetos de
-          portfólio. Você poderá encontrar mais detalhes do seu desenvolvimento no Github:
+          Oi. Eu sou Rodrigo Moura e estudo desenvolvedor web desde 2017. Este é um dos meus projetos de portfólio. Você
+          poderá encontrar mais detalhes do seu desenvolvimento no Github:
           <br />
           <a href="https://github.com/RodBrowning/Word-Search" target="_black">
             https://github.com/RodBrowning/Word-Search
           </a>
         </p>
-        <p>Estarei disponível para responder qualquer pergunta.</p>
+        <p>Entre em contato para fazer qualquer pergunta ou sugestão.</p>
       </div>
       <form action="" className="contact-form">
         <label htmlFor="nome">
