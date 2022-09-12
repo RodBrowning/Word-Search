@@ -20,11 +20,12 @@ export const gameSlice = createSlice({
     processWord: (state: IGameState, payloadAction: PayloadAction) => {
       // eslint-disable-next-line array-callback-return
       state = SWC.processWord(state, payloadAction);
-      if (SWC.gameHasEnded(state)) {
+      if (SWC.matchHasEnded(state)) {
         state.boardData.matchEnded = true;
         state.matches += 1;
+        state.points += state.matchPoints;
       }
-      if (state.matches > state.matchesLimit) {
+      if (SWC.gameHasEnded(state)) {
         state.gameEnded = true;
       }
     },

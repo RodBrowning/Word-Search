@@ -3,13 +3,13 @@ import './style-mobile.scss';
 
 import React, { useEffect, useRef, useState } from 'react';
 import {
-  clearMatchPoints,
-  generateNewBoardData,
-  resetGame,
-  setCustomWords,
-  setDifficulty as setDifficultyState,
-  setLoadThemes as setLoadThemesState,
-  setUseCustom as setUseCustomState,
+  clearMatchPoints as reduxClearMatchPoints,
+  generateNewBoardData as reduxGenerateNewBoardData,
+  resetGame as reduxResetGame,
+  setCustomWords as reduxSetCustomWords,
+  setDifficulty as reduxSetDifficulty,
+  setLoadThemes as reduxSetLoadThemesState,
+  setUseCustom as reduxSetUseCustomState,
 } from '../../../features/game/gameSlice';
 // eslint-disable-next-line import/order
 import { useDispatch, useSelector } from 'react-redux';
@@ -26,55 +26,54 @@ const ConfigModal: React.FC<Props> = ({ setOpenModal }) => {
   const gameState = useSelector((state: RootState) => {
     return state.game;
   });
+
   const [openResetConfirmationModal, setOpenResetConfirmationModal] = useState(false);
+  const [configState, setConfigState] = useState({
+    difficulty: gameState.difficult.current,
+    customWordList: gameState.customWords,
+    customWordListDisplay: gameState.customWords.join(', '),
+    useCustom: gameState.useCustom,
+    loadThemes: gameState.loadThemes,
+  });
 
-  const [difficulty, setDifficulty] = useState(gameState.difficult.current);
   const difficultyRef = useRef(gameState.difficult.current);
-
-  const [customWordList, setCustomWordList] = useState(gameState.customWords);
-  const [customWordListDisplay, setCustomWordListDisplay] = useState(gameState.customWords.join(', '));
   const customWordListRef = useRef(gameState.customWords);
-
-  const [useCustom, setUseCustom] = useState(gameState.useCustom);
   const useCustomRef = useRef(gameState.useCustom);
-
   const themes = Object.keys(gameState.themes);
-
-  const [loadThemes, setLoadThemes] = useState(gameState.loadThemes);
   const loadThemesRef = useRef(gameState.loadThemes);
 
   const dispatch = useDispatch();
 
   const dispatchConfigChanges = () => {
     if (gameState.difficult.current !== difficultyRef.current) {
-      dispatch(setDifficultyState(difficultyRef.current));
-      dispatch(clearMatchPoints());
+      dispatch(reduxSetDifficulty(difficultyRef.current));
+      dispatch(reduxClearMatchPoints());
     }
     if (customWordListRef.current.length >= 10) {
-      dispatch(setCustomWords(customWordListRef.current));
+      dispatch(reduxSetCustomWords(customWordListRef.current));
     }
-    dispatch(setUseCustomState(useCustomRef.current));
-    dispatch(setLoadThemesState(loadThemesRef.current));
-    dispatch(generateNewBoardData());
+    dispatch(reduxSetUseCustomState(useCustomRef.current));
+    dispatch(reduxSetLoadThemesState(loadThemesRef.current));
+    dispatch(reduxGenerateNewBoardData());
   };
 
   const dispatchResetGame = () => {
-    dispatch(resetGame());
-    dispatch(generateNewBoardData());
+    dispatch(reduxResetGame());
+    dispatch(reduxGenerateNewBoardData());
   };
 
   const handleChangeDifficultyLevel = (value: 'easy' | 'normal' | 'hard') => {
-    setDifficulty(value);
+    setConfigState({ ...configState, difficulty: value });
     difficultyRef.current = value;
   };
 
   const handleUseCustom = (isChecked: boolean) => {
-    setUseCustom(isChecked);
+    setConfigState({ ...configState, useCustom: isChecked });
     useCustomRef.current = isChecked;
   };
 
   const handleChangeCustomWords = (target: HTMLTextAreaElement) => {
-    setCustomWordListDisplay(target.value);
+    setConfigState({ ...configState, customWordListDisplay: target.value });
     const words = target.value
       .split(',')
       .map((word) => {
@@ -90,20 +89,20 @@ const ConfigModal: React.FC<Props> = ({ setOpenModal }) => {
         return word.length > 2;
       });
     const uniqueWords = [...new Set(words)];
-    setCustomWordList(uniqueWords);
+    setConfigState({ ...configState, customWordList: uniqueWords });
     customWordListRef.current = uniqueWords;
   };
 
   const handleLoadThemes = (target: HTMLInputElement) => {
     let newLoadThemes = [];
     if (target.checked) {
-      newLoadThemes = [...loadThemes, target.value];
+      newLoadThemes = [...configState.loadThemes, target.value];
     } else {
-      newLoadThemes = loadThemes.filter((theme) => {
+      newLoadThemes = configState.loadThemes.filter((theme) => {
         return theme !== target.value;
       });
     }
-    setLoadThemes(newLoadThemes);
+    setConfigState({ ...configState, loadThemes: newLoadThemes });
     loadThemesRef.current = newLoadThemes;
   };
 
@@ -137,7 +136,7 @@ const ConfigModal: React.FC<Props> = ({ setOpenModal }) => {
             name="difficulty-radio"
             id="easy"
             value="easy"
-            checked={difficulty === 'easy'}
+            checked={configState.difficulty === 'easy'}
             onChange={() => {
               handleChangeDifficultyLevel('easy');
             }}
@@ -150,7 +149,7 @@ const ConfigModal: React.FC<Props> = ({ setOpenModal }) => {
             name="difficulty-radio"
             id="normal"
             value="normal"
-            checked={difficulty === 'normal'}
+            checked={configState.difficulty === 'normal'}
             onChange={() => {
               handleChangeDifficultyLevel('normal');
             }}
@@ -163,7 +162,7 @@ const ConfigModal: React.FC<Props> = ({ setOpenModal }) => {
             name="difficulty-radio"
             id="hard"
             value="hard"
-            checked={difficulty === 'hard'}
+            checked={configState.difficulty === 'hard'}
             onChange={() => {
               handleChangeDifficultyLevel('hard');
             }}
@@ -178,10 +177,10 @@ const ConfigModal: React.FC<Props> = ({ setOpenModal }) => {
             type="checkbox"
             name="custom-checkbox"
             id="use-custom"
-            checked={useCustom}
-            disabled={customWordList.length < 10}
+            checked={configState.useCustom}
+            disabled={configState.customWordList.length < 10}
             onChange={(event) => {
-              if (!event.target.checked && loadThemes.length < 1) return;
+              if (!event.target.checked && configState.loadThemes.length < 1) return;
               handleUseCustom(event.target.checked);
             }}
           />
@@ -195,7 +194,7 @@ const ConfigModal: React.FC<Props> = ({ setOpenModal }) => {
           id="word-list"
           cols={10}
           rows={8}
-          value={customWordListDisplay}
+          value={configState.customWordListDisplay}
           onChange={(event) => {
             handleChangeCustomWords(event.target);
           }}
@@ -212,9 +211,9 @@ const ConfigModal: React.FC<Props> = ({ setOpenModal }) => {
                   name="custom-checkbox"
                   id={theme}
                   value={theme}
-                  checked={loadThemes.includes(theme)}
+                  checked={configState.loadThemes.includes(theme)}
                   onChange={(event) => {
-                    if (!event.target.checked && loadThemes.length < 2 && !useCustom) return;
+                    if (!event.target.checked && configState.loadThemes.length < 2 && !configState.useCustom) return;
                     handleLoadThemes(event.target);
                   }}
                 />

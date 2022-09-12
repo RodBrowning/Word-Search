@@ -151,22 +151,27 @@ function SearchWordController() {
     state.boardData.feedbacks.map((feedback: IPayloadAction) => {
       if (feedback.word === payloadAction.payload) {
         feedback.found = true;
-        state.points += state.difficult.parameters[state.difficult.current].pointsByFoundWord;
+        state.matchPoints += state.difficult.parameters[state.difficult.current].pointsByFoundWord;
       }
     });
 
     return state;
   }
 
-  function gameHasEnded(state: IGameState) {
+  function matchHasEnded(state: IGameState) {
     return state.boardData.feedbacks.every((feedback) => {
       return feedback.found === true;
     });
   }
 
+  function gameHasEnded(state: IGameState) {
+    return state.matches > state.matchesLimit;
+  }
+
   return {
     getBoardData,
     processWord,
+    matchHasEnded,
     gameHasEnded,
   };
 }
