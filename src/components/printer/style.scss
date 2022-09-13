@@ -1,0 +1,39 @@
+@import '../../scss/variables/colors';
+@import '../../scss/variables/layout';
+
+.boards-to-print {
+  margin: 40px 0;
+  position: relative;
+  z-index: $zFirstLayer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  grid-column: 2/12;
+  .print-board {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 64px;
+    margin: 32px 0;
+    .word-list {
+      &:before {
+        height: calc(100% + 12px);
+      }
+      ul {
+        margin-top: 0px;
+        li {
+          float: left;
+          text-align: center;
+          margin-bottom: 0px;
+          margin-right: 24px;
+          &:last-child {
+            margin-right: 0px;
+          }
+        }
+      }
+    }
+    .board {
+      margin: auto;
+    }
+  }
+}

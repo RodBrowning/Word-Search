@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import Board from '../board';
 import ConfigModal from '../modal/config';
+import { Link } from 'react-router-dom';
 import Modal from '../modal/modal';
 import { RootState } from '../../app/store';
 import WordList from '../wordList';
@@ -73,16 +74,18 @@ const Game: React.FC = () => {
               />
             </svg>
           </button>
-          <button className="action-button" type="button">
-            <svg width="21" height="21" viewBox="0 0 21 21" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path
-                fillRule="evenodd"
-                clipRule="evenodd"
-                d="M4.2 17.85H2.1C0.940202 17.85 0 16.9098 0 15.75V7.35C0 6.1902 0.940202 5.25 2.1 5.25H4.2V0H16.8V5.25H18.9C20.0598 5.25 21 6.1902 21 7.35V15.75C21 16.9098 20.0598 17.85 18.9 17.85H16.8V21H4.2V17.85ZM4.2 15.75V13.65H16.8V15.75H18.9V7.35H2.1V15.75H4.2ZM6.3 5.25H14.7V2.1H6.3V5.25ZM14.7 15.75H6.3V18.9H14.7V15.75ZM16.8 8.4C17.3799 8.4 17.85 8.8701 17.85 9.45C17.85 10.0299 17.3799 10.5 16.8 10.5C16.2201 10.5 15.75 10.0299 15.75 9.45C15.75 8.8701 16.2201 8.4 16.8 8.4Z"
-                fill="#0D0701"
-              />
-            </svg>
-          </button>
+          <Link to="imprimir">
+            <button className="action-button" type="button">
+              <svg width="21" height="21" viewBox="0 0 21 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path
+                  fillRule="evenodd"
+                  clipRule="evenodd"
+                  d="M4.2 17.85H2.1C0.940202 17.85 0 16.9098 0 15.75V7.35C0 6.1902 0.940202 5.25 2.1 5.25H4.2V0H16.8V5.25H18.9C20.0598 5.25 21 6.1902 21 7.35V15.75C21 16.9098 20.0598 17.85 18.9 17.85H16.8V21H4.2V17.85ZM4.2 15.75V13.65H16.8V15.75H18.9V7.35H2.1V15.75H4.2ZM6.3 5.25H14.7V2.1H6.3V5.25ZM14.7 15.75H6.3V18.9H14.7V15.75ZM16.8 8.4C17.3799 8.4 17.85 8.8701 17.85 9.45C17.85 10.0299 17.3799 10.5 16.8 10.5C16.2201 10.5 15.75 10.0299 15.75 9.45C15.75 8.8701 16.2201 8.4 16.8 8.4Z"
+                  fill="#0D0701"
+                />
+              </svg>
+            </button>
+          </Link>
         </menu>
         <div className="words">
           <h3>Palavras</h3>

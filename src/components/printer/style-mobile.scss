@@ -1,0 +1,34 @@
+@media only screen and (max-width: 768px) {
+  .boards-to-print {
+    grid-column: 1/13;
+    align-items: flex-start;
+    .print-board {
+      align-items: flex-start;
+      width: 100%;
+      .word-list {
+        ul {
+          column-gap: 0;
+        }
+      }
+      .board-container {
+        width: 100%;
+        overflow: scroll;
+        td {
+          min-width: unset;
+        }
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 700px) {
+  .boards-to-print {
+    .print-board {
+      .board-container {
+        td {
+          min-width: 35px;
+        }
+      }
+    }
+  }
+}
