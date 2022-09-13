@@ -9,7 +9,7 @@ interface IPayloadAction {
   found: boolean;
 }
 
-function SearchWordController() {
+function SearchWordGameController() {
   function getBoardSize(state: IGameState) {
     const maxColumnWidth = 24;
     const maxAvailableColumnNumber = Math.floor(state.availableSpace / maxColumnWidth);
@@ -175,4 +175,4 @@ function SearchWordController() {
     gameHasEnded,
   };
 }
-export default SearchWordController;
+export default SearchWordGameController;

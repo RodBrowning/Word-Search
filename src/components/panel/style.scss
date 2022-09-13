@@ -16,7 +16,7 @@
   z-index: 0;
   .inner-panel {
     grid-column-gap: 20px;
-    z-index: $zHeader;
+    z-index: $zFirstLayer;
     display: grid;
     grid-template-columns: repeat(12, 1fr);
     grid-column: 1 / 13;

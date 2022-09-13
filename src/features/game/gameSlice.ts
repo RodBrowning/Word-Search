@@ -2,11 +2,11 @@
 /* eslint-disable no-param-reassign */
 import IGameState from '../../types/state';
 import type { PayloadAction } from '@reduxjs/toolkit';
-import SearchWordController from '../../utils/SearchWordController';
+import SearchWordGameController from '../../utils/SearchWordGameController';
 import { createSlice } from '@reduxjs/toolkit';
 import initialState from './initialState';
 
-const SWC = SearchWordController();
+const SWGC = SearchWordGameController();
 
 export const gameSlice = createSlice({
   name: 'gameState',
@@ -15,17 +15,17 @@ export const gameSlice = createSlice({
     generateNewBoardData: (state: IGameState) => {
       state.boardData.matchEnded = false;
       state.gameEnded = false;
-      state.boardData = SWC.getBoardData(state);
+      state.boardData = SWGC.getBoardData(state);
     },
     processWord: (state: IGameState, payloadAction: PayloadAction) => {
       // eslint-disable-next-line array-callback-return
-      state = SWC.processWord(state, payloadAction);
-      if (SWC.matchHasEnded(state)) {
+      state = SWGC.processWord(state, payloadAction);
+      if (SWGC.matchHasEnded(state)) {
         state.boardData.matchEnded = true;
         state.matches += 1;
         state.points += state.matchPoints;
       }
-      if (SWC.gameHasEnded(state)) {
+      if (SWGC.gameHasEnded(state)) {
         state.gameEnded = true;
       }
     },
