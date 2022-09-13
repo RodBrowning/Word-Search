@@ -6,10 +6,11 @@ import React, { useEffect, useRef, useState } from 'react';
 import { generateNewBoardData, setAvailableSpace } from '../../features/game/gameSlice';
 import { useDispatch, useSelector } from 'react-redux';
 
+import Board from '../board';
 import ConfigModal from '../modal/config';
-import IGameState from '../../types/state';
 import Modal from '../modal/modal';
 import { RootState } from '../../app/store';
+import WordList from '../wordList';
 
 const Game: React.FC = () => {
   const availableSizeRef = useRef<HTMLElement>() as React.MutableRefObject<HTMLInputElement>;
@@ -36,36 +37,6 @@ const Game: React.FC = () => {
       alert('Ended');
     }
   }, [gameState]);
-
-  const table = (gameState: IGameState) => {
-    return gameState.boardData.board.map((row: string[], i: number) => {
-      return (
-        // eslint-disable-next-line react/no-array-index-key
-        <tr key={`row-${i}`}>
-          {row.map((cell: string, j: number) => {
-            return (
-              // eslint-disable-next-line react/no-array-index-key
-              <td key={`row-${i}-cell-${j}`}>
-                <h6>{cell}</h6>
-              </td>
-            );
-          })}
-        </tr>
-      );
-    });
-  };
-
-  const words = (gameState: IGameState) => {
-    return gameState.boardData.feedbacks.map((feedback) => {
-      return (
-        <li key={feedback.word}>
-          <span className={feedback.found ? 'found' : ''}>
-            <h5>{feedback.word}</h5>
-          </span>
-        </li>
-      );
-    });
-  };
 
   function updateBoard() {
     const availableSpace = availableSizeRef.current?.clientWidth!;
@@ -115,18 +86,11 @@ const Game: React.FC = () => {
         </menu>
         <div className="words">
           <h3>Palavras</h3>
-          <div className="word-list">
-            <ul className={gameState.boardData.feedbacks.length > 12 ? 'split' : ''}>{words(gameState)}</ul>
-          </div>
+          <WordList feedbacks={gameState.boardData.feedbacks} />
         </div>
       </aside>
       <main ref={availableSizeRef}>
-        <div className="board">
-          <table>
-            <tbody>{table(gameState)}</tbody>
-            {/* <tbody>{table(15, 30)}</tbody> */}
-          </table>
-        </div>
+        <Board board={gameState.boardData.board} />
         <div className="placar">
           <div className="pontos">
             <h4>

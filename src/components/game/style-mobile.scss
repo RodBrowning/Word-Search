@@ -50,26 +50,9 @@
           }
         }
       }
-      .words {
-        .word-list {
-          height: unset;
-          &:before {
-            height: calc(100% + 12px);
-            top: -6px;
-          }
-          ul {
-            display: flex;
-            flex-wrap: wrap;
-            column-gap: 12px;
-          }
-        }
-      }
     }
     main {
       grid-column: 1 / 13;
-      .board {
-        margin: auto;
-      }
       .placar {
         width: fit-content;
         margin: auto;

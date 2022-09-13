@@ -1,0 +1,17 @@
+@import '../../scss/variables/colors';
+@import '../../scss/fonts';
+
+@media only screen and (max-width: 768px) {
+  .word-list {
+    height: unset;
+    &:before {
+      height: calc(100% + 12px);
+      top: -6px;
+    }
+    ul {
+      display: flex;
+      flex-wrap: wrap;
+      column-gap: 12px;
+    }
+  }
+}

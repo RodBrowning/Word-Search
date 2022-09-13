@@ -1,36 +1,12 @@
 import './style.scss';
 import './style-mobile.scss';
 
+import Board from '../board';
+// eslint-disable-next-line import/order
 import React from 'react';
+import SearchWordsGame from '../../utils/SearchWordGame';
 
 const About: React.FC = () => {
-  const table = (rows: number, columns: number) => {
-    return Array(rows)
-      .fill(0)
-      .map(() => {
-        return new Array(columns).fill('*');
-      })
-      .map((fArr) => {
-        return fArr.map(() => {
-          return String.fromCharCode(Math.floor(65 + Math.random() * (90 - 65 + 1)));
-        });
-      })
-      .map((row, i) => {
-        return (
-          // eslint-disable-next-line react/no-array-index-key
-          <tr key={`row-${i}`}>
-            {row.map((cell, j) => {
-              return (
-                // eslint-disable-next-line react/no-array-index-key
-                <td key={`row-${i}-cell-${j}`}>
-                  <h6>{cell}</h6>
-                </td>
-              );
-            })}
-          </tr>
-        );
-      });
-  };
   return (
     <div className="inner-panel inner-panel-about">
       <div className="about-text">
@@ -61,11 +37,25 @@ const About: React.FC = () => {
         <span className="under-bar">
           <h1>Caça-palavras</h1>
         </span>
-        <div className="board">
-          <table>
-            <tbody>{table(10, 10)}</tbody>
-            <tbody className="mobile">{table(8, 13)}</tbody>
-          </table>
+        <div className="sample-board">
+          <div className="desk">
+            <Board
+              board={SearchWordsGame().getBoard({
+                boardSize: { columns: 10, rows: 15 },
+                useCustom: true,
+                customWords: ['caça', 'palavras', 'criança', 'aprender', 'memoria', 'futuro', 'sorte', 'santos'],
+              })}
+            />
+          </div>
+          <div className="mobile">
+            <Board
+              board={SearchWordsGame().getBoard({
+                boardSize: { columns: 8, rows: 8 },
+                useCustom: true,
+                customWords: ['caça', 'palavras', 'criança', 'aprender', 'memoria', 'futuro', 'sorte', 'santos'],
+              })}
+            />
+          </div>
         </div>
       </div>
     </div>
