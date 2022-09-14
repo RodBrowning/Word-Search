@@ -1,5 +1,4 @@
-@import '../../scss/variables/colors';
-@import '../../scss/fonts';
+@use '../../scss/index' as mainStyle;
 
 @media only screen and (max-width: 768px) {
   header {
@@ -50,13 +49,13 @@
           display: flex;
           flex-direction: column;
           row-gap: 16px;
-          background-color: $tertiary;
-          border: 1px solid $black-50;
+          background-color: mainStyle.$tertiary;
+          border: 1px solid mainStyle.$black-50;
           &.show-menu {
             visibility: visible;
           }
           a {
-            color: $black;
+            color: mainStyle.$black;
             &:last-child {
               margin-bottom: 10px;
             }

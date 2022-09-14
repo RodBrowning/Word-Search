@@ -1,5 +1,4 @@
-@import '../../scss/variables/colors';
-@import '../../scss/fonts';
+@use '../../scss/index' as mainStyle;
 
 @media only screen and (max-width: 768px) {
   .inner-panel-game {
@@ -29,7 +28,7 @@
               height: 200%;
             }
             svg > path {
-              fill: $tertiary;
+              fill: mainStyle.$tertiary;
             }
           }
           &:before {
@@ -42,7 +41,7 @@
             height: 0;
             border-radius: 50%;
             z-index: -1;
-            background: $primary;
+            background: mainStyle.$primary;
             transition: all 0.15s ease-in-out;
           }
           svg > path {
@@ -65,20 +64,20 @@
           span {
             font-weight: 700;
             &:first-child {
-              font-size: $h1-size;
-              color: $primary;
+              font-size: mainStyle.$h1-size;
+              color: mainStyle.$primary;
             }
             &:last-child {
-              font-size: $h3-size;
-              color: $black;
+              font-size: mainStyle.$h3-size;
+              color: mainStyle.$black;
             }
           }
         }
         .nivel {
           margin-top: 16px;
           span {
-            font-size: $h4-size;
-            color: $secondary;
+            font-size: mainStyle.$h4-size;
+            color: mainStyle.$secondary;
             font-weight: 700;
           }
         }

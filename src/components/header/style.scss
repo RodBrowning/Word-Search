@@ -1,6 +1,4 @@
-@import '../../scss/variables/colors';
-@import '../../scss/variables/layout';
-@import '../../scss/fonts';
+@use '../../scss/index' as mainStyle;
 
 header {
   $header-height: 60px;
@@ -10,14 +8,14 @@ header {
   grid-column-gap: 20px;
   align-items: center;
   padding: 0 24px;
-  background-color: $black-75;
+  background-color: mainStyle.$black-75;
   height: $header-height;
   .inner-header {
     display: flex;
     justify-content: space-between;
     grid-column: 1 / 12;
     height: 100%;
-    z-index: $zFirstLayer;
+    z-index: mainStyle.$zFirstLayer;
     .logo {
       width: 70px;
       display: flex;
@@ -32,7 +30,7 @@ header {
       justify-content: space-between;
       a {
         position: relative;
-        color: $tertiary;
+        color: mainStyle.$tertiary;
         padding: 0 8px;
         z-index: 0;
         transition: all 0.5s ease-in-out;
@@ -43,14 +41,14 @@ header {
           height: 4px;
           left: 0;
           bottom: -8px;
-          background: $gradient;
+          background: mainStyle.$gradient;
           box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
           border-radius: 24px;
           transition: all 0.15s ease-in-out;
         }
         &:hover,
         &.active {
-          color: $black-75;
+          color: mainStyle.$black-75;
           &::before {
             width: calc(100% + 32px);
             height: 100%;

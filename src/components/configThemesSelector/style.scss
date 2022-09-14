@@ -1,6 +1,4 @@
-@import '../../scss/variables/colors';
-@import '../../scss/variables/layout';
-@import '../../scss/fonts';
+@use '../../scss/index' as mainStyle;
 
 .subject {
   .options {

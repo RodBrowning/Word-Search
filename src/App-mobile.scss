@@ -1,5 +1,5 @@
-@import '/src/scss/variables/colors';
-@import '/src/scss/fonts';
+@use '/src/scss/variables/colors';
+@use '/src/scss/fonts';
 
 @media only screen and (max-width: 768px) {
   .App {

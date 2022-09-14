@@ -1,6 +1,4 @@
-@import '../../../scss/variables/colors';
-@import '../../../scss/variables/layout';
-@import '../../../scss/fonts';
+@use '../../../scss/index' as mainStyle;
 
 .config-panel {
   position: absolute;
@@ -9,65 +7,15 @@
   left: 24px;
   width: 320px;
   padding: 14px 8px;
-  border: 1px solid $black-50;
+  border: 1px solid mainStyle.$black-50;
   display: flex;
   flex-direction: column;
   gap: 24px;
-  z-index: $zModalContent;
-  background-color: $tertiary;
+  z-index: mainStyle.$zModalContent;
+  background-color: mainStyle.$tertiary;
   visibility: hidden;
   &.show-config {
     visibility: visible;
-  }
-  button,
-  label > input[type='radio'],
-  label > input[type='checkbox'] {
-    padding: 6px 8px;
-    height: 100%;
-    justify-content: center;
-    align-items: center;
-    background: transparent;
-    border: 1px solid transparent;
-    border-radius: 50px;
-    font-weight: bold;
-    font-size: $h6-size;
-    color: $black-75;
-    cursor: pointer;
-    &:hover,
-    &.reset-game-button,
-    &:hover ~ button {
-      border: 1px solid $black-25;
-      background-color: $black-5;
-    }
-    &.toggle-button {
-      background-color: $black-25;
-      border: 1px solid $black-10;
-      color: $black-50;
-    }
-    &.selected,
-    &.reset-game-button:hover,
-    &:checked ~ button {
-      background: $gradient;
-      border: 1px solid $primary;
-      font-weight: bold;
-      color: $black;
-    }
-    &.reset-game-button {
-      width: 100%;
-    }
-  }
-
-  label {
-    flex: 1;
-    cursor: pointer;
-    input[type='radio'],
-    input[type='checkbox'] {
-      display: none;
-    }
-    button {
-      width: 100%;
-      pointer-events: none;
-    }
   }
   .difficulty {
     display: flex;

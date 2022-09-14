@@ -1,5 +1,4 @@
-@import '../../scss/variables/colors';
-@import '../../scss/fonts';
+@use '../../scss/index' as mainStyle;
 
 .word-list {
   position: relative;
@@ -10,7 +9,7 @@
     width: 7px;
     height: calc(100% + 40px);
     border-radius: 50px;
-    background-color: $primary;
+    background-color: mainStyle.$primary;
   }
   ul {
     padding-left: 15px;
@@ -36,7 +35,7 @@
           content: '';
           width: 100%;
           height: 5px;
-          background-color: $secondary;
+          background-color: mainStyle.$secondary;
           z-index: -1;
         }
       }

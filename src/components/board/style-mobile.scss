@@ -1,5 +1,4 @@
-@import '../../scss/variables/colors';
-@import '../../scss/fonts';
+@use '../../scss/index' as mainStyle;
 
 @media only screen and (max-width: 768px) {
   .board {

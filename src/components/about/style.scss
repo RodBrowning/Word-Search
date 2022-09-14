@@ -1,5 +1,4 @@
-@import '../../scss/variables/colors';
-@import '../../scss/fonts';
+@use '../../scss/index' as mainStyle;
 
 .inner-panel-about {
   padding-top: 92px;

@@ -1,12 +1,11 @@
-@import '../../scss/variables/colors';
-@import '../../scss/fonts';
+@use '../../scss/index' as mainStyle;
 
 .board {
   border-width: 4px 6px 6px 4px;
   border-style: solid;
-  border-color: $primary;
+  border-color: mainStyle.$primary;
   border-radius: 20px;
-  box-shadow: 2px 2px 2px $black-25;
+  box-shadow: 2px 2px 2px mainStyle.$black-25;
   overflow: hidden;
   margin-left: auto;
   width: fit-content;

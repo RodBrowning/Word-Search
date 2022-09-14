@@ -1,5 +1,4 @@
-@import '../../../scss/variables/layout';
-@import '../../../scss/variables/colors';
+@use '../../../scss/index' as mainStyle;
 
 @media only screen and (max-width: 768px) {
   #confirmation-wrapper {
@@ -8,10 +7,10 @@
         button {
           color: white;
           &.confirm {
-            background: darken($success, 15%);
+            background: darken(mainStyle.$success, 15%);
           }
           &.cancel {
-            background: darken($error, 15%);
+            background: darken(mainStyle.$error, 15%);
           }
         }
       }

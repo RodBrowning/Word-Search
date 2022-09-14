@@ -1,5 +1,4 @@
-@import '../../scss/variables/colors';
-@import '../../scss/fonts';
+@use '../../scss/index' as mainStyle;
 
 footer {
   $footer-height: 60px;
@@ -9,7 +8,7 @@ footer {
   justify-content: space-between;
   align-items: center;
   padding: 0 24px;
-  background-color: $black-75;
+  background-color: mainStyle.$black-75;
   margin-top: 5px;
   height: $footer-height;
   &::before {
@@ -19,15 +18,15 @@ footer {
     top: -5px;
     height: 5px;
     width: 100%;
-    background: $gradient;
+    background: mainStyle.$gradient;
   }
   .copyright {
     p {
       margin: 0;
-      font-family: $heading-font;
-      font-size: $h6-size;
+      font-family: mainStyle.$heading-font;
+      font-size: mainStyle.$h6-size;
       font-weight: normal;
-      color: $tertiary;
+      color: mainStyle.$tertiary;
     }
   }
   .social-media {
@@ -50,12 +49,12 @@ footer {
         transform: translateX(-50%);
         bottom: 0;
         border-radius: 24px;
-        background-color: $tertiary;
+        background-color: mainStyle.$tertiary;
         transition: all 0.25s ease-in-out;
       }
       &:hover {
         &::before {
-          background-color: $primary;
+          background-color: mainStyle.$primary;
           height: 0;
           width: 0;
           bottom: -10px;
@@ -65,7 +64,7 @@ footer {
           height: 100%;
           transform: scale(1.5);
           path {
-            fill: $primary;
+            fill: mainStyle.$primary;
           }
         }
       }
@@ -74,7 +73,7 @@ footer {
         top: 0;
         transition: all 0.25s ease-in-out;
         path {
-          fill: $tertiary;
+          fill: mainStyle.$tertiary;
           transition: all 0.25s ease-in-out;
         }
       }

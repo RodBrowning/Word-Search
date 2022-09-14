@@ -1,5 +1,4 @@
-@import '../../scss/variables/colors';
-@import '../../scss/variables/layout';
+@use '../../scss/index.scss' as mainStyle;
 
 .panel {
   $header-footer-height: 60px;
@@ -12,11 +11,11 @@
   align-items: center;
   padding: 0 24px;
   min-height: 690px;
-  background: $main-bg-gradient;
+  background: mainStyle.$main-bg-gradient;
   z-index: 0;
   .inner-panel {
     grid-column-gap: 20px;
-    z-index: $zFirstLayer;
+    z-index: mainStyle.$zFirstLayer;
     display: grid;
     grid-template-columns: repeat(12, 1fr);
     grid-column: 1 / 13;
@@ -31,7 +30,7 @@
         left: 0;
         bottom: -24px;
         border-radius: 8px;
-        background-color: $primary;
+        background-color: mainStyle.$primary;
       }
       h1 {
         margin-bottom: 56px;
@@ -40,16 +39,16 @@
   }
   .bg-decoration {
     position: absolute;
-    z-index: $zBGDecoration;
+    z-index: mainStyle.$zBGDecoration;
     bottom: 0;
     left: 0;
     width: 100%;
     height: calc(100% + 60px);
-    filter: drop-shadow(-16px 0px 13px $black-25);
+    filter: drop-shadow(-16px 0px 13px mainStyle.$black-25);
     .inner-bg-decoration {
       width: 100%;
       height: 100%;
-      background: $tertiary;
+      background: mainStyle.$tertiary;
       clip-path: polygon(100% 0, 0% 100%, 100% 100%);
     }
   }

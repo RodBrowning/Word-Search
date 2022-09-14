@@ -1,5 +1,4 @@
-@import '../../scss/variables/colors';
-@import '../../scss/fonts';
+@use '../../scss/index' as mainStyle;
 
 @media only screen and (max-width: 768px) {
   .inner-panel-contact {
@@ -9,7 +8,7 @@
         transform: translateX(-50%);
       }
       h1 {
-        font-size: $h2-size;
+        font-size: mainStyle.$h2-size;
         text-align: center;
       }
     }
