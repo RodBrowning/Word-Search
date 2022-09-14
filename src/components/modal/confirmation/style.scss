@@ -27,42 +27,6 @@
       display: flex;
       gap: 8px;
       padding: 0 8px;
-      button {
-        background-color: mainStyle.$black-5;
-        border: 1px solid mainStyle.$black-25;
-        color: mainStyle.$black-75;
-        border-radius: 8px;
-        width: 100%;
-        height: 40px;
-        font-weight: 800;
-        cursor: pointer;
-        span {
-          margin-right: 8px;
-          &:last-child {
-            margin-right: 0;
-          }
-          p {
-            color: mainStyle.$black;
-            display: inline-block;
-            margin: 0;
-          }
-          svg > path {
-            fill: mainStyle.$black;
-          }
-        }
-        &.confirm {
-          // background: darken(mainStyle.$success, 15%);
-          &:hover {
-            background: mainStyle.$success;
-          }
-        }
-        &.cancel {
-          // background: darken(mainStyle.$error, 15%);
-          &:hover {
-            background: mainStyle.$error;
-          }
-        }
-      }
     }
   }
 }

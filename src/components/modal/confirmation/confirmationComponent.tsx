@@ -22,7 +22,7 @@ const ConfirmationComponent: React.FC<Props> = ({
       <div className="actions-btn">
         <button
           type="button"
-          className="cancel"
+          className="action-btn cancel"
           onClick={() => {
             setOpenConfirmationModal(false);
           }}
@@ -31,7 +31,7 @@ const ConfirmationComponent: React.FC<Props> = ({
         </button>
         <button
           type="button"
-          className="confirm"
+          className="action-btn confirm"
           onClick={() => {
             setOpenModal(false);
             dispatchAction();

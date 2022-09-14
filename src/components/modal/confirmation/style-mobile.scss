@@ -1,19 +1,4 @@
 @use '../../../scss/index' as mainStyle;
 
 @media only screen and (max-width: 768px) {
-  #confirmation-wrapper {
-    .confirmation-component {
-      .actions-btn {
-        button {
-          color: white;
-          &.confirm {
-            background: darken(mainStyle.$success, 15%);
-          }
-          &.cancel {
-            background: darken(mainStyle.$error, 15%);
-          }
-        }
-      }
-    }
-  }
 }
