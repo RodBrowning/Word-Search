@@ -1,3 +1,4 @@
+/* eslint-disable import/order */
 import './style.scss';
 import './style-mobile.scss';
 
@@ -11,12 +12,13 @@ import {
   setLoadThemes as reduxSetLoadThemesState,
   setUseCustom as reduxSetUseCustomState,
 } from '../../../features/game/gameSlice';
-// eslint-disable-next-line import/order
 import { useDispatch, useSelector } from 'react-redux';
 
 import ConfirmationComponent from '../confirmation/confirmationComponent';
 import ConfirmationModal from '../confirmation/confirmationModal';
+import CustomWordListConfig from '../../configCustomWordList';
 import type { RootState } from '../../../app/store';
+import ThemesSelector from '../../configThemesSelector';
 
 interface Props {
   setOpenModal: React.Dispatch<React.SetStateAction<boolean>>;
@@ -49,9 +51,7 @@ const ConfigModal: React.FC<Props> = ({ setOpenModal }) => {
       dispatch(reduxSetDifficulty(difficultyRef.current));
       dispatch(reduxClearMatchPoints());
     }
-    if (customWordListRef.current.length >= 10) {
-      dispatch(reduxSetCustomWords(customWordListRef.current));
-    }
+    dispatch(reduxSetCustomWords(customWordListRef.current));
     dispatch(reduxSetUseCustomState(useCustomRef.current));
     dispatch(reduxSetLoadThemesState(loadThemesRef.current));
     dispatch(reduxGenerateNewBoardData());
@@ -67,30 +67,25 @@ const ConfigModal: React.FC<Props> = ({ setOpenModal }) => {
     difficultyRef.current = value;
   };
 
-  const handleUseCustom = (isChecked: boolean) => {
+  const handleUseCustomChanges = (isChecked: boolean) => {
     setConfigState({ ...configState, useCustom: isChecked });
     useCustomRef.current = isChecked;
   };
 
-  const handleChangeCustomWords = (target: HTMLTextAreaElement) => {
-    setConfigState({ ...configState, customWordListDisplay: target.value });
-    const words = target.value
-      .split(',')
-      .map((word) => {
-        return word.trim();
-      })
-      .filter((word) => {
-        return word !== '';
-      })
-      .filter((word) => {
-        return /^[a-zA-Z]*$/.test(word);
-      })
-      .filter((word) => {
-        return word.length > 2;
+  const handleCustomWordListChanges = (words: string[]) => {
+    setConfigState({ ...configState, customWordList: words });
+    customWordListRef.current = words;
+    if (words.length < 10) {
+      setConfigState((oldConfigState) => {
+        return { ...oldConfigState, useCustom: false };
       });
-    const uniqueWords = [...new Set(words)];
-    setConfigState({ ...configState, customWordList: uniqueWords });
-    customWordListRef.current = uniqueWords;
+      useCustomRef.current = false;
+      if (configState.loadThemes.length === 0) {
+        setConfigState((oldConfigState) => {
+          return { ...oldConfigState, loadThemes: [themes[0]] };
+        });
+      }
+    }
   };
 
   const handleLoadThemes = (target: HTMLInputElement) => {
@@ -170,59 +165,19 @@ const ConfigModal: React.FC<Props> = ({ setOpenModal }) => {
           <button type="button">Difícil</button>
         </label>
       </div>
-      <div className="word-list">
-        <h5>Lista de palavras</h5>
-        <label htmlFor="use-custom">
-          <input
-            type="checkbox"
-            name="custom-checkbox"
-            id="use-custom"
-            checked={configState.useCustom}
-            disabled={configState.customWordList.length < 10}
-            onChange={(event) => {
-              if (!event.target.checked && configState.loadThemes.length < 1) return;
-              handleUseCustom(event.target.checked);
-            }}
-          />
-          <button type="button" className="toggle-button">
-            Usar Custom
-          </button>
-        </label>
-        <p>Separe por virgula. Mínimo 10 palavras.</p>
-        <textarea
-          name="word-list"
-          id="word-list"
-          cols={10}
-          rows={8}
-          value={configState.customWordListDisplay}
-          onChange={(event) => {
-            handleChangeCustomWords(event.target);
-          }}
-        />
-      </div>
-      <div className="subject">
-        <h5>Tema</h5>
-        <div className="options">
-          {themes.map((theme) => {
-            return (
-              <label htmlFor={theme} key={theme}>
-                <input
-                  type="checkbox"
-                  name="custom-checkbox"
-                  id={theme}
-                  value={theme}
-                  checked={configState.loadThemes.includes(theme)}
-                  onChange={(event) => {
-                    if (!event.target.checked && configState.loadThemes.length < 2 && !configState.useCustom) return;
-                    handleLoadThemes(event.target);
-                  }}
-                />
-                <button type="button">{theme[0].toUpperCase() + theme.slice(1)}</button>
-              </label>
-            );
-          })}
-        </div>
-      </div>
+      <CustomWordListConfig
+        useCustom={configState.useCustom}
+        handleUseCustomChanges={handleUseCustomChanges}
+        customWordList={configState.customWordList}
+        handleCustomWordListChanges={handleCustomWordListChanges}
+        loadThemesLength={configState.loadThemes.length}
+      />
+      <ThemesSelector
+        themes={themes}
+        loadThemes={configState.loadThemes}
+        useCustom={configState.useCustom}
+        handleLoadThemes={handleLoadThemes}
+      />
       <div className="reset-game">
         <button
           type="button"

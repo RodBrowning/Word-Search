@@ -1,0 +1,17 @@
+@import '../../scss/variables/colors';
+@import '../../scss/variables/layout';
+@import '../../scss/fonts';
+
+.subject {
+  .options {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    row-gap: 18px;
+    margin-top: 8px;
+    label {
+      min-width: 100px;
+      max-width: fit-content;
+    }
+  }
+}
