@@ -11,7 +11,7 @@ import ConfigModal from '../modal/config';
 import { Link } from 'react-router-dom';
 import Modal from '../modal/modal';
 import { RootState } from '../../app/store';
-import WordList from '../wordList';
+import WordList from '../feedbackWordList';
 
 const Game: React.FC = () => {
   const availableSizeRef = useRef<HTMLElement>() as React.MutableRefObject<HTMLInputElement>;
