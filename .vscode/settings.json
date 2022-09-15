@@ -4,7 +4,7 @@
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
   "editor.formatOnSave": true,
-  "cSpell.words": ["airbnb", "reduxjs"],
+  "cSpell.words": ["airbnb", "reduxjs", "SWGC"],
   "cSpell.language": "en,pt,pt_BR",
   "cSpell.enabled": true,
   "editor.mouseWheelZoom": true

@@ -1,0 +1,24 @@
+@use './variables/colors';
+@use './variables/layout';
+@use './fonts';
+
+input,
+textarea {
+  border: 1px solid colors.$black-50;
+  background-color: white;
+  border-radius: 8px;
+  height: 18px;
+  padding: 8px;
+  font-family: fonts.$heading-font;
+  font-size: fonts.$h6-size;
+  &:active,
+  &:focus {
+    outline-style: solid;
+    outline-color: colors.$primary;
+    outline-width: 1px;
+  }
+}
+
+textarea {
+  height: auto;
+}

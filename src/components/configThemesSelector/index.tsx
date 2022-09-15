@@ -13,7 +13,7 @@ interface Props {
 const ThemesSelector: React.FC<Props> = ({ themes, loadThemes, useCustom, handleLoadThemes }) => {
   return (
     <div className="subject">
-      <h5>Tema</h5>
+      <h5>Temas</h5>
       <div className="options">
         {themes.map((theme) => {
           return (

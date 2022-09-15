@@ -4,6 +4,19 @@
   .panel {
     grid-column-gap: 8px;
 
+    .inner-panel {
+      span.under-bar {
+        &:before {
+          left: 50%;
+          transform: translateX(-50%);
+        }
+        h1 {
+          font-size: mainStyle.$h2-size;
+          text-align: center;
+        }
+      }
+    }
+
     .bg-decoration {
       filter: drop-shadow(-12px 0px 6px rgba(13, 7, 1, 0.25));
     }

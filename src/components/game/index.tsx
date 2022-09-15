@@ -50,7 +50,7 @@ const Game: React.FC = () => {
       <aside>
         <menu>
           <button
-            className={`action-button ${isConfigModalOpen && 'active'}`}
+            className={`game-menu-action-button ${isConfigModalOpen && 'active'}`}
             type="button"
             onClick={() => {
               setIsConfigModalOpen(true);
@@ -66,7 +66,7 @@ const Game: React.FC = () => {
           <Modal isOpen={isConfigModalOpen} setOpenModal={setIsConfigModalOpen}>
             <ConfigModal setOpenModal={setIsConfigModalOpen} />
           </Modal>
-          <button className="action-button" type="button" onClick={updateBoard}>
+          <button className="game-menu-action-button" type="button" onClick={updateBoard}>
             <svg width="21" height="21" viewBox="0 0 21 21" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path
                 d="M10.4912 18.375C6.13011 18.375 2.60967 14.8575 2.60967 10.5C2.60967 6.1425 6.13011 2.625 10.4912 2.625C12.6631 2.625 14.6247 3.535 16.0434 4.9525L12.2427 8.75H21V0L17.9174 3.08C16.0083 1.19 13.3987 0 10.4912 0C4.69391 0 0 4.7075 0 10.5C0 16.2925 4.69391 21 10.4912 21C15.6931 21 20.0017 17.22 20.8249 12.25H18.1626C17.357 15.75 14.2394 18.375 10.4912 18.375Z"
@@ -75,7 +75,7 @@ const Game: React.FC = () => {
             </svg>
           </button>
           <Link to="imprimir">
-            <button className="action-button" type="button">
+            <button className="game-menu-action-button" type="button">
               <svg width="21" height="21" viewBox="0 0 21 21" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path
                   fillRule="evenodd"

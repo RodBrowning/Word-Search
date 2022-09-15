@@ -27,7 +27,7 @@ label > input[type='checkbox'] {
     color: colors.$black-50;
   }
   &.selected,
-  &:focus,
+  &:focus:not(.game-menu-action-button),
   &:checked ~ button {
     background: colors.$gradient;
     border: 1px solid colors.$primary;
@@ -36,6 +36,29 @@ label > input[type='checkbox'] {
   }
   &.full-size {
     width: 100%;
+  }
+}
+
+button[type='submit'] {
+  background: colors.$gradient;
+  border: 1px solid colors.$secondary;
+  border-radius: 8px;
+  width: 100%;
+  height: 48px;
+  cursor: pointer;
+  span {
+    margin-right: 8px;
+    &:last-child {
+      margin-right: 0;
+    }
+    p {
+      color: colors.$black;
+      display: inline-block;
+      margin: 0;
+    }
+    svg > path {
+      fill: colors.$black;
+    }
   }
 }
 

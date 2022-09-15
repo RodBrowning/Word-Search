@@ -1,17 +1,17 @@
 @use '../../scss/index' as mainStyle;
 
+@media only screen and (max-width: 975px) {
+  .inner-panel-contact {
+    .contact-text {
+      grid-column: 1 / 7;
+    }
+    .contact-form {
+      grid-column: 7 / 13;
+    }
+  }
+}
 @media only screen and (max-width: 768px) {
   .inner-panel-contact {
-    span.under-bar {
-      &:before {
-        left: 50%;
-        transform: translateX(-50%);
-      }
-      h1 {
-        font-size: mainStyle.$h2-size;
-        text-align: center;
-      }
-    }
     padding-top: 32px;
     padding-bottom: 64px;
     .contact-text {
@@ -22,16 +22,22 @@
     }
     .contact-form {
       grid-column: 1 / 13;
-      flex-direction: column;
     }
   }
 }
-@media only screen and (max-width: 360px) {
+@media only screen and (max-width: 425px) {
   .inner-panel-contact {
     .contact-text {
       br {
         display: block !important;
       }
+    }
+    .contact-form {
+      grid-template-areas:
+        'username'
+        'email'
+        'message'
+        'submit';
     }
   }
 }

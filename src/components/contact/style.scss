@@ -11,10 +11,13 @@
   }
   .contact-form {
     grid-column: 8 / 12;
-    display: flex;
-    flex-wrap: wrap;
-    column-gap: 12px;
-    row-gap: 24px;
+    display: grid;
+    grid-template-areas:
+      'username email'
+      'message message'
+      'submit submit';
+    grid-column-gap: 12px;
+    grid-row-gap: 24px;
     label {
       display: inline-grid;
       gap: 8px;
@@ -23,50 +26,18 @@
       font-weight: normal;
       font-size: mainStyle.$h5-size;
       color: mainStyle.$black-75;
-      &:last-child {
-        width: 100%;
+      &:first-child {
+        grid-area: username;
       }
-      input,
-      textarea {
-        border: 1px solid mainStyle.$black-50;
-        background-color: white;
-        border-radius: 8px;
-        height: 18px;
-        padding: 8px;
-        font-family: mainStyle.$heading-font;
-        font-size: mainStyle.$h6-size;
-        &:active,
-        &:focus {
-          outline-style: solid;
-          outline-color: mainStyle.$primary;
-          outline-width: 1px;
-        }
+      &:nth-child(2) {
+        grid-area: email;
       }
-      textarea {
-        height: 150px;
+      &:nth-child(3) {
+        grid-area: message;
       }
     }
     button[type='submit'] {
-      background: mainStyle.$gradient;
-      border: 1px solid mainStyle.$secondary;
-      border-radius: 8px;
-      width: 100%;
-      height: 48px;
-      cursor: pointer;
-      span {
-        margin-right: 8px;
-        &:last-child {
-          margin-right: 0;
-        }
-        p {
-          color: mainStyle.$black;
-          display: inline-block;
-          margin: 0;
-        }
-        svg > path {
-          fill: mainStyle.$black;
-        }
-      }
+      grid-area: submit;
     }
   }
 }

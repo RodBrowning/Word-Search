@@ -16,15 +16,6 @@
       order: -1;
       span.under-bar {
         display: block;
-        &:before {
-          left: 50%;
-          transform: translateX(-50%);
-        }
-        h1 {
-          font-size: mainStyle.$h2-size;
-          text-align: center;
-          margin-bottom: 64px;
-        }
       }
       .sample-board {
         margin: auto;

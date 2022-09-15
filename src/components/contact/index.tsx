@@ -23,15 +23,15 @@ const Contact: React.FC = () => {
       <form action="" className="contact-form">
         <label htmlFor="nome">
           Nome
-          <input type="text" name="nome" />
+          <input type="text" size={10} name="nome" />
         </label>
         <label htmlFor="email">
           E-mail
-          <input type="email" name="email" />
+          <input type="email" size={10} name="email" />
         </label>
         <label htmlFor="mensagem">
           Mensagem
-          <textarea rows={4} cols={20} name="mensagem" />
+          <textarea rows={10} cols={10} name="mensagem" />
         </label>
         <button type="submit">
           <span>
