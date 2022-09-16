@@ -2,18 +2,18 @@
 
 @media only screen and (max-width: 768px) {
   .printer-component {
-    grid-column: 1/13;
     .boards-to-print {
       .print-board {
-        width: 80vw;
+        align-items: flex-start;
         .word-list {
+          width: 100%;
           ul {
             column-gap: 0;
           }
         }
         .board-container {
-          width: 100%;
           overflow: scroll;
+          width: 80vw;
           td {
             min-width: unset;
           }
@@ -25,7 +25,6 @@
 
 @media only screen and (max-width: 700px) {
   .printer-component {
-    grid-column: 2/12;
     .boards-to-print {
       .print-board {
         .board {
@@ -40,6 +39,8 @@
 
 @media only screen and (max-width: 425px) {
   .printer-component {
+    grid-column: 1/13;
+    width: 100%;
     .printer-config-board {
       grid-template-areas:
         'sizes'
@@ -49,10 +50,18 @@
     }
     .sizes-container,
     .amount-container {
-      .label-container {
-        height: fit-content;
+      .input-range-container {
         &:first-child {
           margin-bottom: 24px;
+        }
+      }
+    }
+    .boards-to-print {
+      .print-board {
+        .word-list {
+        }
+        .board-container {
+          width: 95vw;
         }
       }
     }

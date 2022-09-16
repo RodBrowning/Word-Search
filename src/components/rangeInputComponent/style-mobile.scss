@@ -1,10 +1,4 @@
 @use '../../scss/index' as mainStyle;
 
 @media only screen and (max-width: 425px) {
-  .input-range-container {
-    height: fit-content;
-    &:first-child {
-      margin-bottom: 24px;
-    }
-  }
 }

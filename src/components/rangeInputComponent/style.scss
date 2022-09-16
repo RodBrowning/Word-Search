@@ -1,7 +1,7 @@
 @use '../../scss/index' as mainStyle;
-
 .input-range-container {
   label {
+    cursor: default;
     > :first-child {
       display: flex;
       justify-content: space-between;
