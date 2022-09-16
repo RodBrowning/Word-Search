@@ -15,14 +15,6 @@
       'customWords themes';
     grid-auto-columns: 1fr;
     gap: 32px;
-    .label-container {
-      label {
-        > :first-child {
-          display: flex;
-          justify-content: space-between;
-        }
-      }
-    }
     .sizes-container {
       grid-area: sizes;
     }

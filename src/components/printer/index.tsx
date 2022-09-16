@@ -8,6 +8,8 @@ import React from 'react';
 import SearchWordsGame from '../../utils/SearchWordGame';
 import ThemesSelector from '../configThemesSelector';
 import WordList from '../feedbackWordList';
+// eslint-disable-next-line sort-imports
+import RangeInputComponent from '../rangeInputComponent';
 
 const Printer: React.FC = () => {
   const gameBoard = SearchWordsGame();
@@ -21,48 +23,12 @@ const Printer: React.FC = () => {
     <div className="printer-component">
       <div className="printer-config-board">
         <div className="sizes-container">
-          <div className="label-container">
-            <label htmlFor="numOfColumns">
-              <h5>
-                Numero de colunas<span style={{ float: 'right' }}>10</span>
-              </h5>
-              <div className="input-range">
-                <input type="range" defaultValue={10} min={10} max={40} step={1} name="numOfColumns" />
-              </div>
-            </label>
-          </div>
-          <div className="label-container">
-            <label htmlFor="numOfRows">
-              <h5>
-                Numero de linhas<span style={{ float: 'right' }}>10</span>
-              </h5>
-              <div className="input-range">
-                <input type="range" defaultValue={10} min={10} max={40} step={1} name="numOfRows" />
-              </div>
-            </label>
-          </div>
+          <RangeInputComponent name="numOfColumns" labelText="Numero de colunas" min={10} max={30} defaultValue={20} />
+          <RangeInputComponent name="numOfRows" labelText="Numero de linhas" min={10} max={30} defaultValue={20} />
         </div>
         <div className="amount-container">
-          <div className="label-container">
-            <label htmlFor="numOfWords">
-              <h5>
-                Numero de palavras<span style={{ float: 'right' }}>10</span>
-              </h5>
-              <div className="input-range">
-                <input type="range" defaultValue={10} min={10} max={30} step={1} name="numOfWords" />
-              </div>
-            </label>
-          </div>
-          <div className="label-container">
-            <label htmlFor="numOfBoards">
-              <h5>
-                Numero de Quadros<span style={{ float: 'right' }}>10</span>
-              </h5>
-              <div className="input-range">
-                <input type="range" defaultValue={1} min={1} max={20} step={1} name="numOfBoards" />
-              </div>
-            </label>
-          </div>
+          <RangeInputComponent name="numOfWords" labelText="Numero de palavras" min={10} max={30} defaultValue={20} />
+          <RangeInputComponent name="numOfBoards" labelText="Numero de Quadros" min={1} max={20} defaultValue={10} />
         </div>
         <div className="custom-words-container">
           <CustomWordListConfig
