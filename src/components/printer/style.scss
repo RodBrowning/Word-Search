@@ -9,10 +9,31 @@
   position: relative;
   z-index: mainStyle.$zFirstLayer;
   .printer-config-board {
-    display: flex;
+    display: grid;
+    grid-template-areas:
+      'sizes amount'
+      'customWords themes';
+    grid-auto-columns: 1fr;
     gap: 32px;
-    .container {
-      flex: 1;
+    .label-container {
+      label {
+        > :first-child {
+          display: flex;
+          justify-content: space-between;
+        }
+      }
+    }
+    .sizes-container {
+      grid-area: sizes;
+    }
+    .amount-container {
+      grid-area: amount;
+    }
+    .custom-words-container {
+      grid-area: customWords;
+    }
+    .themes-container {
+      grid-area: themes;
     }
   }
   .boards-to-print {

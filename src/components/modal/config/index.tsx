@@ -171,6 +171,8 @@ const ConfigModal: React.FC<Props> = ({ setOpenModal }) => {
         customWordList={configState.customWordList}
         handleCustomWordListChanges={handleCustomWordListChanges}
         loadThemesLength={configState.loadThemes.length}
+        cols={10}
+        rows={8}
       />
       <ThemesSelector
         themes={themes}
@@ -181,7 +183,7 @@ const ConfigModal: React.FC<Props> = ({ setOpenModal }) => {
       <div className="reset-game">
         <button
           type="button"
-          className="reset-game-button"
+          className="reset-game-button full-size"
           onClick={() => {
             setOpenResetConfirmationModal(true);
           }}

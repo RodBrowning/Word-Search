@@ -2,12 +2,10 @@
 
 @media only screen and (max-width: 768px) {
   .printer-component {
+    grid-column: 1/13;
     .boards-to-print {
-      grid-column: 1/13;
-      align-items: flex-start;
       .print-board {
-        align-items: flex-start;
-        width: 100%;
+        width: 80vw;
         .word-list {
           ul {
             column-gap: 0;
@@ -27,12 +25,34 @@
 
 @media only screen and (max-width: 700px) {
   .printer-component {
+    grid-column: 2/12;
     .boards-to-print {
       .print-board {
         .board {
           td {
             min-width: 35px;
           }
+        }
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 425px) {
+  .printer-component {
+    .printer-config-board {
+      grid-template-areas:
+        'sizes'
+        'amount'
+        'customWords'
+        'themes';
+    }
+    .sizes-container,
+    .amount-container {
+      .label-container {
+        height: fit-content;
+        &:first-child {
+          margin-bottom: 24px;
         }
       }
     }

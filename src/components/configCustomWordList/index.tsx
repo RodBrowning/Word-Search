@@ -9,6 +9,8 @@ interface Props {
   customWordList: string[];
   handleCustomWordListChanges: Function;
   loadThemesLength: number;
+  cols: number;
+  rows: number;
 }
 
 const CustomWordListConfig: React.FC<Props> = ({
@@ -17,6 +19,8 @@ const CustomWordListConfig: React.FC<Props> = ({
   customWordList,
   handleCustomWordListChanges,
   loadThemesLength,
+  cols,
+  rows,
 }) => {
   const [customWordListDisplay, setCustomWordListDisplay] = useState(customWordList.join(', '));
 
@@ -63,8 +67,8 @@ const CustomWordListConfig: React.FC<Props> = ({
       <textarea
         name="word-list"
         id="word-list"
-        cols={10}
-        rows={8}
+        cols={cols}
+        rows={rows}
         value={customWordListDisplay}
         onChange={(event) => {
           handleChangeCustomWords(event.target);
