@@ -1,3 +1,5 @@
+import './scss/fonts/Lato/stylesheet.scss';
+import './scss/fonts/Tai/stylesheet.scss';
 import './App.scss';
 import './App-mobile.scss';
 

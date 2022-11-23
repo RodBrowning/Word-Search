@@ -1,0 +1,20 @@
+@font-face {
+  font-family: 'Tai Heritage Pro';
+  src: url('TaiHeritagePro-Bold.eot');
+  src: url('TaiHeritagePro-Bold.eot?#iefix') format('embedded-opentype'),
+    url('TaiHeritagePro-Bold.woff2') format('woff2'), url('TaiHeritagePro-Bold.woff') format('woff'),
+    url('TaiHeritagePro-Bold.ttf') format('truetype');
+  font-weight: bold;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Tai Heritage Pro';
+  src: url('TaiHeritagePro.eot');
+  src: url('TaiHeritagePro.eot?#iefix') format('embedded-opentype'), url('TaiHeritagePro.woff2') format('woff2'),
+    url('TaiHeritagePro.woff') format('woff'), url('TaiHeritagePro.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
