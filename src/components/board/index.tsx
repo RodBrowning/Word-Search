@@ -14,11 +14,9 @@ const Board: React.FC<Props> = ({ board }) => {
         <tbody>
           {board.map((row: string[], i: number) => {
             return (
-              // eslint-disable-next-line react/no-array-index-key
               <tr key={`row-${i}`}>
                 {row.map((cell: string, j: number) => {
                   return (
-                    // eslint-disable-next-line react/no-array-index-key
                     <td key={`row-${i}-cell-${j}`}>
                       <h6>{cell}</h6>
                     </td>
