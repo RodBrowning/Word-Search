@@ -1,4 +1,3 @@
-/* eslint-disable import/order */
 import './style.scss';
 import './style-mobile.scss';
 
@@ -22,16 +21,12 @@ const Game: React.FC = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    const availableSpace = availableSizeRef.current?.clientWidth!;
+    const availableSpace = availableSizeRef.current?.clientWidth;
     dispatch(setAvailableSpace(availableSpace));
     if (gameState.boardData.board.length === 0) {
       dispatch(generateNewBoardData());
     }
   }, []);
-
-  useEffect(() => {
-    console.log(gameState);
-  }, [gameState]);
 
   useEffect(() => {
     if (gameState.gameEnded) {
@@ -40,7 +35,7 @@ const Game: React.FC = () => {
   }, [gameState]);
 
   function updateBoard() {
-    const availableSpace = availableSizeRef.current?.clientWidth!;
+    const availableSpace = availableSizeRef.current?.clientWidth;
     dispatch(setAvailableSpace(availableSpace));
     dispatch(generateNewBoardData());
   }

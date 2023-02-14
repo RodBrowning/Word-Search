@@ -17,7 +17,7 @@ const Board: React.FC<Props> = ({ board }) => {
               <tr key={`row-${i}`}>
                 {row.map((cell: string, j: number) => {
                   return (
-                    <td key={`row-${i}-cell-${j}`}>
+                    <td key={`cell-${j}`} id={`row-${i}-cell-${j}`}>
                       <h6>{cell}</h6>
                     </td>
                   );
