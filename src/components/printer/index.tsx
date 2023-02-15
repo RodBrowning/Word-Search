@@ -1,17 +1,27 @@
 import './style.scss';
 import './style-mobile.scss';
 
+import React, { useState } from 'react';
+
 import Board from '../board';
 import CustomWordListConfig from '../configCustomWordList';
-// eslint-disable-next-line import/order
-import React from 'react';
+import RangeInputComponent from '../rangeInputComponent';
+import { RootState } from '../../app/store';
 import SearchWordsGame from '../../utils/SearchWordGame';
 import ThemesSelector from '../configThemesSelector';
 import WordList from '../feedbackWordList';
-// eslint-disable-next-line sort-imports
-import RangeInputComponent from '../rangeInputComponent';
+import { useSelector } from 'react-redux';
 
 const Printer: React.FC = () => {
+  const gameState = useSelector((state: RootState) => {
+    return state.game;
+  });
+  const themes = Object.keys(gameState.themes);
+
+  const [useCustom, setUseCustom] = useState(false);
+  const [themesToLoad, setThemesToLoad] = useState<string[]>([themes[0]]);
+  const [customWords, setCustomWords] = useState<string[]>([]);
+
   const gameBoard = SearchWordsGame();
   const board = gameBoard.getBoard({
     boardSize: { columns: 30, rows: 15 },
@@ -19,6 +29,29 @@ const Printer: React.FC = () => {
     customWords: ['caça-palavras', 'criança', 'aprender', 'memoria', 'futuro', 'sorte', 'santos'],
   });
   const feedbacks = gameBoard.getFeedbacks();
+
+  const handleCustomWordListChanges = (wordsList: string[]) => {
+    setCustomWords(wordsList);
+    if (wordsList.length < 10) {
+      setUseCustom(false);
+      if (themesToLoad.length === 0) {
+        setThemesToLoad([themes[0]]);
+      }
+    }
+  };
+
+  const handleLoadThemes = (target: HTMLInputElement) => {
+    let newThemesToLoad = [];
+    if (target.checked) {
+      newThemesToLoad = [...themesToLoad, target.value];
+    } else {
+      newThemesToLoad = themesToLoad.filter((theme) => {
+        return theme !== target.value;
+      });
+    }
+    setThemesToLoad(newThemesToLoad);
+  };
+
   return (
     <div className="printer-component">
       <div className="printer-config-board">
@@ -32,21 +65,21 @@ const Printer: React.FC = () => {
         </div>
         <div className="custom-words-container">
           <CustomWordListConfig
-            useCustom={false}
-            handleUseCustomChanges={() => {}}
-            customWordList={[]}
-            handleCustomWordListChanges={() => {}}
-            loadThemesLength={0}
+            useCustom={useCustom}
+            handleUseCustomChanges={setUseCustom}
+            customWordList={customWords}
+            handleCustomWordListChanges={handleCustomWordListChanges}
+            loadThemesLength={themesToLoad.length}
             cols={10}
             rows={4}
           />
         </div>
         <div className="themes-container">
           <ThemesSelector
-            themes={['criança', 'aprender', 'memoria']}
-            loadThemes={['criança']}
-            useCustom={false}
-            handleLoadThemes={() => {}}
+            themes={themes}
+            loadThemes={themesToLoad}
+            useCustom={useCustom}
+            handleLoadThemes={handleLoadThemes}
           />
         </div>
       </div>
