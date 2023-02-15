@@ -1,4 +1,4 @@
-const sports = () => {
+const Sports = () => {
   return {
     esportes: [
       'Atletismo',
@@ -71,4 +71,4 @@ const sports = () => {
   };
 };
 
-export default sports;
+export default Sports;
