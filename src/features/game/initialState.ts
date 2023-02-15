@@ -1,5 +1,4 @@
 import IGameState from '../../types/state';
-// eslint-disable-next-line import/order
 import Themes from './themes/themes';
 
 const initialState: IGameState = {
@@ -29,7 +28,7 @@ const initialState: IGameState = {
   },
   useCustom: false,
   customWords: [],
-  loadThemes: ['animais'],
+  loadThemes: ['nomes'],
   themes: Themes,
   availableSpace: 0,
   matchPoints: 30,

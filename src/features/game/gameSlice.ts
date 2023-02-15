@@ -1,4 +1,3 @@
-/* eslint-disable import/order */
 /* eslint-disable no-param-reassign */
 import IGameState from '../../types/state';
 import type { PayloadAction } from '@reduxjs/toolkit';
