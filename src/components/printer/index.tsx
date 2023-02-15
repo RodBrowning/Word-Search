@@ -19,6 +19,7 @@ const Printer: React.FC = () => {
   const gameState = useSelector((state: RootState) => state.game);
   const themes = gameState.themes;
   const themesTitles = Object.keys(themes);
+  const minCustomWordsLength = 5;
 
   // States
   const [useCustom, setUseCustom] = useState(false);
@@ -34,7 +35,7 @@ const Printer: React.FC = () => {
   // Functions
   const handleCustomWordListChanges = (wordsList: string[]) => {
     setCustomWords(wordsList);
-    if (wordsList.length < 10) {
+    if (wordsList.length < minCustomWordsLength) {
       setUseCustom(false);
       if (themesToLoad.length === 0) {
         setThemesToLoad([themesTitles[0]]);
@@ -81,13 +82,13 @@ const Printer: React.FC = () => {
 
   useEffect(() => {
     generateBoardsToPrint();
-  }, [words, useCustom, columns, rows, numberOfWords, numberOfBoards]);
+  }, [words, columns, rows, numberOfWords, numberOfBoards]);
 
   useEffect(() => {
-    if (useCustom) {
+    if (useCustom && customWords.length >= minCustomWordsLength) {
       generateBoardsToPrint();
     }
-  }, [customWords]);
+  }, [customWords, useCustom]);
 
   return (
     <div className="printer-component">
@@ -137,6 +138,7 @@ const Printer: React.FC = () => {
             loadThemesLength={themesToLoad.length}
             cols={10}
             rows={4}
+            minWords={minCustomWordsLength}
           />
         </div>
         <div className="themes-container">

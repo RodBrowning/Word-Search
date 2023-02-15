@@ -11,6 +11,7 @@ interface Props {
   loadThemesLength: number;
   cols: number;
   rows: number;
+  minWords: number;
 }
 
 const CustomWordListConfig: React.FC<Props> = ({
@@ -21,6 +22,7 @@ const CustomWordListConfig: React.FC<Props> = ({
   loadThemesLength,
   cols,
   rows,
+  minWords,
 }) => {
   const [customWordListDisplay, setCustomWordListDisplay] = useState(customWordList.join(', '));
 
@@ -53,7 +55,7 @@ const CustomWordListConfig: React.FC<Props> = ({
           name="custom-checkbox"
           id="use-custom"
           checked={useCustom}
-          disabled={customWordList.length < 10}
+          disabled={customWordList.length < minWords}
           onChange={(event) => {
             if (!event.target.checked && loadThemesLength < 1) return;
             handleUseCustomChanges(event.target.checked);
@@ -63,7 +65,7 @@ const CustomWordListConfig: React.FC<Props> = ({
           Usar Custom
         </button>
       </label>
-      <p>Separe por virgula. Mínimo 10 palavras.</p>
+      <p>Separe por virgula. Mínimo {minWords} palavras.</p>
       <textarea
         name="word-list"
         id="word-list"

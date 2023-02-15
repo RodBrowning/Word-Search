@@ -1,4 +1,5 @@
 /* eslint-disable import/order */
+
 import './style.scss';
 import './style-mobile.scss';
 
@@ -28,6 +29,7 @@ const ConfigModal: React.FC<Props> = ({ setOpenModal }) => {
   const gameState = useSelector((state: RootState) => {
     return state.game;
   });
+  const minCustomWordsLength = 10;
 
   const [openResetConfirmationModal, setOpenResetConfirmationModal] = useState(false);
   const [configState, setConfigState] = useState({
@@ -75,7 +77,7 @@ const ConfigModal: React.FC<Props> = ({ setOpenModal }) => {
   const handleCustomWordListChanges = (words: string[]) => {
     setConfigState({ ...configState, customWordList: words });
     customWordListRef.current = words;
-    if (words.length < 10) {
+    if (words.length < minCustomWordsLength) {
       setConfigState((oldConfigState) => {
         return { ...oldConfigState, useCustom: false };
       });
@@ -84,6 +86,7 @@ const ConfigModal: React.FC<Props> = ({ setOpenModal }) => {
         setConfigState((oldConfigState) => {
           return { ...oldConfigState, loadThemes: [themes[0]] };
         });
+        loadThemesRef.current = [themes[0]];
       }
     }
   };
@@ -173,6 +176,7 @@ const ConfigModal: React.FC<Props> = ({ setOpenModal }) => {
         loadThemesLength={configState.loadThemes.length}
         cols={10}
         rows={8}
+        minWords={minCustomWordsLength}
       />
       <ThemesSelector
         themes={themes}
