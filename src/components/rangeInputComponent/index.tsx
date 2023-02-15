@@ -9,6 +9,7 @@ interface Props {
   min: number;
   max: number;
   defaultValue: number;
+  setInputValue: Function;
 }
 
 const getPercentage = (max: number, min: number, currentValue: number) => {
@@ -17,13 +18,14 @@ const getPercentage = (max: number, min: number, currentValue: number) => {
   return (currentPosition / totalRange) * 100;
 };
 
-const RangeInputComponent: React.FC<Props> = ({ name, labelText, min, max, defaultValue }) => {
+const RangeInputComponent: React.FC<Props> = ({ name, labelText, min, max, defaultValue, setInputValue }) => {
   const [percentage, setPercentage] = useState(getPercentage(max, min, defaultValue));
   const [valueToDisplay, setValueToDisplay] = useState(defaultValue);
 
   const handleChange = (target: HTMLInputElement) => {
     setPercentage(getPercentage(Number(target.max), Number(target.min), Number(target.value)));
     setValueToDisplay(Number(target.value));
+    setInputValue(Number(target.value));
   };
 
   return (

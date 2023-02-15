@@ -96,7 +96,7 @@ const Cars = () => {
       'Lincoln',
       'Artega',
       'AustinHealey',
-      'Cobra',
+      'Shelby',
     ],
   };
 };
