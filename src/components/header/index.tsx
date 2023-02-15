@@ -1,10 +1,12 @@
 import './style.scss';
 import './style-mobile.scss';
 
+import React, { useState } from 'react';
+
 import { NavLink } from 'react-router-dom';
-import React from 'react';
 
 const Header: React.FC = () => {
+  const [isOpenMenu, setIsOpenMenu] = useState(false);
   return (
     <header>
       <div className="inner-header">
@@ -31,6 +33,14 @@ const Header: React.FC = () => {
             className={({ isActive }) => {
               return isActive ? 'active' : undefined;
             }}
+            to="/imprimir"
+          >
+            Impressão
+          </NavLink>
+          <NavLink
+            className={({ isActive }) => {
+              return isActive ? 'active' : undefined;
+            }}
             to="/sobre"
           >
             Sobre
@@ -44,7 +54,8 @@ const Header: React.FC = () => {
             Contato
           </NavLink>
         </nav>
-        <nav className="mobile">
+        <div className={`background ${isOpenMenu ? 'show-bg' : ''}`} onClick={() => setIsOpenMenu(false)}></div>
+        <nav className="mobile" onClick={() => setIsOpenMenu(true)}>
           <svg width="30" height="25" viewBox="0 0 30 25" fill="none" xmlns="http://www.w3.org/2000/svg">
             <rect
               opacity="0.75"
@@ -57,7 +68,7 @@ const Header: React.FC = () => {
             <rect opacity="0.75" y="8.97882" width="29" height="7" rx="3.5" fill="#FFE8C6" />
             <rect opacity="0.75" y="17.9788" width="29" height="7" rx="3.5" fill="#FFE8C6" />
           </svg>
-          <menu>
+          <menu className={isOpenMenu ? 'show-menu' : ''}>
             <NavLink
               className={({ isActive }) => {
                 return isActive ? 'active' : undefined;
@@ -65,6 +76,14 @@ const Header: React.FC = () => {
               to="/"
             >
               Inicio
+            </NavLink>
+            <NavLink
+              className={({ isActive }) => {
+                return isActive ? 'active' : undefined;
+              }}
+              to="/imprimir"
+            >
+              Impressão
             </NavLink>
             <NavLink
               className={({ isActive }) => {

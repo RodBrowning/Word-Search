@@ -26,7 +26,7 @@
     }
   }
 }
-@media only screen and (max-width: 360px) {
+@media only screen and (max-width: 490px) {
   header {
     padding: 0 24px;
     .inner-header {
@@ -34,25 +34,33 @@
       nav {
         display: none !important;
       }
+      .background {
+        position: absolute;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        &.show-bg {
+          display: block;
+        }
+      }
       nav.mobile {
         position: relative;
         display: flex !important;
         height: 100%;
         padding-right: 8px;
         > menu {
-          visibility: hidden;
+          display: none;
           position: absolute;
           bottom: -148px;
           right: -24px;
           width: 50vw;
           padding: 16px;
-          display: flex;
           flex-direction: column;
           row-gap: 16px;
           background-color: mainStyle.$tertiary;
           border: 1px solid mainStyle.$black-50;
           &.show-menu {
-            visibility: visible;
+            display: flex;
           }
           a {
             color: mainStyle.$black;
