@@ -1,6 +1,6 @@
-const Aquatic = () => {
+const Marine = () => {
   return {
-    aquaticos: [
+    marinhos: [
       'Abalone',
       'Arenque',
       'Arraia',
@@ -58,4 +58,4 @@ const Aquatic = () => {
   };
 };
 
-export default Aquatic;
+export default Marine;
