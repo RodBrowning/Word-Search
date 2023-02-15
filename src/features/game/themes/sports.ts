@@ -4,6 +4,7 @@ const Sports = () => {
       'Atletismo',
       'Basquetebol',
       'Boxe',
+      'Bodybuild',
       'Ciclismo',
       'Corrida',
       'Crossfit',
