@@ -1,4 +1,5 @@
 /* eslint-disable no-param-reassign */
+
 import IConfig from './configInterface';
 import IFeedback from '../types/feedback';
 
@@ -237,12 +238,13 @@ function SearchWordsGame() {
     }
 
     let board = getEmptyBoard();
-    let wordsArray;
+    let wordsSet;
     if (config.customWords!.length > 0 && config.useCustom) {
-      wordsArray = [...config.words!, ...config.customWords!];
+      wordsSet = new Set([...config.words!, ...config.customWords!]);
     } else {
-      wordsArray = config.words!;
+      wordsSet = new Set(config.words!);
     }
+    const wordsArray = [...wordsSet];
     const words = shuffleWords(wordsArray);
     feedbacks = [];
     let placedWords = 0;
