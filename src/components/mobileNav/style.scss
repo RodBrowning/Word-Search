@@ -1,0 +1,45 @@
+@use '../../scss/index' as mainStyle;
+
+#mobile-nav {
+  display: none;
+  nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 56px;
+    align-content: center;
+    justify-content: space-between;
+    a {
+      position: relative;
+      color: mainStyle.$tertiary;
+      padding: 0 8px;
+      z-index: 0;
+      transition: all 0.5s ease-in-out;
+      &::before {
+        content: '';
+        position: absolute;
+        width: 100%;
+        height: 4px;
+        left: 0;
+        bottom: -8px;
+        background: mainStyle.$gradient;
+        box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+        border-radius: 24px;
+        transition: all 0.15s ease-in-out;
+      }
+      &:hover,
+      &.active {
+        color: mainStyle.$black-75;
+        &::before {
+          width: calc(100% + 32px);
+          height: 100%;
+          bottom: -1px;
+          left: -16px;
+          z-index: -1;
+        }
+      }
+    }
+  }
+  .background {
+    display: none;
+  }
+}
