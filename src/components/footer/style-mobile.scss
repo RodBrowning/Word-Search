@@ -1,7 +1,7 @@
 @use '../../scss/index' as mainStyle;
 
 @media only screen and (max-width: 768px) {
-  footer {
+  .App footer {
     flex-direction: column;
     text-align: center;
     height: fit-content;
