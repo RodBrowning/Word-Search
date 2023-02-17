@@ -5,9 +5,9 @@ import React, { useState } from 'react';
 
 interface Props {
   useCustom: boolean;
-  handleUseCustomChanges: Function;
+  handleUseCustomChanges: (isChecked: boolean) => void;
   customWordList: string[];
-  handleCustomWordListChanges: Function;
+  handleCustomWordListChanges: (uniqueWords: string[]) => void;
   loadThemesLength: number;
   cols: number;
   rows: number;

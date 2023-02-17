@@ -6,7 +6,7 @@ import React from 'react';
 interface Props {
   children: React.ReactNode;
   setOpenConfirmationModal: React.Dispatch<React.SetStateAction<boolean>>;
-  dispatchAction: Function;
+  dispatchAction: () => void;
   setOpenModal: React.Dispatch<React.SetStateAction<boolean>>;
 }
 

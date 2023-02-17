@@ -7,7 +7,7 @@ interface Props {
   themes: string[];
   loadThemes: string[];
   useCustom: boolean;
-  handleLoadThemes: Function;
+  handleLoadThemes: (target: HTMLInputElement) => void;
 }
 
 const ThemesSelector: React.FC<Props> = ({ themes, loadThemes, useCustom, handleLoadThemes }) => {
