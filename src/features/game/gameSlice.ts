@@ -51,7 +51,7 @@ export const gameSlice = createSlice({
     },
     resetGame: (state: IGameState) => {
       state.points = 0;
-      state.matches = 0;
+      state.matches = 1;
     },
   },
 });
