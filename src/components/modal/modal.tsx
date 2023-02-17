@@ -12,19 +12,27 @@ interface Props {
 }
 
 const Modal: React.FC<Props> = ({ children, isOpen, setOpenModal }) => {
-  rootModal!.replaceChildren();
   if (!isOpen) return null;
 
-  const modalWrapper = document.createElement('div');
-  modalWrapper.setAttribute('id', 'modal-wrapper');
-  modalWrapper.onclick = ({ target }) => {
-    if (target === modalWrapper) {
+  const checkTarget = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+    if (e.target.id === 'modal-wrapper') {
       setOpenModal(false);
+      return true;
     }
+    return false;
   };
-  rootModal?.appendChild(modalWrapper);
 
-  return ReactDOM.createPortal(children, modalWrapper);
+  return ReactDOM.createPortal(
+    <div
+      id="modal-wrapper"
+      onClick={(e) => {
+        checkTarget(e);
+      }}
+    >
+      {children}
+    </div>,
+    document.getElementById('root-modal')
+  );
 };
 
 export default Modal;
