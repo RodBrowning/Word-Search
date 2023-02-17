@@ -35,6 +35,11 @@
         display: none !important;
         position: inherit !important;
       }
+      svg.menu-btn {
+        display: block;
+        align-self: center;
+        margin-right: 5px;
+      }
     }
   }
 }

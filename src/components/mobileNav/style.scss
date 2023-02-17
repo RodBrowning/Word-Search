@@ -1,45 +1,61 @@
 @use '../../scss/index' as mainStyle;
 
 #mobile-nav {
-  display: none;
   nav {
+    position: relative;
     display: flex;
     flex-wrap: wrap;
     gap: 56px;
     align-content: center;
     justify-content: space-between;
-    a {
-      position: relative;
-      color: mainStyle.$tertiary;
-      padding: 0 8px;
-      z-index: 0;
-      transition: all 0.5s ease-in-out;
-      &::before {
-        content: '';
-        position: absolute;
-        width: 100%;
-        height: 4px;
-        left: 0;
-        bottom: -8px;
-        background: mainStyle.$gradient;
-        box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-        border-radius: 24px;
-        transition: all 0.15s ease-in-out;
-      }
-      &:hover,
-      &.active {
-        color: mainStyle.$black-75;
+    height: 100%;
+    padding-right: 8px;
+    > menu {
+      position: absolute;
+      display: flex;
+      flex-direction: column;
+      top: 25px;
+      right: 50%;
+      transform: translateX(50%);
+      width: 75vw;
+      padding: 16px;
+      row-gap: 16px;
+      background-color: mainStyle.$tertiary;
+      border: 1px solid mainStyle.$black-50;
+      a {
+        position: relative;
+        z-index: 0;
+        transition: all 0.5s ease-in-out;
+        color: mainStyle.$black;
+        padding: 8px 8px;
         &::before {
-          width: calc(100% + 32px);
-          height: 100%;
-          bottom: -1px;
-          left: -16px;
-          z-index: -1;
+          content: '';
+          position: absolute;
+          width: 100%;
+          left: 0;
+          background: mainStyle.$gradient;
+          box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+          border-radius: 24px;
+          transition: all 0.15s ease-in-out;
+          height: 2px;
+          bottom: 0;
+        }
+        &:hover,
+        &.active {
+          margin-top: 10px;
+          color: mainStyle.$black;
+          &::before {
+            width: calc(100% + 16px);
+            left: -8px;
+            bottom: -1px;
+            height: 100%;
+            z-index: -1;
+          }
+        }
+        &:last-child {
+          margin-bottom: 20px;
         }
       }
     }
-  }
-  .background {
-    display: none;
   }
 }
