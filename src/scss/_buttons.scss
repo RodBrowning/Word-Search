@@ -5,6 +5,7 @@
 button,
 label > input[type='radio'],
 label > input[type='checkbox'] {
+  font-family: fonts.$heading-font;
   padding: 6px 8px;
   height: 100%;
   justify-content: center;
