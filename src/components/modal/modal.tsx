@@ -14,19 +14,11 @@ interface Props {
 const Modal: React.FC<Props> = ({ children, isOpen, setOpenModal }) => {
   if (!isOpen) return null;
 
-  const checkTarget = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
-    if (e.target.id === 'modal-wrapper') {
-      setOpenModal(false);
-      return true;
-    }
-    return false;
-  };
-
   return ReactDOM.createPortal(
     <div
       id="modal-wrapper"
       onClick={(e) => {
-        checkTarget(e);
+        if (e.target.id === 'modal-wrapper') setOpenModal(false);
       }}
     >
       {children}

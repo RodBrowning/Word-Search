@@ -10,19 +10,11 @@ interface Props {
 const ConfirmationModal: React.FC<Props> = ({ children, isOpen, setOpenModal }) => {
   if (!isOpen) return null;
 
-  const checkTarget = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
-    if (e.target.id === 'confirmation-wrapper') {
-      setOpenModal(false);
-      return true;
-    }
-    return false;
-  };
-
   return ReactDOM.createPortal(
     <div
       id="confirmation-wrapper"
       onClick={(e) => {
-        checkTarget(e);
+        if (e.target.id === 'confirmation-wrapper') setOpenModal(false);
       }}
     >
       {children}
