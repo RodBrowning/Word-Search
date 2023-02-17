@@ -15,11 +15,7 @@ const Modal: React.FC<Props> = ({ children, isOpen, setOpenModal }) => {
   if (!isOpen) return null;
 
   const checkTarget = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
-    if (e.target.id === 'modal-wrapper') {
-      setOpenModal(false);
-      return true;
-    }
-    return false;
+    if (e.target.id === 'modal-wrapper') setOpenModal(false);
   };
 
   return ReactDOM.createPortal(
