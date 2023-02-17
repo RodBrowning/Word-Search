@@ -4,7 +4,6 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 
 const rootModal = document.getElementById('root-modal');
-const confirmationModal = document.getElementById('confirmation-modal');
 
 interface Props {
   children: React.ReactNode;
@@ -14,7 +13,6 @@ interface Props {
 
 const Modal: React.FC<Props> = ({ children, isOpen, setOpenModal }) => {
   rootModal!.replaceChildren();
-  confirmationModal!.replaceChildren();
   if (!isOpen) return null;
 
   const modalWrapper = document.createElement('div');

@@ -1,8 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-const confirmationModal = document.getElementById('confirmation-modal');
-
 interface Props {
   children: React.ReactNode;
   isOpen: boolean;
@@ -10,19 +8,27 @@ interface Props {
 }
 
 const ConfirmationModal: React.FC<Props> = ({ children, isOpen, setOpenModal }) => {
-  confirmationModal!.replaceChildren();
   if (!isOpen) return null;
 
-  const confirmationWrapper = document.createElement('div');
-  confirmationWrapper.setAttribute('id', 'confirmation-wrapper');
-  confirmationWrapper.onclick = ({ target }) => {
-    if (target === confirmationWrapper) {
+  const checkTarget = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+    if (e.target.id === 'confirmation-wrapper') {
       setOpenModal(false);
+      return true;
     }
+    return false;
   };
-  confirmationModal?.appendChild(confirmationWrapper);
 
-  return ReactDOM.createPortal(children, confirmationWrapper);
+  return ReactDOM.createPortal(
+    <div
+      id="confirmation-wrapper"
+      onClick={(e) => {
+        checkTarget(e);
+      }}
+    >
+      {children}
+    </div>,
+    document.getElementById('confirmation-modal')
+  );
 };
 
 export default ConfirmationModal;
