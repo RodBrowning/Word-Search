@@ -2,6 +2,12 @@
 
 @media only screen and (max-width: 768px) {
   .printer-component {
+    .printer-config-board {
+      grid-template-areas:
+        'sizes amount'
+        'customWords themes'
+        'actions actions';
+    }
     .boards-to-print {
       .print-board {
         align-items: flex-start;
@@ -46,7 +52,8 @@
         'sizes'
         'amount'
         'customWords'
-        'themes';
+        'themes'
+        'actions';
     }
     .sizes-container,
     .amount-container {
@@ -58,8 +65,6 @@
     }
     .boards-to-print {
       .print-board {
-        .word-list {
-        }
         .board-container {
           width: 95vw;
         }

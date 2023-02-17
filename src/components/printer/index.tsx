@@ -137,7 +137,7 @@ const Printer: React.FC = () => {
             handleCustomWordListChanges={handleCustomWordListChanges}
             loadThemesLength={themesToLoad.length}
             cols={10}
-            rows={4}
+            rows={6}
             minWords={minCustomWordsLength}
           />
         </div>
@@ -148,6 +148,13 @@ const Printer: React.FC = () => {
             useCustom={useCustom}
             handleLoadThemes={handleThemesToLoad}
           />
+        </div>
+        <div className="action-btns">
+          <label htmlFor="answers-checkbox">
+            <input type="checkbox" name="withAnswers" id="answers-checkbox" />
+            <button className="toggle-button">Incluir gabarito</button>
+          </label>
+          <button className="toggle-button">Imprimir</button>
         </div>
       </div>
       <div className="boards-to-print">
