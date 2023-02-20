@@ -1,7 +1,7 @@
 import './style.scss';
 import './style-mobile.scss';
 
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 
 import Board from '../board';
 import CustomWordListConfig from '../configCustomWordList';
@@ -11,6 +11,7 @@ import { RootState } from '../../app/store';
 import SearchWordsGame from '../../utils/SearchWordGame';
 import ThemesSelector from '../configThemesSelector';
 import WordList from '../feedbackWordList';
+import { useReactToPrint } from 'react-to-print';
 import { useSelector } from 'react-redux';
 
 const Printer: React.FC = () => {
@@ -31,6 +32,9 @@ const Printer: React.FC = () => {
   const [numberOfBoards, setNumberOfBoards] = useState(1);
   const [words, setWords] = useState<string[]>(themes[themesTitles[0]]);
   const [boardsToPrintArray, setBoardsToPrintArray] = useState<{ board: string[][]; feedbacks: IFeedback[] }[]>([]);
+
+  // References
+  const componentRef = useRef<HTMLDivElement>(null);
 
   // Functions
   const handleCustomWordListChanges = (wordsList: string[]) => {
@@ -72,6 +76,9 @@ const Printer: React.FC = () => {
     }
     setBoardsToPrintArray(boardsToPrint);
   };
+  const handlePrint = useReactToPrint({
+    content: () => componentRef.current,
+  });
 
   // Effects
   useEffect(() => {
@@ -91,7 +98,7 @@ const Printer: React.FC = () => {
   }, [customWords, useCustom]);
 
   return (
-    <div className="printer-component">
+    <div className="printer-component" ref={componentRef}>
       <div className="printer-config-board">
         <div className="sizes-container">
           <RangeInputComponent
@@ -154,18 +161,24 @@ const Printer: React.FC = () => {
             <input type="checkbox" name="withAnswers" id="answers-checkbox" />
             <button className="toggle-button">Incluir gabarito</button>
           </label>
-          <button className="toggle-button">Imprimir</button>
+          <button className="toggle-button" onClick={handlePrint}>
+            Imprimir
+          </button>
         </div>
       </div>
       <div className="boards-to-print">
-        {boardsToPrintArray.map((newBoard) => {
+        {boardsToPrintArray.map((newBoard, i) => {
           return (
-            <div className="print-board no-split" key={JSON.stringify(newBoard.feedbacks)}>
-              <WordList feedbacks={newBoard.feedbacks} />
-              <div className="board-container">
-                <Board board={newBoard.board} />
+            <>
+              {/* .page-break is generating unique key prop error */}
+              <div className="print-board no-split" key={JSON.stringify(newBoard.feedbacks)}>
+                <WordList feedbacks={newBoard.feedbacks} />
+                <div className="board-container">
+                  <Board board={newBoard.board} />
+                </div>
               </div>
-            </div>
+              <div className="page-break" key={i} />
+            </>
           );
         })}
       </div>
