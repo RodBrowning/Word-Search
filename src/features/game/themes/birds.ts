@@ -27,7 +27,7 @@ const Birds = () => {
       'Graveteiro',
       'Inhambu',
       'Jacu',
-      'Joãodebarro',
+      'Joaodebarro',
       'Loris',
       'Mergulhao',
       'Mergulho',

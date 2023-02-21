@@ -93,7 +93,7 @@ const Land = () => {
       'Morsa',
       'Gnu',
       'Chita',
-      'Babuíno',
+      'Babuino',
       'Panda',
       'Lemure',
       'Preguica',
