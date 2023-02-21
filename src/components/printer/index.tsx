@@ -32,6 +32,7 @@ const Printer: React.FC = () => {
   const [numberOfBoards, setNumberOfBoards] = useState(1);
   const [words, setWords] = useState<string[]>(themes[themesTitles[0]]);
   const [boardsToPrintArray, setBoardsToPrintArray] = useState<{ board: string[][]; feedbacks: IFeedback[] }[]>([]);
+  const [showFeedbacks, setShowFeedbacks] = useState(false);
 
   // References
   const componentRef = useRef<HTMLDivElement>(null);
@@ -105,7 +106,7 @@ const Printer: React.FC = () => {
             name="numOfColumns"
             labelText="Numero de colunas"
             min={10}
-            max={30}
+            max={40}
             defaultValue={20}
             setInputValue={setColumns}
           />
@@ -113,7 +114,7 @@ const Printer: React.FC = () => {
             name="numOfRows"
             labelText="Numero de linhas"
             min={10}
-            max={30}
+            max={35}
             defaultValue={20}
             setInputValue={setRows}
           />
@@ -158,7 +159,13 @@ const Printer: React.FC = () => {
         </div>
         <div className="action-btns">
           <label htmlFor="answers-checkbox">
-            <input type="checkbox" name="withAnswers" id="answers-checkbox" />
+            <input
+              type="checkbox"
+              checked={showFeedbacks}
+              onChange={() => setShowFeedbacks(!showFeedbacks)}
+              name="withAnswers"
+              id="answers-checkbox"
+            />
             <button className="toggle-button">Incluir gabarito</button>
           </label>
           <button className="toggle-button" onClick={handlePrint}>
@@ -170,14 +177,19 @@ const Printer: React.FC = () => {
         {boardsToPrintArray.map((newBoard, i) => {
           return (
             <>
-              {/* .page-break is generating unique key prop error */}
-              <div className="print-board no-split" key={JSON.stringify(newBoard.feedbacks)}>
+              <div className="print-board no-split page-break" key={JSON.stringify(newBoard.feedbacks)}>
                 <WordList feedbacks={newBoard.feedbacks} />
                 <div className="board-container">
                   <Board board={newBoard.board} />
                 </div>
               </div>
-              <div className="page-break" key={i} />
+              {/* .feedback-board is generating unique key prop error */}
+              <div
+                className={`feedback-board page-break ${showFeedbacks ? 'include-feedback' : ''}`}
+                key={'f' + i + JSON.stringify(newBoard.feedbacks)}
+              >
+                <p>feedback</p>
+              </div>
             </>
           );
         })}
