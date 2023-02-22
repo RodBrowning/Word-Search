@@ -43,6 +43,7 @@ function SearchWordsGame() {
     useCustom: false,
   };
   let feedbacks: IFeedback[] = [];
+  let feedbackBoard: string[][] = [];
 
   function getEmptyBoard(): string[][] {
     const board = [];
@@ -224,6 +225,18 @@ function SearchWordsGame() {
     return board;
   }
 
+  function fillFeedbackBoardEmptyCells(board: string[][]): string[][] {
+    for (let i = 0; i < board.length; i++) {
+      for (let j = 0; j < board[i].length; j++) {
+        if (!board[i][j]) {
+          const char = String.fromCharCode(0xa0);
+          board[i][j] = char;
+        }
+      }
+    }
+    return board;
+  }
+
   function setConfig(pConfig?: IConfig): IConfig {
     const wordsSet = new Set(pConfig?.words);
     const words = [...wordsSet];
@@ -269,9 +282,13 @@ function SearchWordsGame() {
       }
       if (placedWords >= config.numberOfWords!) break;
     }
-
+    feedbackBoard = fillFeedbackBoardEmptyCells(structuredClone(board));
     board = fillEmptyCells(board);
     return board;
+  }
+
+  function getFeedbackBoard(): string[][] {
+    return feedbackBoard;
   }
 
   function getFeedbacks(): IFeedback[] {
@@ -286,6 +303,7 @@ function SearchWordsGame() {
     getBoard: populateBoard,
     getFeedbacks,
     getBoardSize,
+    getFeedbackBoard,
   };
 }
 
