@@ -80,6 +80,7 @@
     }
     .feedback-board {
       display: none;
+      height: calc(60% + 2rem);
     }
   }
 }
@@ -116,7 +117,7 @@
       width: 100%;
       .print-board {
         margin: 0;
-        gap: 24px;
+        gap: 40px;
         h5 {
           display: block;
         }
@@ -134,6 +135,7 @@
           border-width: 4px;
           box-shadow: none;
           border-radius: 10px;
+          margin-top: 3rem;
           tr td {
             width: 18px;
             height: 5%;
