@@ -183,7 +183,6 @@ const Printer: React.FC = () => {
           return (
             <>
               <div className="print-board no-split page-break" key={JSON.stringify(newBoard.feedbacks)}>
-                <h5>Caça palavras</h5>
                 <WordList feedbacks={newBoard.feedbacks} />
                 <div className="board-container">
                   <Board board={newBoard.board} />

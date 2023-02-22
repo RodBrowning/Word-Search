@@ -54,9 +54,6 @@
       align-items: center;
       gap: 64px;
       margin: 32px 0;
-      > h5 {
-        display: none;
-      }
       .word-list {
         &:before {
           height: calc(100% + 12px);
@@ -106,6 +103,7 @@
 
 @media print {
   .printer-component {
+    color: black;
     margin: 0;
     .printer-config-board {
       overflow: hidden;
@@ -118,9 +116,6 @@
       .print-board {
         margin: 0;
         gap: 40px;
-        h5 {
-          display: block;
-        }
         .word-list {
           align-self: flex-start;
           &:before {
