@@ -10,7 +10,6 @@ interface Props {
 const FeedbackBoard: React.FC<Props> = ({ board }) => {
   return (
     <div id="feedback-board">
-      <h5>Gabarito</h5>
       <Board board={board} />
     </div>
   );
