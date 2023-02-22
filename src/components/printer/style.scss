@@ -54,6 +54,9 @@
       align-items: center;
       gap: 64px;
       margin: 32px 0;
+      > h5 {
+        display: none;
+      }
       .word-list {
         &:before {
           height: calc(100% + 12px);
@@ -113,6 +116,10 @@
       width: 100%;
       .print-board {
         margin: 0;
+        gap: 24px;
+        h5 {
+          display: block;
+        }
         .word-list {
           align-self: flex-start;
           &:before {
@@ -126,6 +133,7 @@
         .board-container .board {
           border-width: 4px;
           box-shadow: none;
+          border-radius: 10px;
           tr td {
             width: 18px;
             height: 5%;
@@ -138,7 +146,6 @@
       }
       .feedback-board.include-feedback {
         display: block;
-        background-color: red;
       }
     }
   }

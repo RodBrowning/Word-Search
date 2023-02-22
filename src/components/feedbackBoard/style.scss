@@ -1,0 +1,17 @@
+#feedback-board {
+  .board {
+    border: 1px solid black;
+    border-radius: 10px;
+    box-shadow: none;
+    margin: 0;
+    margin-top: 2rem;
+    table tr td {
+      width: 18px;
+      height: 5%;
+      border: 0;
+      h6 {
+        font-size: 11px;
+      }
+    }
+  }
+}

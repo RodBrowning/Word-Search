@@ -5,6 +5,7 @@ import React, { useEffect, useRef, useState } from 'react';
 
 import Board from '../board';
 import CustomWordListConfig from '../configCustomWordList';
+import FeedbackBoard from '../feedbackBoard';
 import IFeedback from '../../types/feedback';
 import RangeInputComponent from '../rangeInputComponent';
 import { RootState } from '../../app/store';
@@ -31,7 +32,9 @@ const Printer: React.FC = () => {
   const [numberOfWords, setNumberOfWords] = useState(5);
   const [numberOfBoards, setNumberOfBoards] = useState(1);
   const [words, setWords] = useState<string[]>(themes[themesTitles[0]]);
-  const [boardsToPrintArray, setBoardsToPrintArray] = useState<{ board: string[][]; feedbacks: IFeedback[] }[]>([]);
+  const [boardsToPrintArray, setBoardsToPrintArray] = useState<
+    { board: string[][]; feedbacks: IFeedback[]; feedbackBoard: string[][] }[]
+  >([]);
   const [showFeedbacks, setShowFeedbacks] = useState(false);
 
   // References
@@ -69,10 +72,12 @@ const Printer: React.FC = () => {
         words,
       });
       const newFeedbacks = gameBoard.getFeedbacks();
+      const newFeedbackBoard = gameBoard.getFeedbackBoard();
       const newBoardToPrint: {
         board: string[][];
         feedbacks: IFeedback[];
-      } = { board: newBoard, feedbacks: newFeedbacks };
+        feedbackBoard: string[][];
+      } = { board: newBoard, feedbacks: newFeedbacks, feedbackBoard: newFeedbackBoard };
       boardsToPrint.push(newBoardToPrint);
     }
     setBoardsToPrintArray(boardsToPrint);
@@ -178,6 +183,7 @@ const Printer: React.FC = () => {
           return (
             <>
               <div className="print-board no-split page-break" key={JSON.stringify(newBoard.feedbacks)}>
+                <h5>Caça palavras</h5>
                 <WordList feedbacks={newBoard.feedbacks} />
                 <div className="board-container">
                   <Board board={newBoard.board} />
@@ -188,7 +194,7 @@ const Printer: React.FC = () => {
                 className={`feedback-board page-break ${showFeedbacks ? 'include-feedback' : ''}`}
                 key={'f' + i + JSON.stringify(newBoard.feedbacks)}
               >
-                <p>feedback</p>
+                <FeedbackBoard board={newBoard.feedbackBoard} />
               </div>
             </>
           );
