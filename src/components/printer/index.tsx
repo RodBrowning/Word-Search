@@ -129,7 +129,7 @@ const Printer: React.FC = () => {
             name="numOfWords"
             labelText="Numero de palavras"
             min={1}
-            max={30}
+            max={70}
             defaultValue={numberOfWords}
             setInputValue={setNumberOfWords}
           />
