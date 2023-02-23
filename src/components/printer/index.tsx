@@ -14,6 +14,7 @@ import ThemesSelector from '../configThemesSelector';
 import WordList from '../feedbackWordList';
 import { useReactToPrint } from 'react-to-print';
 import { useSelector } from 'react-redux';
+import useSessionStorage from '../../utils/customHooks/useSessionStorage';
 
 const Printer: React.FC = () => {
   // Variables
@@ -23,19 +24,31 @@ const Printer: React.FC = () => {
   const themesTitles = Object.keys(themes);
   const minCustomWordsLength = 5;
 
+  // Session Storage
+  const [printSession, setPrintSession] = useSessionStorage('printConfig', {
+    useCustom: false,
+    themesToLoad: [themesTitles[0]],
+    customWords: [],
+    columns: 15,
+    rows: 15,
+    numberOfWords: 20,
+    numberOfBoards: 1,
+    showFeedbacks: false,
+  });
+
   // States
-  const [useCustom, setUseCustom] = useState(false);
-  const [themesToLoad, setThemesToLoad] = useState<string[]>([themesTitles[0]]);
-  const [customWords, setCustomWords] = useState<string[]>([]);
-  const [columns, setColumns] = useState(15);
-  const [rows, setRows] = useState(15);
-  const [numberOfWords, setNumberOfWords] = useState(5);
-  const [numberOfBoards, setNumberOfBoards] = useState(1);
+  const [useCustom, setUseCustom] = useState(printSession.useCustom);
+  const [themesToLoad, setThemesToLoad] = useState<string[]>(printSession.themesToLoad);
+  const [customWords, setCustomWords] = useState<string[]>(printSession.customWords);
+  const [columns, setColumns] = useState(printSession.columns);
+  const [rows, setRows] = useState(printSession.rows);
+  const [numberOfWords, setNumberOfWords] = useState(printSession.numberOfWords);
+  const [numberOfBoards, setNumberOfBoards] = useState(printSession.numberOfBoards);
   const [words, setWords] = useState<string[]>(themes[themesTitles[0]]);
   const [boardsToPrintArray, setBoardsToPrintArray] = useState<
     { board: string[][]; feedbacks: IFeedback[]; feedbackBoard: string[][] }[]
   >([]);
-  const [showFeedbacks, setShowFeedbacks] = useState(false);
+  const [showFeedbacks, setShowFeedbacks] = useState(printSession.showFeedbacks);
 
   // References
   const componentRef = useRef<HTMLDivElement>(null);
@@ -43,12 +56,16 @@ const Printer: React.FC = () => {
   // Functions
   const handleCustomWordListChanges = (wordsList: string[]) => {
     setCustomWords(wordsList);
+    printSession.customWords = wordsList;
     if (wordsList.length < minCustomWordsLength) {
       setUseCustom(false);
+      printSession.useCustom = false;
       if (themesToLoad.length === 0) {
         setThemesToLoad([themesTitles[0]]);
+        printSession.themesToLoad = [themesTitles[0]];
       }
     }
+    setPrintSession(printSession);
   };
   const handleThemesToLoad = (target: HTMLInputElement) => {
     let newThemesToLoad = [];
@@ -60,6 +77,7 @@ const Printer: React.FC = () => {
       });
     }
     setThemesToLoad(newThemesToLoad);
+    setPrintSession({ ...printSession, themesToLoad: newThemesToLoad });
   };
   const generateBoardsToPrint = () => {
     const boardsToPrint = [];
@@ -105,6 +123,9 @@ const Printer: React.FC = () => {
 
   return (
     <div className="printer-component" ref={componentRef}>
+      <div className="Aqui">
+        <div>Aqui</div>
+      </div>
       <div className="printer-config-board">
         <div className="sizes-container">
           <RangeInputComponent
@@ -112,16 +133,22 @@ const Printer: React.FC = () => {
             labelText="Numero de colunas"
             min={10}
             max={40}
-            defaultValue={20}
-            setInputValue={setColumns}
+            defaultValue={printSession.columns}
+            setInputValue={(columns: number) => {
+              setColumns(columns);
+              setPrintSession({ ...printSession, columns: columns });
+            }}
           />
           <RangeInputComponent
             name="numOfRows"
             labelText="Numero de linhas"
             min={10}
             max={35}
-            defaultValue={20}
-            setInputValue={setRows}
+            defaultValue={printSession.rows}
+            setInputValue={(rows: number) => {
+              setRows(rows);
+              setPrintSession({ ...printSession, rows: rows });
+            }}
           />
         </div>
         <div className="amount-container">
@@ -130,23 +157,32 @@ const Printer: React.FC = () => {
             labelText="Numero de palavras"
             min={1}
             max={70}
-            defaultValue={numberOfWords}
-            setInputValue={setNumberOfWords}
+            defaultValue={printSession.numberOfWords}
+            setInputValue={(numOfwords: number) => {
+              setNumberOfWords(numOfwords);
+              setPrintSession({ ...printSession, numberOfWords: numOfwords });
+            }}
           />
           <RangeInputComponent
             name="numOfBoards"
             labelText="Numero de Quadros"
             min={1}
             max={20}
-            defaultValue={numberOfBoards}
-            setInputValue={setNumberOfBoards}
+            defaultValue={printSession.numberOfBoards}
+            setInputValue={(numOfBoards: number) => {
+              setNumberOfBoards(numOfBoards);
+              setPrintSession({ ...printSession, numberOfBoards: numOfBoards });
+            }}
           />
         </div>
         <div className="custom-words-container">
           <CustomWordListConfig
             useCustom={useCustom}
-            handleUseCustomChanges={setUseCustom}
-            customWordList={customWords}
+            handleUseCustomChanges={(checked) => {
+              setUseCustom(checked);
+              setPrintSession({ ...printSession, useCustom: checked });
+            }}
+            customWordList={printSession.customWords}
             handleCustomWordListChanges={handleCustomWordListChanges}
             loadThemesLength={themesToLoad.length}
             cols={10}
@@ -157,8 +193,8 @@ const Printer: React.FC = () => {
         <div className="themes-container">
           <ThemesSelector
             themes={themesTitles}
-            loadThemes={themesToLoad}
-            useCustom={useCustom}
+            loadThemes={printSession.themesToLoad}
+            useCustom={printSession.useCustom}
             handleLoadThemes={handleThemesToLoad}
           />
         </div>
@@ -167,7 +203,10 @@ const Printer: React.FC = () => {
             <input
               type="checkbox"
               checked={showFeedbacks}
-              onChange={() => setShowFeedbacks(!showFeedbacks)}
+              onChange={() => {
+                setShowFeedbacks(!showFeedbacks);
+                setPrintSession({ ...printSession, showFeedbacks: !showFeedbacks });
+              }}
               name="withAnswers"
               id="answers-checkbox"
             />
