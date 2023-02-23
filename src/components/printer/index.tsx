@@ -1,7 +1,7 @@
 import './style.scss';
 import './style-mobile.scss';
 
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useLayoutEffect, useRef, useState } from 'react';
 
 import Board from '../board';
 import CustomWordListConfig from '../configCustomWordList';
@@ -87,17 +87,17 @@ const Printer: React.FC = () => {
   });
 
   // Effects
-  useEffect(() => {
+  useLayoutEffect(() => {
     const newWords: string[] = [];
     themesToLoad.map((themeTitle) => newWords.push(...themes[themeTitle]));
     setWords(newWords);
   }, [themesToLoad]);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     generateBoardsToPrint();
   }, [words, columns, rows, numberOfWords, numberOfBoards]);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (useCustom && customWords.length >= minCustomWordsLength) {
       generateBoardsToPrint();
     }
