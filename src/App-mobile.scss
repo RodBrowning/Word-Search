@@ -3,18 +3,10 @@
 
 @media only screen and (max-width: 768px) {
   .App {
+    header,
     .panel,
     footer {
       padding: 0 8px;
-    }
-  }
-}
-
-@media only screen and (max-width: 360px) {
-  .App {
-    .panel,
-    footer {
-      padding: 0 24px;
     }
   }
 }
