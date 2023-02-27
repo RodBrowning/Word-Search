@@ -1,7 +1,7 @@
 import './style.scss';
 import './style-mobile.scss';
 
-import React, { useLayoutEffect, useState } from 'react';
+import React, { useEffect, useLayoutEffect, useState } from 'react';
 
 import CustomWordListConfig from '../../configCustomWordList';
 import IFeedback from '../../../types/feedback';
@@ -54,7 +54,6 @@ const PrinterConfigPanel: React.FC<Props> = ({ handlePrint, setBoardsToPrintArra
   const [numberOfBoards, setNumberOfBoards] = useState(printSession.numberOfBoards);
   const [words, setWords] = useState<string[]>(themes[themesTitles[0]]);
   const [showFeedbacks, setShowFeedbacks] = useState(printSession.showFeedbacks);
-  setPrintFeedbacks(printSession.showFeedbacks);
 
   // Functions
   const handleCustomWordListChanges = (wordsList: string[]) => {
@@ -120,6 +119,10 @@ const PrinterConfigPanel: React.FC<Props> = ({ handlePrint, setBoardsToPrintArra
       generateBoardsToPrint();
     }
   }, [customWords, useCustom]);
+
+  useEffect(() => {
+    setPrintFeedbacks(printSession.showFeedbacks);
+  }, []);
 
   return (
     <div className="printer-config-board">
