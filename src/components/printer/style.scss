@@ -8,43 +8,6 @@
   margin: 40px 0;
   position: relative;
   z-index: mainStyle.$zFirstLayer;
-  .printer-config-board {
-    display: grid;
-    grid-template-areas:
-      'sizes amount'
-      'customWords themes'
-      'customWords actions';
-    grid-auto-columns: 1fr;
-    gap: 32px;
-    .sizes-container {
-      grid-area: sizes;
-    }
-    .amount-container {
-      grid-area: amount;
-    }
-    .custom-words-container {
-      grid-area: customWords;
-    }
-    .themes-container {
-      grid-area: themes;
-    }
-    .action-btns {
-      grid-area: actions;
-      display: flex;
-      justify-content: space-between;
-      align-self: flex-end;
-      gap: 3px;
-      width: 100%;
-      label,
-      button {
-        flex: unset;
-        min-height: 32px;
-      }
-      button {
-        padding: 0 25px;
-      }
-    }
-  }
   .boards-to-print {
     display: grid;
     margin-top: 40px;
@@ -54,6 +17,9 @@
       align-items: center;
       gap: 64px;
       margin: 32px 0;
+      &.no-split ul.split {
+        column-count: 1;
+      }
       .word-list {
         &:before {
           height: calc(100% + 12px);
@@ -80,10 +46,6 @@
       height: calc(60% + 2rem);
     }
   }
-}
-
-.no-split ul.split {
-  column-count: 1;
 }
 
 @media all {

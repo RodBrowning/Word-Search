@@ -1,0 +1,21 @@
+@use '../../../scss/index' as mainStyle;
+
+@media only screen and (max-width: 768px) {
+  .printer-config-board {
+    grid-template-areas:
+      'sizes amount'
+      'customWords themes'
+      'actions actions';
+  }
+}
+
+@media only screen and (max-width: 425px) {
+  .printer-config-board {
+    grid-template-areas:
+      'sizes'
+      'amount'
+      'customWords'
+      'themes'
+      'actions';
+  }
+}

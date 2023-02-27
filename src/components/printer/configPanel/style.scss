@@ -1,0 +1,39 @@
+@use '../../../scss/index' as mainStyle;
+
+.printer-config-board {
+  display: grid;
+  grid-template-areas:
+    'sizes amount'
+    'customWords themes'
+    'customWords actions';
+  grid-auto-columns: 1fr;
+  gap: 32px;
+  .sizes-container {
+    grid-area: sizes;
+  }
+  .amount-container {
+    grid-area: amount;
+  }
+  .custom-words-container {
+    grid-area: customWords;
+  }
+  .themes-container {
+    grid-area: themes;
+  }
+  .action-btns {
+    grid-area: actions;
+    display: flex;
+    justify-content: space-between;
+    align-self: flex-end;
+    gap: 3px;
+    width: 100%;
+    label,
+    button {
+      flex: unset;
+      min-height: 32px;
+    }
+    button {
+      padding: 0 25px;
+    }
+  }
+}
