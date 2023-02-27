@@ -33,7 +33,9 @@ const RangeInputComponent: React.FC<Props> = ({ name, labelText, min, max, defau
       <label htmlFor={name}>
         <h5>
           {labelText}
-          <span style={{ float: 'right' }}>{valueToDisplay}</span>
+          <span style={{ float: 'right' }}>
+            {valueToDisplay}/{max}
+          </span>
         </h5>
         <div className="input-range">
           <input
