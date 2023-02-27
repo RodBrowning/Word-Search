@@ -111,6 +111,14 @@ button.action-btn {
   }
 }
 
+button.load-more {
+  padding-inline: 40px;
+  border: 1px solid colors.$black-25;
+  &:active {
+    border: 1px solid colors.$primary;
+  }
+}
+
 @media only screen and (max-width: 768px) {
   button.action-btn {
     color: white;

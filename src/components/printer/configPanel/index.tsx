@@ -22,9 +22,15 @@ interface Props {
     }[]
   ) => void;
   setPrintFeedbacks: React.Dispatch<React.SetStateAction<boolean>>;
+  setShowAllBoards: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const PrinterConfigPanel: React.FC<Props> = ({ handlePrint, setBoardsToPrintArray, setPrintFeedbacks }) => {
+const PrinterConfigPanel: React.FC<Props> = ({
+  handlePrint,
+  setBoardsToPrintArray,
+  setPrintFeedbacks,
+  setShowAllBoards,
+}) => {
   // Variables
   const gameBoard = SearchWordsGame();
   const gameState = useSelector((state: RootState) => state.game);
@@ -100,6 +106,7 @@ const PrinterConfigPanel: React.FC<Props> = ({ handlePrint, setBoardsToPrintArra
       } = { board: newBoard, feedbacks: newFeedbacks, feedbackBoard: newFeedbackBoard };
       boardsToPrint.push(newBoardToPrint);
     }
+    setShowAllBoards(false);
     setBoardsToPrintArray(boardsToPrint);
   };
 
