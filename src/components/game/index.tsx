@@ -6,6 +6,7 @@ import { generateNewBoardData, setAvailableSpace } from '../../features/game/gam
 import { useDispatch, useSelector } from 'react-redux';
 
 import Board from '../board';
+import BoardSelector from '../BoardSelector';
 import ConfigModal from '../modal/config';
 import { Link } from 'react-router-dom';
 import Modal from '../modal/modal';
@@ -88,7 +89,9 @@ const Game: React.FC = () => {
         </div>
       </aside>
       <main ref={availableSizeRef}>
-        <Board board={gameState.boardData.board} />
+        <BoardSelector board={gameState.boardData.board} feedbacks={gameState.boardData.feedbacks}>
+          <Board board={gameState.boardData.board} />
+        </BoardSelector>
         <div className="placar">
           <div className="pontos">
             <h4>

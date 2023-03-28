@@ -1,0 +1,28 @@
+#board-selection-wrapper {
+  position: relative;
+  width: fit-content;
+  margin-left: auto;
+  border-radius: 25px;
+  background-color: white;
+  #konva-stage {
+    position: absolute;
+    // background-color: rgba(255, 0, 0, 0.227);
+    border-radius: 18px;
+    inset: 8px;
+    margin-left: auto;
+    cursor: pointer;
+    > * {
+      position: absolute;
+    }
+  }
+  .board {
+    position: relative;
+    background-color: transparent;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  #board-selection-wrapper #konva-stage {
+    margin: auto;
+  }
+}
