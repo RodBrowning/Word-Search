@@ -172,7 +172,7 @@ function SearchWordsGame() {
         break;
       case 'crossedUp':
         column = initPos.column + (word.length - 1);
-        row = initPos.row + (word.length - 1);
+        row = initPos.row - (word.length - 1);
         break;
       default:
         break;
