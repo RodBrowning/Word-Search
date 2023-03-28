@@ -6,6 +6,8 @@ import FoundWordsStage from './foundWordsLayer';
 import IFeedback from '../../types/feedback';
 import SelectorStage from './selectorLayer';
 import colors from './colors';
+import { processWord } from '../../features/game/gameSlice';
+import { useDispatch } from 'react-redux';
 
 interface Props {
   board: string[][];
@@ -33,6 +35,7 @@ const BoardSelector: React.FC<Props> = ({ board, feedbacks, children }) => {
     columnWidth: 0,
   });
   const [foundWordsFeedbacks, setFoundWordsFeedbacks] = useState<IFeedback[]>([]);
+  const dispatch = useDispatch();
 
   let colorIndex = 0;
   const changeColorIndex = () => {
@@ -117,7 +120,7 @@ const BoardSelector: React.FC<Props> = ({ board, feedbacks, children }) => {
           getColor={getColor}
           changeColorIndex={changeColorIndex}
           handleFoundWord={(word) => {
-            return alert(`found ${word}`);
+            return dispatch(processWord(word));
           }}
         />
       </div>

@@ -97,7 +97,6 @@ const SelectorStage: React.FC<Props> = ({
     });
     return feedbacksMap;
   };
-  // TODO ----------------------------------------
 
   const checkIfTheWordWasFound = (position: {
     initialColumn: number;

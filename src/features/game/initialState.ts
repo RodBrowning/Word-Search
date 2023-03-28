@@ -2,7 +2,7 @@ import IGameState from '../../types/state';
 import Themes from './themes/themes';
 
 const initialState: IGameState = {
-  points: 30,
+  points: 0,
   difficult: {
     current: 'normal',
     parameters: {
@@ -31,8 +31,8 @@ const initialState: IGameState = {
   loadThemes: ['nomes'],
   themes: Themes,
   availableSpace: 0,
-  matchPoints: 30,
-  matches: 30,
+  matchPoints: 0,
+  matches: 1,
   matchesLimit: 50,
   gameEnded: false,
   boardData: {

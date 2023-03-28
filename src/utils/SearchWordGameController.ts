@@ -146,7 +146,7 @@ function SearchWordGameController() {
     return state.boardData;
   }
 
-  function processWord(state: IGameState, payloadAction: PayloadAction) {
+  function processWord(state: IGameState, payloadAction: { payload: string }) {
     // eslint-disable-next-line array-callback-return
     state.boardData.feedbacks.map((feedback: IPayloadAction) => {
       if (feedback.word === payloadAction.payload) {
