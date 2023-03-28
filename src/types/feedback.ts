@@ -1,7 +1,7 @@
 export default interface IFeedback {
   word: string;
   found: boolean;
-  color: string;
+  color?: string;
   position: {
     initial: {
       row: number;
