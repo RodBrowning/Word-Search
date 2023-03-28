@@ -33,7 +33,6 @@ const BoardSelector: React.FC<Props> = ({ board, feedbacks, children }) => {
     rowHeight: 0,
     columnWidth: 0,
   });
-  const [foundWordsFeedbacks, setFoundWordsFeedbacks] = useState<IFeedback[]>([]);
   const dispatch = useDispatch();
 
   const getMainParameters = (wrapperDiv: HTMLDivElement) => {
@@ -72,13 +71,6 @@ const BoardSelector: React.FC<Props> = ({ board, feedbacks, children }) => {
     };
   }, []);
 
-  useLayoutEffect(() => {
-    const foundWords = feedbacks.filter((feedback) => {
-      return feedback.found;
-    });
-    setFoundWordsFeedbacks(foundWords);
-  }, [feedbacks]);
-
   return (
     <div id="board-selection-wrapper" ref={boardWrapperRef}>
       <div
@@ -87,7 +79,9 @@ const BoardSelector: React.FC<Props> = ({ board, feedbacks, children }) => {
         style={{ width: `${mainParamenters.stageWidth}px`, height: `${mainParamenters.stageHeight}px` }}
       >
         <FoundWordsStage
-          feedbacks={foundWordsFeedbacks}
+          feedbacks={feedbacks.filter((feedback) => {
+            return feedback.found;
+          })}
           columnWidth={mainParamenters.columnWidth}
           rowHeight={mainParamenters.rowHeight}
           stageWidth={mainParamenters.stageWidth}
