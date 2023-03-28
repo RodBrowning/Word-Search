@@ -5,8 +5,9 @@ import type { PayloadAction } from '@reduxjs/toolkit';
 import SearchWordsGame from './SearchWordGame';
 
 interface IPayloadAction {
-  word: any;
+  word: string;
   found: boolean;
+  color: string;
 }
 
 function SearchWordGameController() {
@@ -146,11 +147,12 @@ function SearchWordGameController() {
     return state.boardData;
   }
 
-  function processWord(state: IGameState, payloadAction: { payload: string }) {
+  function processWord(state: IGameState, payload: { word: string; color: string }) {
     // eslint-disable-next-line array-callback-return
     state.boardData.feedbacks.map((feedback: IPayloadAction) => {
-      if (feedback.word === payloadAction.payload) {
+      if (feedback.word === payload.word) {
         feedback.found = true;
+        feedback.color = payload.color;
         state.matchPoints += state.difficult.parameters[state.difficult.current].pointsByFoundWord;
       }
     });

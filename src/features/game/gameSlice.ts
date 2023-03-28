@@ -16,9 +16,9 @@ export const gameSlice = createSlice({
       state.gameEnded = false;
       state.boardData = SWGC.getBoardData(state);
     },
-    processWord: (state: IGameState, payloadAction: { payload: string }) => {
+    processWord: (state: IGameState, payloadAction: { payload: { word: string; color: string } }) => {
       // eslint-disable-next-line array-callback-return
-      state = SWGC.processWord(state, payloadAction);
+      state = SWGC.processWord(state, payloadAction.payload);
       if (SWGC.matchHasEnded(state)) {
         state.boardData.matchEnded = true;
         state.matches += 1;

@@ -15,7 +15,7 @@ interface Props {
   stageHeight: number;
   getColor: () => string;
   changeColorIndex: () => void;
-  handleFoundWord: React.Dispatch<React.SetStateAction<string>>;
+  handleFoundWord: (word: string, color: string) => void;
 }
 
 const SelectorStage: React.FC<Props> = ({
@@ -98,18 +98,21 @@ const SelectorStage: React.FC<Props> = ({
     return feedbacksMap;
   };
 
-  const checkIfTheWordWasFound = (position: {
-    initialColumn: number;
-    initialRow: number;
-    finalColumn: number;
-    finalRow: number;
-  }) => {
+  const checkIfTheWordWasFound = (
+    position: {
+      initialColumn: number;
+      initialRow: number;
+      finalColumn: number;
+      finalRow: number;
+    },
+    color: string
+  ) => {
     const feedbackCode = getFeedbackString(position);
 
     const foundWord = notFoundWordskMap!.has(feedbackCode);
     if (foundWord) {
       const { word } = notFoundWordskMap!.get(feedbackCode)!;
-      handleFoundWord(word);
+      handleFoundWord(word, color);
       notFoundWordskMap?.delete(feedbackCode);
       setNotFoundWordskMap(notFoundWordskMap);
     }
@@ -117,7 +120,12 @@ const SelectorStage: React.FC<Props> = ({
     changeColorIndex();
   };
 
-  const handleMouseUpEvent = (upEvent: React.BaseSyntheticEvent, initialColumn: number, initialRow: number) => {
+  const handleMouseUpEvent = (
+    upEvent: React.BaseSyntheticEvent,
+    initialColumn: number,
+    initialRow: number,
+    color: string
+  ) => {
     let { target } = upEvent;
     if (target !== upEvent.currentTarget) {
       target = target.parent.parent;
@@ -135,12 +143,15 @@ const SelectorStage: React.FC<Props> = ({
     target.off('mousemove');
     target.off('mouseup');
 
-    return checkIfTheWordWasFound({
-      initialColumn,
-      initialRow,
-      finalColumn,
-      finalRow,
-    });
+    return checkIfTheWordWasFound(
+      {
+        initialColumn,
+        initialRow,
+        finalColumn,
+        finalRow,
+      },
+      color
+    );
   };
 
   const handleOnMouseMoveEvent = (
@@ -194,10 +205,10 @@ const SelectorStage: React.FC<Props> = ({
     });
 
     target.on('touchend', (upEvent: React.BaseSyntheticEvent) => {
-      handleMouseUpEvent(upEvent, initialColumn, initialRow);
+      handleMouseUpEvent(upEvent, initialColumn, initialRow, color);
     });
     target.on('mouseup', (upEvent: React.BaseSyntheticEvent) => {
-      handleMouseUpEvent(upEvent, initialColumn, initialRow);
+      handleMouseUpEvent(upEvent, initialColumn, initialRow, color);
     });
 
     target.on('mouseleave', () => {

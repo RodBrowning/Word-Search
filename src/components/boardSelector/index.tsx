@@ -106,8 +106,6 @@ const BoardSelector: React.FC<Props> = ({ board, feedbacks, children }) => {
           rowHeight={mainParamenters.rowHeight}
           stageWidth={mainParamenters.stageWidth}
           stageHeight={mainParamenters.stageHeight}
-          getColor={getColor}
-          changeColorIndex={changeColorIndex}
         />
         <SelectorStage
           feedbacks={feedbacks.filter((feedback) => {
@@ -119,8 +117,8 @@ const BoardSelector: React.FC<Props> = ({ board, feedbacks, children }) => {
           stageHeight={mainParamenters.stageHeight}
           getColor={getColor}
           changeColorIndex={changeColorIndex}
-          handleFoundWord={(word) => {
-            return dispatch(processWord(word));
+          handleFoundWord={(word: string, color: string) => {
+            return dispatch(processWord({ word, color }));
           }}
         />
       </div>

@@ -10,30 +10,18 @@ interface Props {
   rowHeight: number;
   stageWidth: number;
   stageHeight: number;
-  getColor: () => string;
-  changeColorIndex: () => void;
 }
 
-const FoundWordsStage: React.FC<Props> = ({
-  feedbacks,
-  columnWidth,
-  rowHeight,
-  stageWidth,
-  stageHeight,
-  getColor,
-  changeColorIndex,
-}) => {
+const FoundWordsStage: React.FC<Props> = ({ feedbacks, columnWidth, rowHeight, stageWidth, stageHeight }) => {
   return (
     <Stage width={stageWidth} height={stageHeight}>
       <Layer>
         {feedbacks.map((feedback) => {
-          const color = getColor();
-          changeColorIndex();
           return (
             <Selector
               columnWidth={columnWidth}
               rowHeight={rowHeight}
-              color={color}
+              color={feedback.color}
               position={{
                 initialRow: feedback.position.initial.row,
                 initialColumn: feedback.position.initial.column,
