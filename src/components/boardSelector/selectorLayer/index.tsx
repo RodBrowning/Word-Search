@@ -7,6 +7,7 @@ import { getDirection, getWordLength } from '../utils/utils';
 import IFeedback from '../../../types/feedback';
 import Selector from '../selectors/selector';
 import colors from './colors';
+import useSessionStorage from '../../../utils/customHooks/useSessionStorage';
 
 interface Props {
   feedbacks: IFeedback[];
@@ -28,12 +29,13 @@ const SelectorStage: React.FC<Props> = ({
   const [notFoundWordskMap, setNotFoundWordskMap] = useState<Map<string, { word: string; found: boolean }>>();
   const [selector, setSelector] = useState<React.ReactElement>();
 
-  let colorIndex = 0;
+  const [colorIndex, setNewColorIndex] = useSessionStorage('colorIndex', 0);
+
   const changeColorIndex = () => {
     if (colorIndex + 1 === colors.length) {
-      colorIndex = 0;
+      setNewColorIndex(0);
     } else {
-      colorIndex += 1;
+      setNewColorIndex(colorIndex + 1);
     }
   };
   const getColor = () => {
