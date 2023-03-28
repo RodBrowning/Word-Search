@@ -6,6 +6,7 @@ import { getDirection, getWordLength } from '../utils/utils';
 
 import IFeedback from '../../../types/feedback';
 import Selector from '../selectors/selector';
+import colors from './colors';
 
 interface Props {
   feedbacks: IFeedback[];
@@ -13,8 +14,6 @@ interface Props {
   rowHeight: number;
   stageWidth: number;
   stageHeight: number;
-  getColor: () => string;
-  changeColorIndex: () => void;
   handleFoundWord: (word: string, color: string) => void;
 }
 
@@ -24,12 +23,23 @@ const SelectorStage: React.FC<Props> = ({
   rowHeight,
   stageWidth,
   stageHeight,
-  getColor,
-  changeColorIndex,
   handleFoundWord,
 }) => {
   const [notFoundWordskMap, setNotFoundWordskMap] = useState<Map<string, { word: string; found: boolean }>>();
   const [selector, setSelector] = useState<React.ReactElement>();
+
+  let colorIndex = 0;
+  const changeColorIndex = () => {
+    if (colorIndex + 1 === colors.length) {
+      colorIndex = 0;
+    } else {
+      colorIndex += 1;
+    }
+  };
+  const getColor = () => {
+    const color = colors[colorIndex];
+    return color;
+  };
 
   const getFeedbackString = (position: {
     initialColumn: number;
