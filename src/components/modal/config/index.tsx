@@ -94,11 +94,13 @@ const ConfigModal: React.FC<Props> = ({ setOpenModal }) => {
   const handleLoadThemes = (target: HTMLInputElement) => {
     let newLoadThemes = [];
     if (target.checked) {
-      newLoadThemes = [...configState.loadThemes, target.value];
+      newLoadThemes = [...configState.loadThemes, target.value].sort();
     } else {
-      newLoadThemes = configState.loadThemes.filter((theme) => {
-        return theme !== target.value;
-      });
+      newLoadThemes = configState.loadThemes
+        .filter((theme) => {
+          return theme !== target.value;
+        })
+        .sort();
     }
     setConfigState({ ...configState, loadThemes: newLoadThemes });
     loadThemesRef.current = newLoadThemes;
@@ -108,8 +110,8 @@ const ConfigModal: React.FC<Props> = ({ setOpenModal }) => {
     if (
       gameState.difficult.current === difficultyRef.current &&
       gameState.useCustom === useCustomRef.current &&
-      gameState.customWords === customWordListRef.current &&
-      gameState.loadThemes === loadThemesRef.current
+      JSON.stringify(gameState.customWords) === JSON.stringify(customWordListRef.current) &&
+      JSON.stringify(gameState.loadThemes) === JSON.stringify(loadThemesRef.current)
     ) {
       return false;
     }
