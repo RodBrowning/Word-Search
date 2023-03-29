@@ -53,10 +53,16 @@ const ConfigModal: React.FC<Props> = ({ setOpenModal }) => {
       dispatch(reduxSetDifficulty(difficultyRef.current));
       dispatch(reduxClearMatchPoints());
     }
-    dispatch(reduxSetCustomWords(customWordListRef.current));
     dispatch(reduxSetUseCustomState(useCustomRef.current));
     dispatch(reduxSetLoadThemesState(loadThemesRef.current));
     dispatch(reduxGenerateNewBoardData());
+  };
+
+  const dispatchCustomWordsChanges = () => {
+    dispatch(reduxSetCustomWords(customWordListRef.current));
+    if (useCustomRef.current) {
+      dispatch(reduxGenerateNewBoardData());
+    }
   };
 
   const dispatchResetGame = () => {
@@ -107,21 +113,23 @@ const ConfigModal: React.FC<Props> = ({ setOpenModal }) => {
   };
 
   const thereAreSomeChanges = () => {
-    if (
-      gameState.difficult.current === difficultyRef.current &&
-      gameState.useCustom === useCustomRef.current &&
-      JSON.stringify(gameState.customWords) === JSON.stringify(customWordListRef.current) &&
-      JSON.stringify(gameState.loadThemes) === JSON.stringify(loadThemesRef.current)
-    ) {
-      return false;
-    }
-    return true;
+    return (
+      gameState.difficult.current !== difficultyRef.current ||
+      gameState.useCustom !== useCustomRef.current ||
+      JSON.stringify(gameState.loadThemes) !== JSON.stringify(loadThemesRef.current)
+    );
+  };
+  const wasCustomWordsChanged = () => {
+    return JSON.stringify(gameState.customWords) !== JSON.stringify(customWordListRef.current);
   };
 
   useEffect(() => {
     return () => {
       if (thereAreSomeChanges()) {
         dispatchConfigChanges();
+      }
+      if (wasCustomWordsChanged()) {
+        dispatchCustomWordsChanges();
       }
     };
   }, []);
