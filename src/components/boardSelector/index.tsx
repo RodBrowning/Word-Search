@@ -1,6 +1,6 @@
 import './style.scss';
 
-import React, { ReactNode, useEffect, useLayoutEffect, useRef, useState } from 'react';
+import React, { ReactNode, useEffect, useRef, useState } from 'react';
 
 import FoundWordsStage from './foundWordsLayer';
 import IFeedback from '../../types/feedback';
@@ -54,22 +54,20 @@ const BoardSelector: React.FC<Props> = ({ board, feedbacks, children }) => {
     };
   };
 
-  // Effects
-  useEffect(() => {
+  const computeMainParameters = () => {
     const mainParams = getMainParameters(boardWrapperRef.current!);
     setMainParamenters(mainParams);
-  }, [board]);
+  };
 
-  useLayoutEffect(() => {
-    const onResize = () => {
-      const mainParams = getMainParameters(boardWrapperRef.current!);
-      setMainParamenters(mainParams);
-    };
-    window.addEventListener('resize', onResize);
+  // Effects
+  useEffect(() => {
+    computeMainParameters();
+
+    window.addEventListener('resize', computeMainParameters);
     return () => {
-      window.removeEventListener('resize', onResize);
+      window.removeEventListener('resize', computeMainParameters);
     };
-  }, []);
+  }, [board]);
 
   return (
     <div id="board-selection-wrapper" ref={boardWrapperRef}>
