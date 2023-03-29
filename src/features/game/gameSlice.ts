@@ -23,6 +23,7 @@ export const gameSlice = createSlice({
         state.boardData.matchEnded = true;
         state.matches += 1;
         state.points += state.matchPoints;
+        state.matchPoints = 0;
       }
       if (SWGC.gameHasEnded(state)) {
         state.gameEnded = true;
@@ -51,6 +52,7 @@ export const gameSlice = createSlice({
     },
     resetGame: (state: IGameState) => {
       state.points = 0;
+      state.matchPoints = 0;
       state.matches = 1;
     },
   },
