@@ -13,13 +13,13 @@ const ConfirmationModal: React.FC<Props> = ({ children, isOpen, setOpenModal }) 
   return ReactDOM.createPortal(
     <div
       id="confirmation-wrapper"
-      onClick={(e) => {
-        if (e.target.id === 'confirmation-wrapper') setOpenModal(false);
+      onClick={(e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+        if (e.target.id! === 'confirmation-wrapper') setOpenModal(false);
       }}
     >
       {children}
     </div>,
-    document.getElementById('confirmation-modal')
+    document.getElementById('confirmation-modal')!
   );
 };
 
