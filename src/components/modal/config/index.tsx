@@ -207,7 +207,7 @@ const ConfigModal: React.FC<Props> = ({ setOpenModal }) => {
         <ConfirmationModal isOpen={openResetConfirmationModal} setOpenModal={setOpenResetConfirmationModal}>
           <ConfirmationComponent
             setOpenConfirmationModal={setOpenResetConfirmationModal}
-            dispatchAction={dispatchResetGame}
+            callbackAction={dispatchResetGame}
             setOpenModal={setOpenModal}
           >
             <h5>Não será possível recuperar o progresso após esta ação.</h5>

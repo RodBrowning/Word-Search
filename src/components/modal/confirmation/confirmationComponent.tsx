@@ -6,14 +6,14 @@ import React from 'react';
 interface Props {
   children: React.ReactNode;
   setOpenConfirmationModal: React.Dispatch<React.SetStateAction<boolean>>;
-  dispatchAction: () => void;
+  callbackAction: () => void;
   setOpenModal: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const ConfirmationComponent: React.FC<Props> = ({
   children,
   setOpenConfirmationModal,
-  dispatchAction,
+  callbackAction,
   setOpenModal,
 }) => {
   return (
@@ -34,7 +34,7 @@ const ConfirmationComponent: React.FC<Props> = ({
           className="action-btn confirm"
           onClick={() => {
             setOpenModal(false);
-            dispatchAction();
+            callbackAction();
           }}
         >
           Confirmar
