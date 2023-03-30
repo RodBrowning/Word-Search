@@ -15,7 +15,7 @@ interface Props {
   rowHeight: number;
   stageWidth: number;
   stageHeight: number;
-  handleFoundWord: (word: string, color: string) => void;
+  handleFoundWord?: (word: string, color: string) => void;
 }
 
 const SelectorStage: React.FC<Props> = ({
@@ -124,7 +124,9 @@ const SelectorStage: React.FC<Props> = ({
     const foundWord = notFoundWordskMap!.has(feedbackCode);
     if (foundWord) {
       const { word } = notFoundWordskMap!.get(feedbackCode)!;
-      handleFoundWord(word, color);
+      if (handleFoundWord) {
+        handleFoundWord(word, color);
+      }
       notFoundWordskMap?.delete(feedbackCode);
       setNotFoundWordskMap(notFoundWordskMap);
     }

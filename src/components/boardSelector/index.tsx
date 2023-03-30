@@ -5,13 +5,12 @@ import React, { ReactNode, useEffect, useRef, useState } from 'react';
 import FoundWordsStage from './foundWordsLayer';
 import IFeedback from '../../types/feedback';
 import SelectorStage from './selectorLayer';
-import { processWord } from '../../features/game/gameSlice';
-import { useDispatch } from 'react-redux';
 
 interface Props {
   board: string[][];
   feedbacks: IFeedback[];
   children: ReactNode;
+  handleFoundWord?: (word: string, color: string) => void;
 }
 
 type mainParamentersType = {
@@ -23,7 +22,7 @@ type mainParamentersType = {
   columnWidth: number;
 };
 
-const BoardSelector: React.FC<Props> = ({ board, feedbacks, children }) => {
+const BoardSelector: React.FC<Props> = ({ board, feedbacks, children, handleFoundWord }) => {
   const boardWrapperRef = useRef<HTMLDivElement>(null);
   const [mainParamenters, setMainParamenters] = useState<mainParamentersType>({
     stageHeight: 1,
@@ -33,7 +32,6 @@ const BoardSelector: React.FC<Props> = ({ board, feedbacks, children }) => {
     rowHeight: 0,
     columnWidth: 0,
   });
-  const dispatch = useDispatch();
 
   const getMainParameters = (wrapperDiv: HTMLDivElement) => {
     const tBody = wrapperDiv.getElementsByTagName('tbody')[0];
@@ -93,9 +91,7 @@ const BoardSelector: React.FC<Props> = ({ board, feedbacks, children }) => {
           rowHeight={mainParamenters.rowHeight}
           stageWidth={mainParamenters.stageWidth}
           stageHeight={mainParamenters.stageHeight}
-          handleFoundWord={(word: string, color: string) => {
-            return dispatch(processWord({ word, color }));
-          }}
+          handleFoundWord={handleFoundWord}
         />
       </div>
       {children}
