@@ -1,12 +1,60 @@
 import './style.scss';
 import './style-mobile.scss';
 
-import Board from '../board';
 // eslint-disable-next-line import/order
-import React from 'react';
+import React, { useState } from 'react';
+
+import Board from '../board';
+import BoardSelector from '../BoardSelector';
 import SearchWordsGame from '../../utils/SearchWordGame';
 
 const About: React.FC = () => {
+  const deskGame = SearchWordsGame();
+  const deskBoard = deskGame.getBoard({
+    boardSize: { columns: 10, rows: 15 },
+    useCustom: true,
+    customWords: ['caça', 'palavras', 'criança', 'aprender', 'memoria', 'futuro', 'sorte', 'santos'],
+  });
+  const deskFeedbacks = deskGame.getFeedbacks();
+  const [deskBoardState] = useState(deskBoard);
+  const [deskFeedbacksState, setDeskFeedbacksState] = useState(deskFeedbacks);
+  const deskHandleFoundWord = (word: string, color: string) => {
+    const newFeedbacks = deskFeedbacksState.map((feedback) => {
+      if (feedback.word === word) {
+        return {
+          ...feedback,
+          found: true,
+          color: color,
+        };
+      }
+      return feedback;
+    });
+    setDeskFeedbacksState(newFeedbacks);
+  };
+
+  const mobileGame = SearchWordsGame();
+  const mobileBoard = mobileGame.getBoard({
+    boardSize: { columns: 8, rows: 8 },
+    useCustom: true,
+    customWords: ['caça', 'palavras', 'criança', 'aprender', 'memoria', 'futuro', 'sorte', 'santos'],
+  });
+  const mobileFeedbacks = mobileGame.getFeedbacks();
+  const [mobileBoardState] = useState(mobileBoard);
+  const [mobileFeedbacksState, setMobileFeedbacksState] = useState(mobileFeedbacks);
+  const mobileHandleFoundWord = (word: string, color: string) => {
+    const newFeedbacks = mobileFeedbacksState.map((feedback) => {
+      if (feedback.word === word) {
+        return {
+          ...feedback,
+          found: true,
+          color: color,
+        };
+      }
+      return feedback;
+    });
+    setMobileFeedbacksState(newFeedbacks);
+  };
+
   return (
     <div className="inner-panel inner-panel-about">
       <div className="about-text">
@@ -39,22 +87,18 @@ const About: React.FC = () => {
         </span>
         <div className="sample-board">
           <div className="desk">
-            <Board
-              board={SearchWordsGame().getBoard({
-                boardSize: { columns: 10, rows: 15 },
-                useCustom: true,
-                customWords: ['caça', 'palavras', 'criança', 'aprender', 'memoria', 'futuro', 'sorte', 'santos'],
-              })}
-            />
+            <BoardSelector board={deskBoardState} feedbacks={deskFeedbacksState} handleFoundWord={deskHandleFoundWord}>
+              <Board board={deskBoardState} />
+            </BoardSelector>
           </div>
           <div className="mobile">
-            <Board
-              board={SearchWordsGame().getBoard({
-                boardSize: { columns: 8, rows: 8 },
-                useCustom: true,
-                customWords: ['caça', 'palavras', 'criança', 'aprender', 'memoria', 'futuro', 'sorte', 'santos'],
-              })}
-            />
+            <BoardSelector
+              board={mobileBoardState}
+              feedbacks={mobileFeedbacksState}
+              handleFoundWord={mobileHandleFoundWord}
+            >
+              <Board board={mobileBoardState} />
+            </BoardSelector>
           </div>
         </div>
       </div>
