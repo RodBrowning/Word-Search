@@ -2,7 +2,7 @@ import './style.scss';
 import './style-mobile.scss';
 
 import React, { useEffect, useRef, useState } from 'react';
-import { generateNewBoardData, setAvailableSpace } from '../../features/game/gameSlice';
+import { generateNewBoardData, processWord, setAvailableSpace } from '../../features/game/gameSlice';
 import { useDispatch, useSelector } from 'react-redux';
 
 import Board from '../board';
@@ -89,7 +89,13 @@ const Game: React.FC = () => {
         </div>
       </aside>
       <main ref={availableSizeRef}>
-        <BoardSelector board={gameState.boardData.board} feedbacks={gameState.boardData.feedbacks}>
+        <BoardSelector
+          board={gameState.boardData.board}
+          feedbacks={gameState.boardData.feedbacks}
+          handleFoundWord={(word: string, color: string) => {
+            dispatch(processWord({ word, color }));
+          }}
+        >
           <Board board={gameState.boardData.board} />
         </BoardSelector>
         <div className="placar">
