@@ -22,7 +22,7 @@ const InformationComponent: React.FC<Props> = ({ children, setOpenModal, callbac
             setOpenModal(false);
           }}
         >
-          Ok
+          OK
         </button>
       </div>
     </div>

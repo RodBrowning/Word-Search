@@ -130,9 +130,9 @@ const Game: React.FC = () => {
               dispatch(generateNewBoardData());
             }}
           >
-            <h4>Parabéns</h4>
+            <h4>Parabéns!!!</h4>
             <br />
-            <h5>Você completou o nivel {gameState.matches - 1}!!!</h5>
+            <h5>Você completou o nivel {gameState.matches - 1}</h5>
           </InformationComponent>
         </InformationModal>
       </main>
