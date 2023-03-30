@@ -8,6 +8,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import Board from '../board';
 import BoardSelector from '../BoardSelector';
 import ConfigModal from '../modal/config';
+import InformationComponent from '../modal/info/informationComponent';
+import InformationModal from '../modal/info/informationModal';
 import { Link } from 'react-router-dom';
 import Modal from '../modal/modal';
 import { RootState } from '../../app/store';
@@ -16,6 +18,7 @@ import WordList from '../feedbackWordList';
 const Game: React.FC = () => {
   const availableSizeRef = useRef<HTMLElement>() as React.MutableRefObject<HTMLInputElement>;
   const [isConfigModalOpen, setIsConfigModalOpen] = useState(false);
+  const [isInformationModalOpen, setIsInformationModalOpen] = useState(false);
   const gameState = useSelector((state: RootState) => {
     return state.game;
   });
@@ -32,6 +35,9 @@ const Game: React.FC = () => {
   useEffect(() => {
     if (gameState.gameEnded) {
       alert('Ended');
+    }
+    if (gameState.boardData.matchEnded) {
+      setIsInformationModalOpen(true);
     }
   }, [gameState]);
 
@@ -111,6 +117,24 @@ const Game: React.FC = () => {
             </span>
           </div>
         </div>
+        <InformationModal
+          isOpen={isInformationModalOpen}
+          setOpenModal={setIsInformationModalOpen}
+          callbackAction={() => {
+            dispatch(generateNewBoardData());
+          }}
+        >
+          <InformationComponent
+            setOpenModal={setIsInformationModalOpen}
+            callbackAction={() => {
+              dispatch(generateNewBoardData());
+            }}
+          >
+            <h4>Parabéns</h4>
+            <br />
+            <h5>Você completou o nivel {gameState.matches - 1}!!!</h5>
+          </InformationComponent>
+        </InformationModal>
       </main>
     </div>
   );

@@ -1,0 +1,30 @@
+@use '../../../scss/index' as mainStyle;
+
+#information-wrapper {
+  position: absolute;
+  inset: 0;
+  z-index: mainStyle.$zModalWrapper;
+  background: mainStyle.$black-25;
+  .information-component {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    max-width: 500px;
+    width: 90%;
+    background: white;
+    z-index: mainStyle.$zModalContent;
+    background-color: mainStyle.$tertiary;
+    color: mainStyle.$black-75;
+    text-align: center;
+    border: 1px solid rgba(13, 7, 1, 0.5);
+    padding: 14px 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+    justify-content: space-between;
+    .actions-btn {
+      padding: 0 8px;
+    }
+  }
+}
