@@ -1,14 +1,8 @@
+import IFeedback from '../types/feedback';
 /* eslint-disable import/order */
 import IGameState from '../types/state';
-import type { PayloadAction } from '@reduxjs/toolkit';
 /* eslint-disable no-param-reassign */
 import SearchWordsGame from './SearchWordGame';
-
-interface IPayloadAction {
-  word: string;
-  found: boolean;
-  color: string;
-}
 
 function SearchWordGameController() {
   function getBoardSize(state: IGameState) {
@@ -149,7 +143,7 @@ function SearchWordGameController() {
 
   function processWord(state: IGameState, payload: { word: string; color: string }) {
     // eslint-disable-next-line array-callback-return
-    state.boardData.feedbacks.map((feedback: IPayloadAction) => {
+    state.boardData.feedbacks.map((feedback: IFeedback) => {
       if (feedback.word === payload.word) {
         feedback.found = true;
         feedback.color = payload.color;
