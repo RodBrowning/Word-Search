@@ -265,7 +265,7 @@ function SearchWordsGame() {
     const words = shuffleWords(wordsArray);
     feedbacks = [];
     let placedWords = 0;
-    let reversePlacedWords = 0;
+    let placedReverseWords = 0;
 
     for (let i = 0; i < words.length; i++) {
       let isPosToPlace = false;
@@ -276,7 +276,7 @@ function SearchWordsGame() {
         maxTries = 200;
       }
       const remainingWordsToPlace = config.numberOfWords! - placedWords;
-      const remainingReverseWordsToPlace = config.numberOfReverseWords! - reversePlacedWords;
+      const remainingReverseWordsToPlace = config.numberOfReverseWords! - placedReverseWords;
       const chanceToBeReversed = calculateChanceToBeReversed(remainingWordsToPlace, remainingReverseWordsToPlace);
 
       let tries = 0;
@@ -293,7 +293,7 @@ function SearchWordsGame() {
           board = placeWordInBoard(board, { ...initPos }, direction, currentWord);
           if (config.useReverse && isReverse) {
             currentWord = currentWord.split('').reverse().join('');
-            reversePlacedWords += 1;
+            placedReverseWords += 1;
           }
           setFeedback(initPos, direction, currentWord);
           placedWords += 1;

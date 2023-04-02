@@ -1,7 +1,7 @@
 import './style.scss';
 import './style-mobile.scss';
 
-import React, { useState } from 'react';
+import React, { useLayoutEffect, useState } from 'react';
 
 interface Props {
   name: string;
@@ -9,7 +9,7 @@ interface Props {
   min: number;
   max: number;
   defaultValue: number;
-  setInputValue: Function;
+  setInputValue: (value: number) => void;
 }
 
 const getPercentage = (max: number, min: number, currentValue: number) => {
@@ -22,11 +22,19 @@ const RangeInputComponent: React.FC<Props> = ({ name, labelText, min, max, defau
   const [percentage, setPercentage] = useState(getPercentage(max, min, defaultValue));
   const [valueToDisplay, setValueToDisplay] = useState(defaultValue);
 
-  const handleChange = (target: HTMLInputElement) => {
-    setPercentage(getPercentage(Number(target.max), Number(target.min), Number(target.value)));
-    setValueToDisplay(Number(target.value));
-    setInputValue(Number(target.value));
+  const setParameters = (min: number, max: number, defaultValue: number) => {
+    setPercentage(getPercentage(Number(max), Number(min), Number(defaultValue)));
+    setValueToDisplay(Number(defaultValue));
+    setInputValue(Number(defaultValue));
   };
+
+  const handleChange = (target: HTMLInputElement) => {
+    setParameters(Number(target.min), Number(target.max), Number(target.value));
+  };
+
+  useLayoutEffect(() => {
+    setParameters(min, max, defaultValue);
+  }, [defaultValue]);
 
   return (
     <div className="input-range-container">
@@ -42,7 +50,7 @@ const RangeInputComponent: React.FC<Props> = ({ name, labelText, min, max, defau
             type="range"
             onChange={(e) => handleChange(e.target)}
             style={{ backgroundSize: `${percentage}% 100%` }}
-            defaultValue={defaultValue}
+            value={defaultValue}
             min={min}
             max={max}
             step={1}

@@ -5,6 +5,7 @@ import React, { useEffect, useLayoutEffect, useState } from 'react';
 
 import CustomWordListConfig from '../../configCustomWordList';
 import IFeedback from '../../../types/feedback';
+import IPrintConfig from '../../../types/printConfig';
 import RangeInputComponent from '../../rangeInputComponent';
 import { RootState } from '../../../app/store';
 import SearchWordsGame from '../../../utils/SearchWordGame';
@@ -39,13 +40,15 @@ const PrinterConfigPanel: React.FC<Props> = ({
   const minCustomWordsLength = 5;
 
   // Session Storage
-  const [printSession, setPrintSession] = useSessionStorage('printConfig', {
+  const [printSession, setPrintSession] = useSessionStorage<IPrintConfig>('printConfig', {
     useCustom: false,
+    useReverse: true,
     themesToLoad: [themesTitles[0]],
     customWords: [],
     columns: 15,
     rows: 15,
     numberOfWords: 20,
+    numberOfReverseWords: 0,
     numberOfBoards: 1,
     showFeedbacks: false,
   });
@@ -57,6 +60,7 @@ const PrinterConfigPanel: React.FC<Props> = ({
   const [columns, setColumns] = useState(printSession.columns);
   const [rows, setRows] = useState(printSession.rows);
   const [numberOfWords, setNumberOfWords] = useState(printSession.numberOfWords);
+  const [numberOfReverseWords, setNumberOfReverseWords] = useState(printSession.numberOfReverseWords);
   const [numberOfBoards, setNumberOfBoards] = useState(printSession.numberOfBoards);
   const [words, setWords] = useState<string[]>(themes[themesTitles[0]]);
   const [showFeedbacks, setShowFeedbacks] = useState(printSession.showFeedbacks);
@@ -93,8 +97,10 @@ const PrinterConfigPanel: React.FC<Props> = ({
       const newBoard = gameBoard.getBoard({
         boardSize: { columns, rows },
         useCustom: useCustom,
+        useReverse: printSession.useReverse,
         customWords,
         numberOfWords,
+        numberOfReverseWords,
         words,
       });
       const newFeedbacks = gameBoard.getFeedbacks();
@@ -119,7 +125,7 @@ const PrinterConfigPanel: React.FC<Props> = ({
 
   useLayoutEffect(() => {
     generateBoardsToPrint();
-  }, [words, columns, rows, numberOfWords, numberOfBoards]);
+  }, [words, columns, rows, numberOfWords, numberOfReverseWords, numberOfBoards]);
 
   useLayoutEffect(() => {
     if (useCustom && customWords.length >= minCustomWordsLength) {
@@ -156,6 +162,17 @@ const PrinterConfigPanel: React.FC<Props> = ({
             setPrintSession({ ...printSession, rows: rows });
           }}
         />
+        <RangeInputComponent
+          name="numOfBoards"
+          labelText="Numero de Quadros"
+          min={1}
+          max={20}
+          defaultValue={printSession.numberOfBoards}
+          setInputValue={(numOfBoards: number) => {
+            setNumberOfBoards(numOfBoards);
+            setPrintSession({ ...printSession, numberOfBoards: numOfBoards });
+          }}
+        />
       </div>
       <div className="amount-container">
         <RangeInputComponent
@@ -166,18 +183,19 @@ const PrinterConfigPanel: React.FC<Props> = ({
           defaultValue={printSession.numberOfWords}
           setInputValue={(numOfwords: number) => {
             setNumberOfWords(numOfwords);
-            setPrintSession({ ...printSession, numberOfWords: numOfwords });
+            setNumberOfReverseWords(0);
+            setPrintSession({ ...printSession, numberOfWords: numOfwords, numberOfReverseWords: 0 });
           }}
         />
         <RangeInputComponent
-          name="numOfBoards"
-          labelText="Numero de Quadros"
-          min={1}
-          max={20}
-          defaultValue={printSession.numberOfBoards}
-          setInputValue={(numOfBoards: number) => {
-            setNumberOfBoards(numOfBoards);
-            setPrintSession({ ...printSession, numberOfBoards: numOfBoards });
+          name="numOfReverseWords"
+          labelText="Numero de palavras ao contrário"
+          min={0}
+          max={printSession.numberOfWords}
+          defaultValue={printSession.numberOfReverseWords}
+          setInputValue={(numOfReverseWords: number) => {
+            setNumberOfReverseWords(numOfReverseWords);
+            setPrintSession({ ...printSession, numberOfReverseWords: numOfReverseWords });
           }}
         />
       </div>
