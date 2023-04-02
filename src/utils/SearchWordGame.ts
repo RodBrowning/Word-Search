@@ -4,10 +4,10 @@ import IFeedback from '../types/feedback';
 
 function SearchWordsGame() {
   const directions = ['horizontal', 'vertical', 'crossedUp', 'crossedDown'];
-  let configuration: IConfig = {
+  let defaultConfiguration: IConfig = {
     boardSize: { columns: 15, rows: 15 },
     numberOfWords: 5,
-    numberOfReverseWords: 0,
+    numberOfReverseWords: 1,
     words: [
       'um',
       'dois',
@@ -243,28 +243,26 @@ function SearchWordsGame() {
   }
 
   function setConfigUnicWords(pConfig: IConfig): IConfig {
-    const wordsSet = new Set(pConfig.words);
+    let wordsSet;
+    if (pConfig.customWords!.length > 0 && pConfig.useCustom) {
+      wordsSet = new Set([...pConfig.words!, ...pConfig.customWords!]);
+    } else {
+      wordsSet = new Set(pConfig.words);
+    }
     const words = [...wordsSet];
     return { ...pConfig, words };
   }
 
   function populateBoard(pConfig?: IConfig): string[][] {
-    const config = setConfigUnicWords({ ...configuration, ...pConfig });
-    configuration = config;
+    const config = setConfigUnicWords({ ...defaultConfiguration, ...pConfig });
+    defaultConfiguration = config;
     if ((config.words!.length <= 0 && config.useCustom === false) || config.numberOfWords! <= 0) {
       throw new Error('Any word to find');
     }
 
     let board = getEmptyBoard(config);
-    let wordsSet;
-    if (config.customWords!.length > 0 && config.useCustom) {
-      wordsSet = new Set([...config.words!, ...config.customWords!]);
-    } else {
-      wordsSet = new Set(config.words!);
-    }
 
-    const wordsArray = [...wordsSet];
-    const words = shuffleWords(wordsArray);
+    const words = shuffleWords(config.words!);
     feedbacks = [];
     let placedWords = 0;
     let placedReverseWords = 0;
@@ -318,7 +316,7 @@ function SearchWordsGame() {
   }
 
   function getBoardSize(): { columns: number; rows: number } {
-    return configuration.boardSize!;
+    return defaultConfiguration.boardSize!;
   }
 
   return {
