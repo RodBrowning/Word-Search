@@ -22,7 +22,6 @@ export const gameSlice = createSlice({
       state = SWGC.processWord(state, payloadAction.payload);
       if (SWGC.matchHasEnded(state)) {
         state.boardData.matchEnded = true;
-        state.matches += 1;
         if (state.useReverse)
           state.matchPoints = Math.ceil(
             state.matchPoints * state.difficult.parameters[state.difficult.current].extraPointsIfincludesReverseWords
@@ -52,6 +51,9 @@ export const gameSlice = createSlice({
     setLoadThemes: (state: IGameState, payloadAction: { payload: string[] }) => {
       state.loadThemes = payloadAction.payload;
     },
+    setNextMatch: (state: IGameState) => {
+      state.matches += 1;
+    },
     setMatchPoints: (state: IGameState, payloadAction: { payload: number }) => {
       state.matchPoints += payloadAction.payload;
     },
@@ -76,6 +78,7 @@ export const {
   setUseReverse,
   setLoadThemes,
   resetGame,
+  setNextMatch,
   setMatchPoints,
   clearMatchPoints,
 } = gameSlice.actions;

@@ -2,7 +2,7 @@ import './style.scss';
 import './style-mobile.scss';
 
 import React, { useEffect, useRef, useState } from 'react';
-import { generateNewBoardData, processWord, setAvailableSpace } from '../../features/game/gameSlice';
+import { generateNewBoardData, processWord, setAvailableSpace, setNextMatch } from '../../features/game/gameSlice';
 import { useDispatch, useSelector } from 'react-redux';
 
 import Board from '../board';
@@ -122,17 +122,19 @@ const Game: React.FC = () => {
           setOpenModal={setIsInformationModalOpen}
           callbackAction={() => {
             dispatch(generateNewBoardData());
+            dispatch(setNextMatch());
           }}
         >
           <InformationComponent
             setOpenModal={setIsInformationModalOpen}
             callbackAction={() => {
               dispatch(generateNewBoardData());
+              dispatch(setNextMatch());
             }}
           >
             <h4>Parabéns!!!</h4>
             <br />
-            <h5>Você completou o nivel {gameState.matches - 1}</h5>
+            <h5>Você completou o nivel {gameState.matches}</h5>
           </InformationComponent>
         </InformationModal>
       </main>
