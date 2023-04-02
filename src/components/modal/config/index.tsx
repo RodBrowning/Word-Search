@@ -12,6 +12,7 @@ import {
   setDifficulty as reduxSetDifficulty,
   setLoadThemes as reduxSetLoadThemesState,
   setUseCustom as reduxSetUseCustomState,
+  setUseReverse as reduxSetUseReverseState,
 } from '../../../features/game/gameSlice';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -37,12 +38,14 @@ const ConfigModal: React.FC<Props> = ({ setOpenModal }) => {
     customWordList: gameState.customWords,
     customWordListDisplay: gameState.customWords.join(', '),
     useCustom: gameState.useCustom,
+    useReverse: gameState.useReverse,
     loadThemes: gameState.loadThemes,
   });
 
   const difficultyRef = useRef(gameState.difficult.current);
   const customWordListRef = useRef(gameState.customWords);
   const useCustomRef = useRef(gameState.useCustom);
+  const useReverseRef = useRef(gameState.useReverse);
   const themes = Object.keys(gameState.themes);
   const loadThemesRef = useRef(gameState.loadThemes);
 
@@ -54,6 +57,7 @@ const ConfigModal: React.FC<Props> = ({ setOpenModal }) => {
       dispatch(reduxClearMatchPoints());
     }
     dispatch(reduxSetUseCustomState(useCustomRef.current));
+    dispatch(reduxSetUseReverseState(useReverseRef.current));
     dispatch(reduxSetLoadThemesState(loadThemesRef.current));
     dispatch(reduxGenerateNewBoardData());
   };
@@ -78,6 +82,11 @@ const ConfigModal: React.FC<Props> = ({ setOpenModal }) => {
   const handleUseCustomChanges = (isChecked: boolean) => {
     setConfigState({ ...configState, useCustom: isChecked });
     useCustomRef.current = isChecked;
+  };
+
+  const handleUseReverseChanges = (isReverse: boolean) => {
+    setConfigState({ ...configState, useReverse: isReverse });
+    useReverseRef.current = isReverse;
   };
 
   const handleCustomWordListChanges = (words: string[]) => {
@@ -116,6 +125,7 @@ const ConfigModal: React.FC<Props> = ({ setOpenModal }) => {
     return (
       gameState.difficult.current !== difficultyRef.current ||
       gameState.useCustom !== useCustomRef.current ||
+      gameState.useReverse !== useReverseRef.current ||
       JSON.stringify(gameState.loadThemes) !== JSON.stringify(loadThemesRef.current)
     );
   };
@@ -178,6 +188,24 @@ const ConfigModal: React.FC<Props> = ({ setOpenModal }) => {
           <button type="button">Difícil</button>
         </label>
       </div>
+      <div className="reverse">
+        <h5>Palavras ao contrário</h5>
+        <label htmlFor="use-reverse">
+          <input
+            type="checkbox"
+            name="reverse-checkbox"
+            id="use-reverse"
+            checked={configState.useReverse}
+            onChange={(event) => {
+              handleUseReverseChanges(event.target.checked);
+            }}
+          />
+          <button type="button" className="toggle-button">
+            Incluir
+          </button>
+        </label>
+      </div>
+
       <CustomWordListConfig
         useCustom={configState.useCustom}
         handleUseCustomChanges={handleUseCustomChanges}

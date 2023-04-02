@@ -1,6 +1,4 @@
-/* eslint-disable no-param-reassign */
-
-import IConfig from './configInterface';
+import IConfig from '../types/configInterface';
 import IFeedback from '../types/feedback';
 
 function SearchWordsGame() {
@@ -8,6 +6,7 @@ function SearchWordsGame() {
   let config: IConfig = {
     boardSize: { columns: 15, rows: 15 },
     numberOfWords: undefined,
+    numberOfReverseWords: 0,
     words: [
       'um',
       'dois',
@@ -41,6 +40,7 @@ function SearchWordsGame() {
     ],
     customWords: [],
     useCustom: false,
+    useReverse: false,
   };
   let feedbacks: IFeedback[] = [];
   let feedbackBoard: string[][] = [];
@@ -121,7 +121,7 @@ function SearchWordsGame() {
     position: { row: number; column: number },
     direction: string,
     word: string,
-    index: number = 0
+    index = 0
   ): boolean {
     if (index >= word.length) return true;
     if (board.length - 1 < position.row || position.row < 0) return false;
@@ -141,7 +141,7 @@ function SearchWordsGame() {
     position: { row: number; column: number },
     direction: string,
     word: string,
-    index: number = 0
+    index = 0
   ): string[][] {
     if (index === word.length) return board;
     board[position.row][position.column] = word[index];
@@ -213,6 +213,10 @@ function SearchWordsGame() {
     return shuffled;
   }
 
+  function calculateChanceToBeReversed(remainingWordsToPlace: number, remainingReverseWordsToPlace: number): number {
+    return Math.round((remainingReverseWordsToPlace * 100) / remainingWordsToPlace);
+  }
+
   function fillEmptyCells(board: string[][]): string[][] {
     for (let i = 0; i < board.length; i++) {
       for (let j = 0; j < board[i].length; j++) {
@@ -246,7 +250,7 @@ function SearchWordsGame() {
 
   function populateBoard(pConfig?: IConfig): string[][] {
     const config = setConfig(pConfig);
-    if ((config?.words!.length <= 0 && config.useCustom === false) || config.numberOfWords! <= 0) {
+    if ((config.words!.length <= 0 && config.useCustom === false) || config.numberOfWords! <= 0) {
       throw new Error('Any word to find');
     }
 
@@ -261,21 +265,37 @@ function SearchWordsGame() {
     const words = shuffleWords(wordsArray);
     feedbacks = [];
     let placedWords = 0;
+    let reversePlacedWords = 0;
 
     for (let i = 0; i < words.length; i++) {
       let isPosToPlace = false;
       const word = words[i].toUpperCase();
-      const maxTries = 100;
+      let maxTries = 100;
+
+      if (config.useReverse) {
+        maxTries = 200;
+      }
+      const remainingWordsToPlace = config.numberOfWords! - placedWords;
+      const remainingReverseWordsToPlace = config.numberOfReverseWords! - reversePlacedWords;
+      const chanceToBeReversed = calculateChanceToBeReversed(remainingWordsToPlace, remainingReverseWordsToPlace);
 
       let tries = 0;
       while (!isPosToPlace && tries <= maxTries) {
         const direction = directions[Math.floor(Math.random() * directions.length)];
-        const initPos = getInitialPosition(config.boardSize!, word, direction);
+        let currentWord = word;
 
-        isPosToPlace = isPossibleToPlaceWord(board, { ...initPos }, direction, word);
+        const isReverse = Math.floor(Math.random() * 101) <= chanceToBeReversed;
+        if (config.useReverse && isReverse) currentWord = currentWord.split('').reverse().join('');
+        const initPos = getInitialPosition(config.boardSize!, currentWord, direction);
+
+        isPosToPlace = isPossibleToPlaceWord(board, { ...initPos }, direction, currentWord);
         if (isPosToPlace) {
-          board = placeWordInBoard(board, { ...initPos }, direction, word);
-          setFeedback(initPos, direction, word);
+          board = placeWordInBoard(board, { ...initPos }, direction, currentWord);
+          if (config.useReverse && isReverse) {
+            currentWord = currentWord.split('').reverse().join('');
+            reversePlacedWords += 1;
+          }
+          setFeedback(initPos, direction, currentWord);
           placedWords += 1;
         }
         tries += 1;

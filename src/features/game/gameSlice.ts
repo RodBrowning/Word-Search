@@ -1,4 +1,5 @@
 /* eslint-disable no-param-reassign */
+
 import IGameState from '../../types/state';
 import type { PayloadAction } from '@reduxjs/toolkit';
 import SearchWordGameController from '../../utils/SearchWordGameController';
@@ -22,6 +23,10 @@ export const gameSlice = createSlice({
       if (SWGC.matchHasEnded(state)) {
         state.boardData.matchEnded = true;
         state.matches += 1;
+        if (state.useReverse)
+          state.matchPoints = Math.ceil(
+            state.matchPoints * state.difficult.parameters[state.difficult.current].extraPointsIfincludesReverseWords
+          );
         state.points += state.matchPoints;
         state.matchPoints = 0;
       }
@@ -40,6 +45,9 @@ export const gameSlice = createSlice({
     },
     setUseCustom: (state: IGameState, payloadAction: { payload: boolean }) => {
       state.useCustom = payloadAction.payload;
+    },
+    setUseReverse: (state: IGameState, payloadAction: { payload: boolean }) => {
+      state.useReverse = payloadAction.payload;
     },
     setLoadThemes: (state: IGameState, payloadAction: { payload: string[] }) => {
       state.loadThemes = payloadAction.payload;
@@ -65,6 +73,7 @@ export const {
   setDifficulty,
   setCustomWords,
   setUseCustom,
+  setUseReverse,
   setLoadThemes,
   resetGame,
   setMatchPoints,

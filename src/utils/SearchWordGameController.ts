@@ -1,7 +1,5 @@
 import IFeedback from '../types/feedback';
-/* eslint-disable import/order */
 import IGameState from '../types/state';
-/* eslint-disable no-param-reassign */
 import SearchWordsGame from './SearchWordGame';
 
 function SearchWordGameController() {
@@ -69,6 +67,11 @@ function SearchWordGameController() {
     return finalNumberOfWords;
   }
 
+  function getNumberOfReverseWords(state: IGameState, numberOfWords: number) {
+    const percentageOfGameProgress = Math.round((state.matches * 100) / state.matchesLimit);
+    return Math.round((percentageOfGameProgress / 100) * numberOfWords);
+  }
+
   function getWordsByLength(state: IGameState, words: string[]) {
     const reductionPoint = Math.floor(state.matchesLimit * 0.8);
     const lastMatches = state.matchesLimit - reductionPoint;
@@ -124,12 +127,18 @@ function SearchWordGameController() {
     const boardSize = getBoardSize(state);
     const numberOfWords = getNumberOfWords(state);
     const filteredWords = getWordsByLength(state, words);
+    let numberOfReverseWords = 0;
+    if (state.useReverse) {
+      numberOfReverseWords = getNumberOfReverseWords(state, numberOfWords) || 1;
+    }
 
     const config = {
       boardSize,
       numberOfWords,
+      numberOfReverseWords,
       words: filteredWords,
       useCustom: state.useCustom,
+      useReverse: state.useReverse,
       customWords: state.customWords,
     };
     state.boardData.board = searchWordsGame.getBoard(config);

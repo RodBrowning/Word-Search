@@ -25,4 +25,17 @@
       width: 100%;
     }
   }
+  .reverse {
+    display: flex;
+    flex-wrap: wrap;
+    column-gap: 8px;
+    h5 {
+      width: unset;
+      flex: 2;
+    }
+    button {
+      padding: 0 24px;
+      min-height: 32px;
+    }
+  }
 }

@@ -11,11 +11,13 @@ export default interface IGameState {
         wordsGrowthFactor: number;
         wordsLengthFactor: number;
         pointsByFoundWord: number;
+        extraPointsIfincludesReverseWords: number;
       };
     };
   };
   customWords: string[];
   useCustom: boolean;
+  useReverse: boolean;
   loadThemes: string[];
   themes: ITheme;
   availableSpace: number;
