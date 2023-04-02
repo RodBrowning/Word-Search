@@ -24,7 +24,7 @@ export const gameSlice = createSlice({
         state.boardData.matchEnded = true;
         if (state.useReverse)
           state.matchPoints = Math.ceil(
-            state.matchPoints * state.difficult.parameters[state.difficult.current].extraPointsIfincludesReverseWords
+            state.matchPoints * state.difficult.parameters[state.difficult.current].reverseWordsExtraPoints
           );
         state.points += state.matchPoints;
         state.matchPoints = 0;

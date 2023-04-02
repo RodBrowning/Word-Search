@@ -11,7 +11,7 @@ export default interface IGameState {
         wordsGrowthFactor: number;
         wordsLengthFactor: number;
         pointsByFoundWord: number;
-        extraPointsIfincludesReverseWords: number;
+        reverseWordsExtraPoints: number;
       };
     };
   };
