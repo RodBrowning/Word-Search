@@ -3,6 +3,7 @@ import './style-mobile.scss';
 
 import React, { useEffect, useRef, useState } from 'react';
 import { generateNewBoardData, processWord, setAvailableSpace, setNextMatch } from '../../features/game/gameSlice';
+// eslint-disable-next-line import/order
 import { useDispatch, useSelector } from 'react-redux';
 
 import Board from '../board';
@@ -10,6 +11,7 @@ import BoardSelector from '../BoardSelector';
 import ConfigModal from '../modal/config';
 import InformationComponent from '../modal/info/informationComponent';
 import InformationModal from '../modal/info/informationModal';
+// eslint-disable-next-line import/order
 import { Link } from 'react-router-dom';
 import Modal from '../modal/modal';
 import { RootState } from '../../app/store';

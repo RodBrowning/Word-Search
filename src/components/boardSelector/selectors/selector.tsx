@@ -1,3 +1,4 @@
+// eslint-disable-next-line import/order
 import { calculateHypotenuse, getDirection, getWordLength } from '../utils/utils';
 
 import React from 'react';

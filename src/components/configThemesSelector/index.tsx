@@ -7,6 +7,7 @@ interface Props {
   themes: string[];
   loadThemes: string[];
   useCustom: boolean;
+  // eslint-disable-next-line no-unused-vars
   handleLoadThemes: (target: HTMLInputElement) => void;
 }
 

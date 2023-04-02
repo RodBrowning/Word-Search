@@ -9,10 +9,20 @@ interface Props {
 }
 
 const MobileNav: React.FC<Props> = ({ setIsOpen }) => {
+  const closeModal = () => {
+    setIsOpen(false);
+  };
+
+  const handleKeyDown = (event: React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement>) => {
+    if (event.key === 'Enter' || event.key === ' ') {
+      closeModal();
+    }
+  };
+
   return (
     <div id="mobile-nav">
       <nav>
-        <menu onClick={() => setIsOpen(false)}>
+        <div onClick={closeModal} onKeyDown={handleKeyDown} role="button" tabIndex={0}>
           <NavLink
             className={({ isActive }) => {
               return isActive ? 'active' : undefined;
@@ -45,7 +55,7 @@ const MobileNav: React.FC<Props> = ({ setIsOpen }) => {
           >
             Contato
           </NavLink>
-        </menu>
+        </div>
       </nav>
     </div>
   );

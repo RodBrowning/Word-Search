@@ -1,6 +1,7 @@
 import { Layer, Stage } from 'react-konva';
 
 import IFeedback from '../../../types/feedback';
+// eslint-disable-next-line import/order
 import React from 'react';
 import Selector from '../selectors/selector';
 
@@ -21,7 +22,7 @@ const FoundWordsStage: React.FC<Props> = ({ feedbacks, columnWidth, rowHeight, s
             <Selector
               columnWidth={columnWidth}
               rowHeight={rowHeight}
-              color={feedback.color}
+              color={feedback.color!}
               position={{
                 initialRow: feedback.position.initial.row,
                 initialColumn: feedback.position.initial.column,

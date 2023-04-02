@@ -6,6 +6,7 @@ import { getDirection, getWordLength } from '../utils/utils';
 
 import IFeedback from '../../../types/feedback';
 import Selector from '../selectors/selector';
+// eslint-disable-next-line import/order
 import colors from './colors';
 import useSessionStorage from '../../../utils/customHooks/useSessionStorage';
 
@@ -15,6 +16,7 @@ interface Props {
   rowHeight: number;
   stageWidth: number;
   stageHeight: number;
+  // eslint-disable-next-line no-unused-vars
   handleFoundWord?: (word: string, color: string) => void;
 }
 
@@ -258,6 +260,10 @@ const SelectorStage: React.FC<Props> = ({
       <Layer>{selector}</Layer>
     </Stage>
   );
+};
+
+SelectorStage.defaultProps = {
+  handleFoundWord: () => {},
 };
 
 export default SelectorStage;

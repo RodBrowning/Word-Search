@@ -6,8 +6,9 @@ import './App-mobile.scss';
 import Footer from './components/footer';
 import Header from './components/header';
 import Panel from './components/panel';
+import React from 'react';
 
-const App = () => {
+const App: React.FC = () => {
   return (
     <div className="App">
       <Header />

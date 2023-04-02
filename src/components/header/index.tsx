@@ -5,10 +5,20 @@ import React, { useState } from 'react';
 
 import MobileNav from '../mobileNav/MobileNav';
 import Modal from '../modal/modal';
+// eslint-disable-next-line import/order
 import { NavLink } from 'react-router-dom';
 
 const Header: React.FC = () => {
   const [open, setOpen] = useState(false);
+  const closeModal = () => {
+    setOpen(true);
+  };
+
+  const handleKeyDown = (event: React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement>) => {
+    if (event.key === 'Enter' || event.key === ' ') {
+      closeModal();
+    }
+  };
   return (
     <header>
       <div className="inner-header">
@@ -59,7 +69,10 @@ const Header: React.FC = () => {
 
         <svg
           className="menu-btn"
-          onClick={() => setOpen(true)}
+          onClick={closeModal}
+          onKeyDown={handleKeyDown}
+          role="button"
+          tabIndex={0}
           width="30"
           height="25"
           viewBox="0 0 30 25"

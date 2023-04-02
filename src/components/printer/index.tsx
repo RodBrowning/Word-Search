@@ -6,8 +6,10 @@ import React, { useEffect, useRef, useState } from 'react';
 import Board from '../board';
 import FeedbackBoard from '../feedbackBoard';
 import IFeedback from '../../types/feedback';
+// eslint-disable-next-line import/order
 import PrinterConfigPanel from './configPanel';
 import WordList from '../feedbackWordList';
+// eslint-disable-next-line import/order
 import { useReactToPrint } from 'react-to-print';
 
 const Printer: React.FC = () => {
@@ -29,8 +31,12 @@ const Printer: React.FC = () => {
   };
 
   const callPrinter = useReactToPrint({
-    content: () => componentRef.current,
-    onAfterPrint: () => setTriggerPrinter(false),
+    content: () => {
+      return componentRef.current;
+    },
+    onAfterPrint: () => {
+      return setTriggerPrinter(false);
+    },
   });
 
   // Effects
@@ -74,10 +80,10 @@ const Printer: React.FC = () => {
         {/* Only if more than one board */}
         {showAllBoards
           ? boardsToPrintArray.map((newBoard, i) => {
-              if (i === 0) return;
+              if (i === 0) return undefined;
               return (
                 <>
-                  <div className="print-board no-split page-break" key={JSON.stringify(newBoard.feedbacks)}>
+                  <div className="print-board no-split page-break" key={JSON.stringify(newBoard.board)}>
                     <WordList feedbacks={newBoard.feedbacks} />
                     <div className="board-container">
                       <Board board={newBoard.board} />
@@ -86,7 +92,7 @@ const Printer: React.FC = () => {
                   {/* .feedback-board is generating unique key prop error */}
                   <div
                     className={`feedback-board page-break ${printFeedbacks ? 'include-feedback' : ''}`}
-                    key={JSON.stringify(newBoard.feedbackBoard)}
+                    key={JSON.stringify(newBoard.feedbacks)}
                   >
                     <FeedbackBoard board={newBoard.feedbackBoard} />
                   </div>
@@ -97,7 +103,13 @@ const Printer: React.FC = () => {
 
         {!showAllBoards && boardsToPrintArray.length > 1 ? (
           <div className="show-all-boards">
-            <button className="load-more" onClick={() => setShowAllBoards(true)}>
+            <button
+              className="load-more"
+              onClick={() => {
+                return setShowAllBoards(true);
+              }}
+              type="button"
+            >
               Mostrar mais
             </button>
           </div>

@@ -4,12 +4,14 @@ import React, { ReactNode, useEffect, useRef, useState } from 'react';
 
 import FoundWordsStage from './foundWordsLayer';
 import IFeedback from '../../types/feedback';
+// eslint-disable-next-line import/order
 import SelectorStage from './selectorLayer';
 
 interface Props {
   board: string[][];
   feedbacks: IFeedback[];
   children: ReactNode;
+  // eslint-disable-next-line no-unused-vars
   handleFoundWord?: (word: string, color: string) => void;
 }
 
@@ -97,6 +99,10 @@ const BoardSelector: React.FC<Props> = ({ board, feedbacks, children, handleFoun
       {children}
     </div>
   );
+};
+
+BoardSelector.defaultProps = {
+  handleFoundWord: () => {},
 };
 
 export default BoardSelector;

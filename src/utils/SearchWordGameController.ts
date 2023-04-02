@@ -1,3 +1,4 @@
+/* eslint-disable no-param-reassign */
 import IFeedback from '../types/feedback';
 import IGameState from '../types/state';
 import SearchWordsGame from './SearchWordGame';

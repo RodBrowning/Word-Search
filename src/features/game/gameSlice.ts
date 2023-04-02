@@ -1,9 +1,10 @@
 /* eslint-disable no-param-reassign */
 
 import IGameState from '../../types/state';
-import type { PayloadAction } from '@reduxjs/toolkit';
 import SearchWordGameController from '../../utils/SearchWordGameController';
+// eslint-disable-next-line import/order
 import { createSlice } from '@reduxjs/toolkit';
+// eslint-disable-next-line import/order
 import initialState from './initialState';
 
 const SWGC = SearchWordGameController();

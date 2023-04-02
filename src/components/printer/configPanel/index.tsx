@@ -10,18 +10,19 @@ import RangeInputComponent from '../../rangeInputComponent';
 import { RootState } from '../../../app/store';
 import SearchWordsGame from '../../../utils/SearchWordGame';
 import ThemesSelector from '../../configThemesSelector';
+// eslint-disable-next-line import/order
 import { useSelector } from 'react-redux';
 import useSessionStorage from '../../../utils/customHooks/useSessionStorage';
 
+type setBoardsToPrintParam = {
+  board: string[][];
+  feedbacks: IFeedback[];
+  feedbackBoard: string[][];
+};
 interface Props {
   handlePrint: () => void;
-  setBoardsToPrintArray: (
-    boardsToPrint: {
-      board: string[][];
-      feedbacks: IFeedback[];
-      feedbackBoard: string[][];
-    }[]
-  ) => void;
+  // eslint-disable-next-line no-unused-vars
+  setBoardsToPrintArray: (BoardsToPrintParam: setBoardsToPrintParam[]) => void;
   setPrintFeedbacks: React.Dispatch<React.SetStateAction<boolean>>;
   setShowAllBoards: React.Dispatch<React.SetStateAction<boolean>>;
 }
@@ -34,8 +35,10 @@ const PrinterConfigPanel: React.FC<Props> = ({
 }) => {
   // Variables
   const gameBoard = SearchWordsGame();
-  const gameState = useSelector((state: RootState) => state.game);
-  const themes = gameState.themes;
+  const gameState = useSelector((state: RootState) => {
+    return state.game;
+  });
+  const { themes } = gameState;
   const themesTitles = Object.keys(themes);
   const minCustomWordsLength = 5;
 
@@ -96,7 +99,7 @@ const PrinterConfigPanel: React.FC<Props> = ({
     for (let index = 0; index < numberOfBoards; index++) {
       const newBoard = gameBoard.getBoard({
         boardSize: { columns, rows },
-        useCustom: useCustom,
+        useCustom,
         useReverse: printSession.useReverse,
         customWords,
         numberOfWords,
@@ -119,7 +122,9 @@ const PrinterConfigPanel: React.FC<Props> = ({
   // Effects
   useLayoutEffect(() => {
     const newWords: string[] = [];
-    themesToLoad.map((themeTitle) => newWords.push(...themes[themeTitle]));
+    themesToLoad.map((themeTitle) => {
+      return newWords.push(...themes[themeTitle]);
+    });
     setWords(newWords);
   }, [themesToLoad]);
 
@@ -148,7 +153,7 @@ const PrinterConfigPanel: React.FC<Props> = ({
           defaultValue={printSession.columns}
           setInputValue={(columns: number) => {
             setColumns(columns);
-            setPrintSession({ ...printSession, columns: columns });
+            setPrintSession({ ...printSession, columns });
           }}
         />
         <RangeInputComponent
@@ -159,7 +164,7 @@ const PrinterConfigPanel: React.FC<Props> = ({
           defaultValue={printSession.rows}
           setInputValue={(rows: number) => {
             setRows(rows);
-            setPrintSession({ ...printSession, rows: rows });
+            setPrintSession({ ...printSession, rows });
           }}
         />
         <RangeInputComponent
@@ -235,9 +240,11 @@ const PrinterConfigPanel: React.FC<Props> = ({
             name="withAnswers"
             id="answers-checkbox"
           />
-          <button className="toggle-button">Incluir gabarito</button>
+          <button type="button" className="toggle-button">
+            Incluir gabarito
+          </button>
         </label>
-        <button className="toggle-button" onClick={handlePrint}>
+        <button type="button" className="toggle-button" onClick={handlePrint}>
           Imprimir
         </button>
       </div>

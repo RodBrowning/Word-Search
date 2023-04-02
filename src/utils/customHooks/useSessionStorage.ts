@@ -1,15 +1,5 @@
 import { Dispatch, SetStateAction, useEffect, useState } from 'react';
 
-// type initValType = {
-//   useCustom: boolean;
-//   themesToLoad: string[];
-//   customWords: string[];
-//   columns: number;
-//   rows: number;
-//   numberOfWords: number;
-//   numberOfBoards: number;
-//   showFeedbacks: boolean;
-// };
 type UseSessionStorageReturnType<T> = [T, Dispatch<SetStateAction<T>>, boolean, Error | null];
 
 const useSessionStorage = <T>(key: string, initialValue: T): UseSessionStorageReturnType<T> => {

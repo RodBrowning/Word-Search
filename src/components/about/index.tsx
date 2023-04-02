@@ -1,11 +1,10 @@
 import './style.scss';
 import './style-mobile.scss';
 
-// eslint-disable-next-line import/order
 import React, { useState } from 'react';
 
 import Board from '../board';
-import BoardSelector from '../BoardSelector';
+import BoardSelector from '../boardSelector';
 import SearchWordsGame from '../../utils/SearchWordGame';
 
 const About: React.FC = () => {
@@ -24,7 +23,7 @@ const About: React.FC = () => {
         return {
           ...feedback,
           found: true,
-          color: color,
+          color,
         };
       }
       return feedback;
@@ -47,7 +46,7 @@ const About: React.FC = () => {
         return {
           ...feedback,
           found: true,
-          color: color,
+          color,
         };
       }
       return feedback;

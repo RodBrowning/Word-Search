@@ -2,6 +2,7 @@ import './style.scss';
 import './style-mobile.scss';
 
 import IFeedback from '../../types/feedback';
+// eslint-disable-next-line import/order
 import React from 'react';
 
 interface Props {

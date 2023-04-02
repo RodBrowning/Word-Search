@@ -5,8 +5,10 @@ import React, { useState } from 'react';
 
 interface Props {
   useCustom: boolean;
+  // eslint-disable-next-line no-unused-vars
   handleUseCustomChanges: (isChecked: boolean) => void;
   customWordList: string[];
+  // eslint-disable-next-line no-unused-vars
   handleCustomWordListChanges: (uniqueWords: string[]) => void;
   loadThemesLength: number;
   cols: number;

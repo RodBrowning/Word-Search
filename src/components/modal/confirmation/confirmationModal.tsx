@@ -10,13 +10,23 @@ interface Props {
 const ConfirmationModal: React.FC<Props> = ({ children, isOpen, setOpenModal }) => {
   if (!isOpen) return null;
 
+  const closeModal = () => {
+    setOpenModal(false);
+  };
+
+  const handleClick = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+    const target = e.target as HTMLButtonElement;
+    if (target.id! === 'confirmation-wrapper') closeModal();
+  };
+
+  const handleKeyDown = (event: React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement>) => {
+    if (event.key === 'Enter' || event.key === ' ') {
+      closeModal();
+    }
+  };
+
   return ReactDOM.createPortal(
-    <div
-      id="confirmation-wrapper"
-      onClick={(e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
-        if (e.target.id! === 'confirmation-wrapper') setOpenModal(false);
-      }}
-    >
+    <div id="confirmation-wrapper" onClick={handleClick} onKeyDown={handleKeyDown} role="button" tabIndex={0}>
       {children}
     </div>,
     document.getElementById('confirmation-modal')!

@@ -9,6 +9,7 @@ interface Props {
   min: number;
   max: number;
   defaultValue: number;
+  // eslint-disable-next-line no-unused-vars
   setInputValue: (value: number) => void;
 }
 
@@ -48,7 +49,9 @@ const RangeInputComponent: React.FC<Props> = ({ name, labelText, min, max, defau
         <div className="input-range">
           <input
             type="range"
-            onChange={(e) => handleChange(e.target)}
+            onChange={(e) => {
+              return handleChange(e.target);
+            }}
             style={{ backgroundSize: `${percentage}% 100%` }}
             value={defaultValue}
             min={min}

@@ -1,3 +1,4 @@
+/* eslint-disable no-param-reassign */
 import IConfig from '../types/configInterface';
 import IFeedback from '../types/feedback';
 
@@ -261,6 +262,7 @@ function SearchWordsGame() {
     } else {
       wordsSet = new Set(config.words!);
     }
+
     const wordsArray = [...wordsSet];
     const words = shuffleWords(wordsArray);
     feedbacks = [];

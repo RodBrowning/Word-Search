@@ -1,6 +1,7 @@
 import './style.scss';
 
 import Board from '../board';
+// eslint-disable-next-line import/order
 import React from 'react';
 
 interface Props {
