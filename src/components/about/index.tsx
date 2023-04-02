@@ -11,6 +11,7 @@ const About: React.FC = () => {
   const deskGame = SearchWordsGame();
   const deskBoard = deskGame.getBoard({
     boardSize: { columns: 10, rows: 15 },
+    words: [],
     useCustom: true,
     customWords: ['caça', 'palavras', 'criança', 'aprender', 'memoria', 'futuro', 'sorte', 'santos'],
   });
