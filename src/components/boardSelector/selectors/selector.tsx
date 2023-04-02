@@ -58,7 +58,7 @@ const Selector: React.FC<Props> = ({ columnWidth, rowHeight, color, position }) 
       height = selectorWidth;
       xPosition = columnWidth * posX + (columnWidth - selectorWidth) / 2;
       yPosition = rowHeight * posY + (rowHeight - selectorWidth) / 2;
-      offset = isReverse ? { x: rowHeight - selectorWidth, y: 0 } : { x: 0, y: 0 };
+      offset = isReverse ? { x: columnWidth - selectorWidth, y: 0 } : { x: 0, y: 0 };
       break;
 
     case undefined:
@@ -67,6 +67,18 @@ const Selector: React.FC<Props> = ({ columnWidth, rowHeight, color, position }) 
       xPosition = columnWidth * posX + (columnWidth - selectorWidth) / 2;
       yPosition = rowHeight * posY + (rowHeight - selectorWidth) / 2;
       offset = { x: 0, y: 0 };
+      break;
+
+    default:
+      break;
+  }
+
+  switch (direction) {
+    case 'downLeft':
+      offset = { x: -1, y: 1 };
+      break;
+    case 'upLeft':
+      offset = { x: -1, y: -1 };
       break;
 
     default:
