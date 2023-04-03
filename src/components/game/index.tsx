@@ -3,7 +3,6 @@ import './style-mobile.scss';
 
 import React, { useEffect, useRef, useState } from 'react';
 import {
-  clearMatchPoints,
   generateNewBoardData,
   processWord,
   setAvailableSpace,
@@ -56,7 +55,6 @@ const Game: React.FC = () => {
   function updateBoard() {
     const availableSpace = availableSizeRef.current?.clientWidth;
     dispatch(setAvailableSpace(availableSpace));
-    dispatch(clearMatchPoints());
     dispatch(generateNewBoardData());
   }
 
@@ -96,7 +94,6 @@ const Game: React.FC = () => {
               if (isFeedbacksHidden) {
                 dispatch(setHiddenWords(false));
               } else {
-                dispatch(clearMatchPoints());
                 dispatch(generateNewBoardData());
                 dispatch(setHiddenWords(true));
               }

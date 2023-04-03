@@ -16,6 +16,7 @@ export const gameSlice = createSlice({
     generateNewBoardData: (state: IGameState) => {
       state.boardData.matchEnded = false;
       state.gameEnded = false;
+      state.matchPoints = 0;
       state.boardData = SWGC.getBoardData(state);
     },
     processWord: (state: IGameState, payloadAction: { payload: { word: string; color: string } }) => {

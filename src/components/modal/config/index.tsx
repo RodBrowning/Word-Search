@@ -5,7 +5,6 @@ import './style-mobile.scss';
 
 import React, { useEffect, useRef, useState } from 'react';
 import {
-  clearMatchPoints as reduxClearMatchPoints,
   generateNewBoardData as reduxGenerateNewBoardData,
   resetGame as reduxResetGame,
   setCustomWords as reduxSetCustomWords,
@@ -54,7 +53,6 @@ const ConfigModal: React.FC<Props> = ({ setOpenModal }) => {
   const dispatchConfigChanges = () => {
     if (gameState.difficult.current !== difficultyRef.current) {
       dispatch(reduxSetDifficulty(difficultyRef.current));
-      dispatch(reduxClearMatchPoints());
     }
     dispatch(reduxSetUseCustomState(useCustomRef.current));
     dispatch(reduxSetUseReverseState(useReverseRef.current));
