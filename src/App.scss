@@ -1,6 +1,26 @@
-@use '/src/scss/variables/colors';
+@use '/src/scss/variables/colors' as colors;
 @use '/src/scss/fonts';
 
 .App {
   height: 100%;
+}
+
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 5px colors.$quaternary;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: colors.$gradient;
+  border-radius: 10px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: colors.$primary;
 }
