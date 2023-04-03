@@ -8,46 +8,7 @@
       grid-column: 1 / 13;
       margin-bottom: 32px;
       menu {
-        display: flex;
-        gap: 24px;
-        padding-inline-start: 0px;
-        margin: 0;
-        button {
-          position: relative;
-          display: flex;
-          padding: 0;
-          border: 0;
-          cursor: pointer;
-          background-color: transparent;
-          transition: all 0.15s ease-in-out;
-          &:hover,
-          &.active {
-            transform: scale(0.9);
-            &:before {
-              width: 200%;
-              height: 200%;
-            }
-            svg > path {
-              fill: mainStyle.$tertiary;
-            }
-          }
-          &:before {
-            position: absolute;
-            content: '';
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 0;
-            height: 0;
-            border-radius: 50%;
-            z-index: -1;
-            background: mainStyle.$primary;
-            transition: all 0.15s ease-in-out;
-          }
-          svg > path {
-            transition: all 0.15s ease-in-out;
-          }
-        }
+        padding-inline-start: 4px;
       }
     }
     main {
@@ -59,27 +20,6 @@
         text-align: left;
         &::before {
           left: -29px;
-        }
-        .pontos {
-          span {
-            font-weight: 700;
-            &:first-child {
-              font-size: mainStyle.$h1-size;
-              color: mainStyle.$primary;
-            }
-            &:last-child {
-              font-size: mainStyle.$h3-size;
-              color: mainStyle.$black;
-            }
-          }
-        }
-        .nivel {
-          margin-top: 16px;
-          span {
-            font-size: mainStyle.$h4-size;
-            color: mainStyle.$secondary;
-            font-weight: 700;
-          }
         }
       }
     }
