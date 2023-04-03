@@ -169,7 +169,7 @@ const PrinterConfigPanel: React.FC<Props> = ({
         />
         <RangeInputComponent
           name="numOfBoards"
-          labelText="Numero de Quadros"
+          labelText="Numero de quadros"
           min={1}
           max={20}
           defaultValue={printSession.numberOfBoards}
@@ -244,7 +244,7 @@ const PrinterConfigPanel: React.FC<Props> = ({
             Incluir gabarito
           </button>
         </label>
-        <button type="button" className="toggle-button" onClick={handlePrint}>
+        <button type="button" className="btn-printer" onClick={handlePrint}>
           Imprimir
         </button>
       </div>
