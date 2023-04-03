@@ -33,7 +33,7 @@ const WordList: React.FC<Props> = ({ feedbacks, blurFeedbaks }) => {
 };
 
 WordList.defaultProps = {
-  blurFeedbaks: true,
+  blurFeedbaks: false,
 };
 
 export default WordList;
