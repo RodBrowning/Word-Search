@@ -1,6 +1,7 @@
 /* eslint-disable no-param-reassign */
 import IFeedback from '../types/feedback';
 import IGameState from '../types/state';
+// eslint-disable-next-line import/order
 import SearchWordsGame from './SearchWordGame';
 
 function SearchWordGameController() {
@@ -45,13 +46,13 @@ function SearchWordGameController() {
     const inicialWordNumber = 5;
     const maxWordsNumber = 20;
     const wordsToPlace = maxWordsNumber - inicialWordNumber;
-    const reductionPoint = Math.floor(state.matchesLimit * 0.8);
+    const reductionPoint = Math.floor(state.matchesLimit * 0.65);
     const lastMatches = state.matchesLimit - reductionPoint;
 
     let numberOfWordsToAdd = Math.floor(state.matches / (reductionPoint / wordsToPlace) + inicialWordNumber);
     numberOfWordsToAdd = numberOfWordsToAdd > maxWordsNumber ? maxWordsNumber : numberOfWordsToAdd;
 
-    // remove words after reductionPoint, in this case 80% of the total game matches.
+    // remove words after reductionPoint, in this case 65% of the total game matches.
     const matchesAfterReductionPoint = lastMatches - (state.matchesLimit - state.matches);
     const matchesToRemoveOneWord = lastMatches / (wordsToPlace + inicialWordNumber);
 

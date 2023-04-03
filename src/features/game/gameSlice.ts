@@ -30,7 +30,7 @@ export const gameSlice = createSlice({
           state.matchPoints = Math.ceil(
             state.matchPoints * state.difficult.parameters[state.difficult.current].hiddenWordsExtraPoints
           );
-        state.points += state.matchPoints;
+        state.points += state.matchPoints * state.matches;
         state.matchPoints = 0;
       }
       if (SWGC.gameHasEnded(state)) {

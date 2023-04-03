@@ -42,7 +42,7 @@ const initialState: IGameState = {
   hideFeedbacks: false,
   matchPoints: 0,
   matches: 1,
-  matchesLimit: 50,
+  matchesLimit: 100,
   gameEnded: false,
   boardData: {
     board: [],

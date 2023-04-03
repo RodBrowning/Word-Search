@@ -141,7 +141,7 @@ const Game: React.FC = () => {
         <div className="placar">
           <div className="pontos">
             <h4>
-              <span>{String(gameState.points + gameState.matchPoints).padStart(2, '0')}</span> <span>Pontos</span>
+              <span>{(gameState.points + gameState.matchPoints).toLocaleString(userLocale)}</span> <span>Pontos</span>
             </h4>
           </div>
           <div className="nivel">
