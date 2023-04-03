@@ -15,6 +15,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import Board from '../board';
 import BoardSelector from '../boardSelector';
 import ConfigModal from '../modal/config';
+import IFeedback from '../../types/feedback';
 import InformationComponent from '../modal/info/informationComponent';
 import InformationModal from '../modal/info/informationModal';
 // eslint-disable-next-line import/order
@@ -34,6 +35,14 @@ const Game: React.FC = () => {
     return state.game;
   });
   const dispatch = useDispatch();
+
+  const remainingWordsReducer = (total: number, feedback: IFeedback) => {
+    return feedback.found ? total - 1 : total;
+  };
+  const remainingWords = gameState.boardData.feedbacks.reduce(
+    remainingWordsReducer,
+    gameState.boardData.feedbacks.length
+  );
 
   useEffect(() => {
     const availableSpace = availableSizeRef.current?.clientWidth;
@@ -122,7 +131,9 @@ const Game: React.FC = () => {
           </Link>
         </menu>
         <div className="words">
-          <h3>Palavras</h3>
+          <h3>
+            {remainingWords > 0 ? `${remainingWords} ${remainingWords > 1 ? 'Palavras' : 'Palavra'}` : 'Palavras'}
+          </h3>
           <WordList feedbacks={gameState.boardData.feedbacks} blurFeedbaks={isFeedbacksHidden} />
         </div>
       </aside>
