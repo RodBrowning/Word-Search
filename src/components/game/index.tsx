@@ -56,6 +56,7 @@ const Game: React.FC = () => {
   function updateBoard() {
     const availableSpace = availableSizeRef.current?.clientWidth;
     dispatch(setAvailableSpace(availableSpace));
+    dispatch(clearMatchPoints());
     dispatch(generateNewBoardData());
   }
 
