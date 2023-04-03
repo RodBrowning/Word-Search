@@ -2,12 +2,19 @@ import './style.scss';
 import './style-mobile.scss';
 
 import React, { useEffect, useRef, useState } from 'react';
-import { generateNewBoardData, processWord, setAvailableSpace, setNextMatch } from '../../features/game/gameSlice';
+import {
+  clearMatchPoints,
+  generateNewBoardData,
+  processWord,
+  setAvailableSpace,
+  setHiddenWords,
+  setNextMatch,
+} from '../../features/game/gameSlice';
 // eslint-disable-next-line import/order
 import { useDispatch, useSelector } from 'react-redux';
 
 import Board from '../board';
-import BoardSelector from '../BoardSelector';
+import BoardSelector from '../boardSelector';
 import ConfigModal from '../modal/config';
 import InformationComponent from '../modal/info/informationComponent';
 import InformationModal from '../modal/info/informationModal';
@@ -17,9 +24,12 @@ import Modal from '../modal/modal';
 import { RootState } from '../../app/store';
 import WordList from '../feedbackWordList';
 
+const userLocale = navigator.language;
+
 const Game: React.FC = () => {
   const availableSizeRef = useRef<HTMLElement>() as React.MutableRefObject<HTMLInputElement>;
   const [isConfigModalOpen, setIsConfigModalOpen] = useState(false);
+  const [isFeedbacksHidden, setIsFeedbacksHidden] = useState(false);
   const [isInformationModalOpen, setIsInformationModalOpen] = useState(false);
   const gameState = useSelector((state: RootState) => {
     return state.game;
@@ -78,6 +88,27 @@ const Game: React.FC = () => {
               />
             </svg>
           </button>
+          <button
+            className={`game-menu-action-button ${isFeedbacksHidden && 'active'}`}
+            type="button"
+            onClick={() => {
+              if (isFeedbacksHidden) {
+                dispatch(setHiddenWords(false));
+              } else {
+                dispatch(clearMatchPoints());
+                dispatch(generateNewBoardData());
+                dispatch(setHiddenWords(true));
+              }
+              setIsFeedbacksHidden(!isFeedbacksHidden);
+            }}
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 20 20">
+              <path
+                fill="#000"
+                d="m12.81 4.36l-1.77 1.78a4 4 0 0 0-4.9 4.9l-2.76 2.75C2.06 12.79.96 11.49.2 10a11 11 0 0 1 12.6-5.64zm3.8 1.85c1.33 1 2.43 2.3 3.2 3.79a11 11 0 0 1-12.62 5.64l1.77-1.78a4 4 0 0 0 4.9-4.9l2.76-2.75zm-.25-3.99l1.42 1.42L3.64 17.78l-1.42-1.42L16.36 2.22z"
+              />
+            </svg>
+          </button>
           <Link to="imprimir">
             <button className="game-menu-action-button" type="button">
               <svg width="21" height="21" viewBox="0 0 21 21" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -93,7 +124,7 @@ const Game: React.FC = () => {
         </menu>
         <div className="words">
           <h3>Palavras</h3>
-          <WordList feedbacks={gameState.boardData.feedbacks} />
+          <WordList feedbacks={gameState.boardData.feedbacks} blurFeedbaks={isFeedbacksHidden} />
         </div>
       </aside>
       <main ref={availableSizeRef}>

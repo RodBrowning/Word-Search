@@ -12,6 +12,7 @@ export default interface IGameState {
         wordsLengthFactor: number;
         pointsByFoundWord: number;
         reverseWordsExtraPoints: number;
+        hiddenWordsExtraPoints: number;
       };
     };
   };
@@ -21,6 +22,7 @@ export default interface IGameState {
   loadThemes: string[];
   themes: ITheme;
   availableSpace: number;
+  hideFeedbacks: boolean;
   matchPoints: number;
   matches: number;
   matchesLimit: number;

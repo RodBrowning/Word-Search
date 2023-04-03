@@ -38,6 +38,9 @@
           background-color: mainStyle.$secondary;
           z-index: -1;
         }
+        &.blur-feedbacks {
+          filter: blur(5px);
+        }
       }
     }
   }

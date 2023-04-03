@@ -19,13 +19,16 @@ export const gameSlice = createSlice({
       state.boardData = SWGC.getBoardData(state);
     },
     processWord: (state: IGameState, payloadAction: { payload: { word: string; color: string } }) => {
-      // eslint-disable-next-line array-callback-return
       state = SWGC.processWord(state, payloadAction.payload);
       if (SWGC.matchHasEnded(state)) {
         state.boardData.matchEnded = true;
         if (state.useReverse)
           state.matchPoints = Math.ceil(
             state.matchPoints * state.difficult.parameters[state.difficult.current].reverseWordsExtraPoints
+          );
+        if (state.hideFeedbacks)
+          state.matchPoints = Math.ceil(
+            state.matchPoints * state.difficult.parameters[state.difficult.current].hiddenWordsExtraPoints
           );
         state.points += state.matchPoints;
         state.matchPoints = 0;
@@ -55,6 +58,9 @@ export const gameSlice = createSlice({
     setNextMatch: (state: IGameState) => {
       state.matches += 1;
     },
+    setHiddenWords: (state: IGameState, payloadAction: { payload: boolean }) => {
+      state.hideFeedbacks = payloadAction.payload;
+    },
     setMatchPoints: (state: IGameState, payloadAction: { payload: number }) => {
       state.matchPoints += payloadAction.payload;
     },
@@ -80,6 +86,7 @@ export const {
   setLoadThemes,
   resetGame,
   setNextMatch,
+  setHiddenWords,
   setMatchPoints,
   clearMatchPoints,
 } = gameSlice.actions;

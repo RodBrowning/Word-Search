@@ -7,16 +7,21 @@ import React from 'react';
 
 interface Props {
   feedbacks: IFeedback[];
+  blurFeedbaks?: boolean;
 }
 
-const WordList: React.FC<Props> = ({ feedbacks }) => {
+const WordList: React.FC<Props> = ({ feedbacks, blurFeedbaks }) => {
   return (
     <div className="word-list">
       <ul className={feedbacks.length > 12 ? 'split' : ''}>
         {feedbacks.map((feedback) => {
+          const classes = {
+            found: feedback.found ? 'found' : '',
+            blur: blurFeedbaks && !feedback.found ? 'blur-feedbacks' : '',
+          };
           return (
             <li key={feedback.word}>
-              <span className={feedback.found ? 'found' : ''}>
+              <span className={`${classes.found} ${classes.blur}`}>
                 <h5>{feedback.word}</h5>
               </span>
             </li>
@@ -25,6 +30,10 @@ const WordList: React.FC<Props> = ({ feedbacks }) => {
       </ul>
     </div>
   );
+};
+
+WordList.defaultProps = {
+  blurFeedbaks: true,
 };
 
 export default WordList;
