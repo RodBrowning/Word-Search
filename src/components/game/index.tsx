@@ -23,6 +23,7 @@ import { Link } from 'react-router-dom';
 import Modal from '../modal/modal';
 import { RootState } from '../../app/store';
 import WordList from '../feedbackWordList';
+import useLocalStorage from '../../utils/customHooks/useLocalStorage';
 
 const userLocale = navigator.language;
 
@@ -35,6 +36,7 @@ const Game: React.FC = () => {
     return state.game;
   });
   const dispatch = useDispatch();
+  const [, setLocalStorageValue] = useLocalStorage('gameState', gameState);
 
   const remainingWordsReducer = (total: number, feedback: IFeedback) => {
     return feedback.found ? total - 1 : total;
@@ -57,6 +59,7 @@ const Game: React.FC = () => {
   }, []);
 
   useEffect(() => {
+    setLocalStorageValue(gameState);
     if (gameState.gameEnded) {
       // ! Reset matches to 1
       alert('Ended');
