@@ -1,7 +1,7 @@
 import './style.scss';
 import './style-mobile.scss';
 
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import {
   generateNewBoardData,
   processWord,
@@ -50,6 +50,10 @@ const Game: React.FC = () => {
     if (gameState.boardData.board.length === 0) {
       dispatch(generateNewBoardData());
     }
+  }, []);
+
+  useLayoutEffect(() => {
+    setIsFeedbacksHidden(gameState.hideFeedbacks);
   }, []);
 
   useEffect(() => {
