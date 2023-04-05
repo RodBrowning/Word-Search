@@ -54,6 +54,9 @@
         }
       }
     }
+    .words .word-list li span:not(.found) {
+      user-select: none;
+    }
   }
   main {
     grid-column: 4 / 12;
