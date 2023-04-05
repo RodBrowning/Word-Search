@@ -67,7 +67,9 @@ const CustomWordListConfig: React.FC<Props> = ({
           Usar Custom
         </button>
       </label>
-      <p>Separe por virgula. Mínimo {minWords} palavras.</p>
+      <p>
+        Separe por virgula. Mínimo {minWords} {minWords > 1 ? 'palavras' : 'palavra'}.
+      </p>
       <textarea
         name="word-list"
         id="word-list"
