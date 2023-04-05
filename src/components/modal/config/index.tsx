@@ -146,7 +146,10 @@ const ConfigModal: React.FC<Props> = ({ setOpenModal }) => {
     <div className="config-panel show-config">
       <div className="difficulty">
         <h5>Dificuldade</h5>
-        <label htmlFor="easy">
+        <label
+          htmlFor="easy"
+          title={`Ganhe ${gameState.difficult.parameters.easy.pointsByFoundWord} ponto por palavra encontrata.`}
+        >
           <input
             type="radio"
             name="difficulty-radio"
@@ -159,7 +162,10 @@ const ConfigModal: React.FC<Props> = ({ setOpenModal }) => {
           />
           <button type="button">Fácil</button>
         </label>
-        <label htmlFor="normal">
+        <label
+          htmlFor="normal"
+          title={`Ganhe ${gameState.difficult.parameters.normal.pointsByFoundWord} ponto por palavra encontrata.`}
+        >
           <input
             type="radio"
             name="difficulty-radio"
@@ -172,7 +178,10 @@ const ConfigModal: React.FC<Props> = ({ setOpenModal }) => {
           />
           <button type="button">Médio</button>
         </label>
-        <label htmlFor="hard">
+        <label
+          htmlFor="hard"
+          title={`Ganhe ${gameState.difficult.parameters.hard.pointsByFoundWord} ponto por palavra encontrata.`}
+        >
           <input
             type="radio"
             name="difficulty-radio"
@@ -188,7 +197,16 @@ const ConfigModal: React.FC<Props> = ({ setOpenModal }) => {
       </div>
       <div className="reverse">
         <h5>Palavras ao contrário</h5>
-        <label htmlFor="use-reverse">
+        <label
+          htmlFor="use-reverse"
+          title={`Adicione mais complexidade com palavras invertidas e ganhe pontos extra. No o modo Fácil ganhe ${Math.round(
+            (gameState.difficult.parameters.easy.reverseWordsExtraPoints - 1) * 100
+          )}%, no Médio ${Math.round(
+            (gameState.difficult.parameters.normal.reverseWordsExtraPoints - 1) * 100
+          )}% e no Difícil ${Math.round(
+            (gameState.difficult.parameters.hard.reverseWordsExtraPoints - 1) * 100
+          )}% sobre o total de pontos ganhos em cada partida. A quantidade aumenta com o decorrer do jogo.`}
+        >
           <input
             type="checkbox"
             name="reverse-checkbox"
@@ -222,6 +240,7 @@ const ConfigModal: React.FC<Props> = ({ setOpenModal }) => {
       />
       <div className="reset-game">
         <button
+          title="Zera todo o placar do jogo."
           type="button"
           className="reset-game-button full-size"
           onClick={() => {

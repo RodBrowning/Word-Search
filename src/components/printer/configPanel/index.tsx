@@ -228,7 +228,7 @@ const PrinterConfigPanel: React.FC<Props> = ({
         />
       </div>
       <div className="action-btns">
-        <label htmlFor="answers-checkbox">
+        <label htmlFor="answers-checkbox" title="Recomendado impressão frente e verso nesta opção.">
           <input
             type="checkbox"
             checked={showFeedbacks}
