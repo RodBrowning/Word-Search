@@ -7,7 +7,7 @@ const Footer: React.FC = () => {
   return (
     <footer>
       <div className="copyright">
-        <p>Copyright © 2022. Todos os direitos reservados. Desenvolvido por Rodrigo&nbsp;Moura.</p>
+        <p>Copyright © 2023. Todos os direitos reservados. Desenvolvido por Rodrigo&nbsp;da&nbsp;Silva&nbsp;Moura.</p>
       </div>
       <div className="social-media">
         <div className="img">
