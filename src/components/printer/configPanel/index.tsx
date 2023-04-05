@@ -40,7 +40,7 @@ const PrinterConfigPanel: React.FC<Props> = ({
   });
   const { themes } = gameState;
   const themesTitles = Object.keys(themes);
-  const minCustomWordsLength = 5;
+  const minCustomWordsLength = 1;
 
   // Session Storage
   const [printSession, setPrintSession] = useSessionStorage<IPrintConfig>('printConfig', {
