@@ -11,6 +11,9 @@
       display: flex;
       flex-wrap: wrap;
       column-gap: 12px;
+      li span.blur-feedbacks {
+        filter: blur(6px);
+      }
     }
   }
 }
