@@ -35,6 +35,7 @@ const About: React.FC = () => {
   const mobileGame = SearchWordsGame();
   const mobileBoard = mobileGame.getBoard({
     boardSize: { columns: 8, rows: 8 },
+    words: [],
     useCustom: true,
     customWords: ['caça', 'palavras', 'criança', 'aprender', 'memoria', 'futuro', 'sorte', 'santos'],
   });
