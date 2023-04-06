@@ -29,13 +29,14 @@
         display: inline-block;
         &.found::before {
           position: absolute;
-          left: 0;
+          left: -1px;
           top: 50%;
           transform: translateY(-50%);
           content: '';
-          width: 100%;
+          width: 105%;
           height: 5px;
           background-color: mainStyle.$secondary;
+          border-radius: 15px;
           z-index: -1;
         }
         &.blur-feedbacks {
