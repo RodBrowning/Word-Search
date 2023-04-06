@@ -80,7 +80,7 @@ const Game: React.FC = () => {
       <aside>
         <menu>
           <button
-            className={`game-menu-action-button ${isConfigModalOpen && 'active'}`}
+            className={`game-menu-action-button ${isConfigModalOpen ? 'active' : ''}`}
             title="Configurações"
             type="button"
             onClick={() => {
@@ -106,7 +106,7 @@ const Game: React.FC = () => {
             </svg>
           </button>
           <button
-            className={`game-menu-action-button ${isFeedbacksHidden && 'active'}`}
+            className={`game-menu-action-button ${isFeedbacksHidden ? 'active' : ''}`}
             title={`Adicione mais complexidade ofuscando as palavras do gabarito e ganhe pontos extra. No modo Fácil ganhe ${Math.round(
               (gameState.difficult.parameters.easy.hiddenWordsExtraPoints - 1) * 100
             )}%, no Médio ${Math.round(
