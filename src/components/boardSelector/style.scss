@@ -24,5 +24,8 @@
 @media only screen and (max-width: 768px) {
   #board-selection-wrapper {
     margin: auto;
+    #konva-stage {
+      inset: 6px 6px;
+    }
   }
 }
