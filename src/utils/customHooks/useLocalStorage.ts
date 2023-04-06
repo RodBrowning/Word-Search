@@ -26,7 +26,7 @@ const useLocalStorage = <T>(key: string, initialValue: T): UseLocalStorageReturn
         } catch (error) {
           console.error(error);
           setIsLoading(false);
-          setError(error);
+          setError(error as SetStateAction<Error | null>);
         }
       }
     };
@@ -38,17 +38,18 @@ const useLocalStorage = <T>(key: string, initialValue: T): UseLocalStorageReturn
     };
   }, [key]);
 
-  const setLocalStorageValue = (newValue: T) => {
+  const setLocalStorageValue: Dispatch<SetStateAction<T>> = (newValue: SetStateAction<T>) => {
     setIsLoading(true);
     try {
-      window.localStorage.setItem(key, JSON.stringify(newValue));
-      setValue(newValue);
+      const valueToStore = newValue instanceof Function ? newValue(value) : newValue;
+      window.localStorage.setItem(key, JSON.stringify(valueToStore));
+      setValue(valueToStore);
       setIsLoading(false);
       setError(null);
     } catch (error) {
       console.error(error);
       setIsLoading(false);
-      setError(error);
+      setError(error as SetStateAction<Error | null>);
     }
   };
 

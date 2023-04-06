@@ -20,13 +20,13 @@ const useSessionStorage = <T>(key: string, initialValue: T): UseSessionStorageRe
       if (event.storageArea === window.sessionStorage && event.key === key) {
         setIsLoading(true);
         try {
-          setValue(JSON.parse(event.newValue));
+          setValue(JSON.parse(event.newValue!));
           setIsLoading(false);
           setError(null);
         } catch (error) {
           console.error(error);
           setIsLoading(false);
-          setError(error);
+          setError(error as SetStateAction<Error | null>);
         }
       }
     };
@@ -38,17 +38,18 @@ const useSessionStorage = <T>(key: string, initialValue: T): UseSessionStorageRe
     };
   }, [key]);
 
-  const setSessionStorageValue = (newValue: T) => {
+  const setSessionStorageValue: Dispatch<SetStateAction<T>> = (newValue: SetStateAction<T>) => {
     setIsLoading(true);
     try {
-      window.sessionStorage.setItem(key, JSON.stringify(newValue));
-      setValue(newValue);
+      const valueToStore = newValue instanceof Function ? newValue(value) : newValue;
+      window.sessionStorage.setItem(key, JSON.stringify(valueToStore));
+      setValue(valueToStore);
       setIsLoading(false);
       setError(null);
     } catch (error) {
       console.error(error);
       setIsLoading(false);
-      setError(error);
+      setError(error as SetStateAction<Error | null>);
     }
   };
 

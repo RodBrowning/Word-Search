@@ -110,7 +110,7 @@ const ConfigModal: React.FC<Props> = ({ setOpenModal }) => {
       newLoadThemes = [...configState.loadThemes, target.value].sort();
     } else {
       newLoadThemes = configState.loadThemes
-        .filter((theme) => {
+        .filter((theme: string) => {
           return theme !== target.value;
         })
         .sort();
