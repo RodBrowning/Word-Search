@@ -9,6 +9,31 @@
       margin-bottom: 32px;
       menu {
         padding-inline-start: 4px;
+        button.game-menu-action-button {
+          &:hover {
+            transform: scale(1);
+            &:before {
+              width: 0%;
+              height: 0%;
+            }
+            svg > path {
+              fill: #000;
+            }
+          }
+          &:active,
+          &.refresh-btn:hover,
+          &.printer-btn:hover,
+          &.active {
+            transform: scale(0.9);
+            &:before {
+              width: 200%;
+              height: 200%;
+            }
+            svg > path {
+              fill: mainStyle.$tertiary;
+            }
+          }
+        }
       }
     }
     main {
