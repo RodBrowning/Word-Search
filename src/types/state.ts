@@ -3,10 +3,10 @@ import ITheme from './theme';
 
 export default interface IGameState {
   points: number;
-  difficult: {
+  difficulty: {
     current: 'easy' | 'normal' | 'hard';
     parameters: {
-      [difficult: string]: {
+      [difficulty: string]: {
         gridShrinkFactor: number;
         wordsGrowthFactor: number;
         wordsLengthFactor: number;

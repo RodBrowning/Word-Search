@@ -4,7 +4,7 @@ import Themes from './themes/themes';
 
 const initialState: IGameState = {
   points: 0,
-  difficult: {
+  difficulty: {
     current: 'normal',
     parameters: {
       easy: {

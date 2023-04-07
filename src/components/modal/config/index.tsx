@@ -33,7 +33,7 @@ const ConfigModal: React.FC<Props> = ({ setOpenModal }) => {
 
   const [openResetConfirmationModal, setOpenResetConfirmationModal] = useState(false);
   const [configState, setConfigState] = useState({
-    difficulty: gameState.difficult.current,
+    difficulty: gameState.difficulty.current,
     customWordList: gameState.customWords,
     customWordListDisplay: gameState.customWords.join(', '),
     useCustom: gameState.useCustom,
@@ -41,7 +41,7 @@ const ConfigModal: React.FC<Props> = ({ setOpenModal }) => {
     loadThemes: gameState.loadThemes,
   });
 
-  const difficultyRef = useRef(gameState.difficult.current);
+  const difficultyRef = useRef(gameState.difficulty.current);
   const customWordListRef = useRef(gameState.customWords);
   const useCustomRef = useRef(gameState.useCustom);
   const useReverseRef = useRef(gameState.useReverse);
@@ -51,7 +51,7 @@ const ConfigModal: React.FC<Props> = ({ setOpenModal }) => {
   const dispatch = useDispatch();
 
   const dispatchConfigChanges = () => {
-    if (gameState.difficult.current !== difficultyRef.current) {
+    if (gameState.difficulty.current !== difficultyRef.current) {
       dispatch(reduxSetDifficulty(difficultyRef.current));
     }
     dispatch(reduxSetUseCustomState(useCustomRef.current));
@@ -121,7 +121,7 @@ const ConfigModal: React.FC<Props> = ({ setOpenModal }) => {
 
   const thereAreSomeChanges = () => {
     return (
-      gameState.difficult.current !== difficultyRef.current ||
+      gameState.difficulty.current !== difficultyRef.current ||
       gameState.useCustom !== useCustomRef.current ||
       gameState.useReverse !== useReverseRef.current ||
       JSON.stringify(gameState.loadThemes) !== JSON.stringify(loadThemesRef.current)
@@ -148,7 +148,7 @@ const ConfigModal: React.FC<Props> = ({ setOpenModal }) => {
         <h5>Dificuldade</h5>
         <label
           htmlFor="easy"
-          title={`Ganhe ${gameState.difficult.parameters.easy.pointsByFoundWord} ponto por palavra encontrata.`}
+          title={`Ganhe ${gameState.difficulty.parameters.easy.pointsByFoundWord} ponto por palavra encontrata.`}
         >
           <input
             type="radio"
@@ -164,7 +164,7 @@ const ConfigModal: React.FC<Props> = ({ setOpenModal }) => {
         </label>
         <label
           htmlFor="normal"
-          title={`Ganhe ${gameState.difficult.parameters.normal.pointsByFoundWord} ponto por palavra encontrata.`}
+          title={`Ganhe ${gameState.difficulty.parameters.normal.pointsByFoundWord} ponto por palavra encontrata.`}
         >
           <input
             type="radio"
@@ -180,7 +180,7 @@ const ConfigModal: React.FC<Props> = ({ setOpenModal }) => {
         </label>
         <label
           htmlFor="hard"
-          title={`Ganhe ${gameState.difficult.parameters.hard.pointsByFoundWord} ponto por palavra encontrata.`}
+          title={`Ganhe ${gameState.difficulty.parameters.hard.pointsByFoundWord} ponto por palavra encontrata.`}
         >
           <input
             type="radio"
@@ -200,11 +200,11 @@ const ConfigModal: React.FC<Props> = ({ setOpenModal }) => {
         <label
           htmlFor="use-reverse"
           title={`Adicione mais complexidade com palavras invertidas e ganhe pontos extra. No o modo Fácil ganhe ${Math.round(
-            (gameState.difficult.parameters.easy.reverseWordsExtraPoints - 1) * 100
+            (gameState.difficulty.parameters.easy.reverseWordsExtraPoints - 1) * 100
           )}%, no Médio ${Math.round(
-            (gameState.difficult.parameters.normal.reverseWordsExtraPoints - 1) * 100
+            (gameState.difficulty.parameters.normal.reverseWordsExtraPoints - 1) * 100
           )}% e no Difícil ${Math.round(
-            (gameState.difficult.parameters.hard.reverseWordsExtraPoints - 1) * 100
+            (gameState.difficulty.parameters.hard.reverseWordsExtraPoints - 1) * 100
           )}% sobre o total de pontos ganhos em cada partida. A quantidade aumenta com o decorrer do jogo.`}
         >
           <input

@@ -113,11 +113,11 @@ const Game: React.FC = () => {
           <button
             className={`game-menu-action-button ${isFeedbacksHidden ? 'active' : ''}`}
             title={`Adicione mais complexidade ofuscando as palavras do gabarito e ganhe pontos extra. No modo Fácil ganhe ${Math.round(
-              (gameState.difficult.parameters.easy.hiddenWordsExtraPoints - 1) * 100
+              (gameState.difficulty.parameters.easy.hiddenWordsExtraPoints - 1) * 100
             )}%, no Médio ${Math.round(
-              (gameState.difficult.parameters.normal.hiddenWordsExtraPoints - 1) * 100
+              (gameState.difficulty.parameters.normal.hiddenWordsExtraPoints - 1) * 100
             )}% e no Difícil ${Math.round(
-              (gameState.difficult.parameters.hard.hiddenWordsExtraPoints - 1) * 100
+              (gameState.difficulty.parameters.hard.hiddenWordsExtraPoints - 1) * 100
             )}% sobre o total de pontos ganhos em cada partida.`}
             type="button"
             onClick={() => {

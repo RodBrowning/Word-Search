@@ -28,11 +28,11 @@ export const gameSlice = createSlice({
         state.boardData.matchEnded = true;
         if (state.useReverse)
           state.matchPoints = Math.ceil(
-            state.matchPoints * state.difficult.parameters[state.difficult.current].reverseWordsExtraPoints
+            state.matchPoints * state.difficulty.parameters[state.difficulty.current].reverseWordsExtraPoints
           );
         if (state.hideFeedbacks)
           state.matchPoints = Math.ceil(
-            state.matchPoints * state.difficult.parameters[state.difficult.current].hiddenWordsExtraPoints
+            state.matchPoints * state.difficulty.parameters[state.difficulty.current].hiddenWordsExtraPoints
           );
         state.points += state.matchPoints * state.matches;
         state.matchPoints = 0;
@@ -45,7 +45,7 @@ export const gameSlice = createSlice({
       state.availableSpace = payloadAction.payload;
     },
     setDifficulty: (state: IGameState, payloadAction: { payload: 'easy' | 'normal' | 'hard' }) => {
-      state.difficult.current = payloadAction.payload;
+      state.difficulty.current = payloadAction.payload;
     },
     setCustomWords: (state: IGameState, payloadAction: { payload: string[] }) => {
       state.customWords = payloadAction.payload;

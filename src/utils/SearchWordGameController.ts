@@ -1,4 +1,5 @@
 /* eslint-disable no-param-reassign */
+
 import IFeedback from '../types/feedback';
 import IGameState from '../types/state';
 // eslint-disable-next-line import/order
@@ -31,9 +32,11 @@ function SearchWordGameController() {
     boardSize.rows = defaultInicialSize.rows + rowsToAdd;
 
     boardSize.columns = Math.floor(
-      boardSize.columns * state.difficult.parameters[state.difficult.current].gridShrinkFactor
+      boardSize.columns * state.difficulty.parameters[state.difficulty.current].gridShrinkFactor
     );
-    boardSize.rows = Math.floor(boardSize.rows * state.difficult.parameters[state.difficult.current].gridShrinkFactor);
+    boardSize.rows = Math.floor(
+      boardSize.rows * state.difficulty.parameters[state.difficulty.current].gridShrinkFactor
+    );
 
     boardSize.columns =
       boardSize.columns < defaultInicialSize.minColumns ? defaultInicialSize.minColumns : boardSize.columns;
@@ -63,7 +66,7 @@ function SearchWordGameController() {
     finalNumberOfWords = finalNumberOfWords < 1 ? 1 : finalNumberOfWords;
 
     finalNumberOfWords = Math.ceil(
-      finalNumberOfWords * state.difficult.parameters[state.difficult.current].wordsGrowthFactor
+      finalNumberOfWords * state.difficulty.parameters[state.difficulty.current].wordsGrowthFactor
     );
 
     return finalNumberOfWords;
@@ -100,9 +103,9 @@ function SearchWordGameController() {
 
     let currentMaxWordLength = maxWordLength - lettersToReduce;
 
-    minWordLength = Math.ceil(minWordLength * state.difficult.parameters[state.difficult.current].wordsLengthFactor);
+    minWordLength = Math.ceil(minWordLength * state.difficulty.parameters[state.difficulty.current].wordsLengthFactor);
     currentMaxWordLength = Math.ceil(
-      currentMaxWordLength * state.difficult.parameters[state.difficult.current].wordsLengthFactor
+      currentMaxWordLength * state.difficulty.parameters[state.difficulty.current].wordsLengthFactor
     );
 
     if (state.matches > reductionPoint) {
@@ -158,7 +161,7 @@ function SearchWordGameController() {
       if (feedback.word === payload.word) {
         feedback.found = true;
         feedback.color = payload.color;
-        state.matchPoints += state.difficult.parameters[state.difficult.current].pointsByFoundWord;
+        state.matchPoints += state.difficulty.parameters[state.difficulty.current].pointsByFoundWord;
       }
     });
 
