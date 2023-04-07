@@ -12,11 +12,9 @@
 
 &nbsp;&nbsp;https://github.com/RodBrowning
 
-<!-- ### ✨ [Production](https://rodbrowning.github.io/Word-Search/) -->
+### ✨ [Production](https://word-search-ochre.vercel.app/)
 
-### ✨ Production - Coming Soon
-
-<!-- &nbsp;&nbsp;https://rodbrowning.github.io/Word-Search/ -->
+&nbsp;&nbsp;https://word-search-ochre.vercel.app/
 
 ## Install
 
