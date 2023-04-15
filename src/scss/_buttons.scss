@@ -105,11 +105,13 @@ button.action-btn {
   &.confirm {
     &:hover {
       background: colors.$success;
+      border: 1px solid colors.$black-25;
     }
   }
   &.cancel {
     &:hover {
       background: colors.$error;
+      border: 1px solid colors.$black-25;
     }
   }
 }
