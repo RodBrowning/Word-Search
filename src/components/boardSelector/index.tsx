@@ -37,8 +37,8 @@ const BoardSelector: React.FC<Props> = ({ board, feedbacks, children, handleFoun
 
   const getMainParameters = (wrapperDiv: HTMLDivElement) => {
     const tBody = wrapperDiv.getElementsByTagName('tbody')[0];
-    const stageHeight = tBody.clientHeight;
-    const stageWidth = tBody.clientWidth;
+    const stageHeight = tBody.getBoundingClientRect().height;
+    const stageWidth = tBody.getBoundingClientRect().width;
     const numOfRows = board.length;
     const numOfColumns = board[0]?.length;
     const rowHeight = stageHeight / numOfRows;

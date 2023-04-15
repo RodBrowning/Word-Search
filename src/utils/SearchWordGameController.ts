@@ -7,8 +7,9 @@ import SearchWordsGame from './SearchWordGame';
 
 function SearchWordGameController() {
   function getBoardSize(state: IGameState) {
-    const maxColumnWidth = 24;
-    const maxAvailableColumnNumber = Math.floor(state.availableSpace / maxColumnWidth);
+    const minColumnWidth = 25;
+    const tableBorder = 14;
+    const maxAvailableColumnNumber = Math.floor((state.availableSpace - tableBorder) / minColumnWidth);
     const maxColumnNumber = maxAvailableColumnNumber > 37 ? 37 : maxAvailableColumnNumber;
     const maxRowNumber = 30;
     const { matchesLimit } = state;

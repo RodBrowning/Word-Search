@@ -47,7 +47,7 @@ const Game: React.FC = () => {
   );
 
   useEffect(() => {
-    const availableSpace = availableSizeRef.current?.clientWidth;
+    const availableSpace = availableSizeRef.current?.getBoundingClientRect().width;
     dispatch(setAvailableSpace(availableSpace));
     if (gameState.boardData.board.length === 0) {
       dispatch(generateNewBoardData());
@@ -70,7 +70,7 @@ const Game: React.FC = () => {
   }, [gameState]);
 
   function updateBoard() {
-    const availableSpace = availableSizeRef.current?.clientWidth;
+    const availableSpace = availableSizeRef.current?.getBoundingClientRect().width;
     dispatch(setAvailableSpace(availableSpace));
     dispatch(generateNewBoardData());
   }
