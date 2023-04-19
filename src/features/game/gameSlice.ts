@@ -34,7 +34,13 @@ export const gameSlice = createSlice({
           state.matchPoints = Math.ceil(
             state.matchPoints * state.difficulty.parameters[state.difficulty.current].hiddenWordsExtraPoints
           );
-        state.points += state.matchPoints * state.matches;
+        if (state.boardData.boardSize.columns >= 16 && state.boardData.boardSize.columns <= 28) {
+          state.matchPoints *= 1.1;
+        }
+        if (state.boardData.boardSize.columns >= 29) {
+          state.matchPoints *= 1.2;
+        }
+        state.points += Math.round(state.matchPoints * state.matches);
         state.matchPoints = 0;
       }
       if (SWGC.gameHasEnded(state)) {
