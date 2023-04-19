@@ -169,6 +169,31 @@ function SearchWordGameController() {
     return state;
   }
 
+  function processEndedMatch(state: IGameState) {
+    state.boardData.matchEnded = true;
+    if (state.useReverse)
+      state.matchPoints = Math.ceil(
+        state.matchPoints * state.difficulty.parameters[state.difficulty.current].reverseWordsExtraPoints
+      );
+    if (state.hideFeedbacks)
+      state.matchPoints = Math.ceil(
+        state.matchPoints * state.difficulty.parameters[state.difficulty.current].hiddenWordsExtraPoints
+      );
+
+    const smallBoard = state.boardData.boardSize.columns <= 15;
+    if (smallBoard) state.matchPoints *= 1;
+
+    const mediumBoard = state.boardData.boardSize.columns >= 16 && state.boardData.boardSize.columns <= 28;
+    if (mediumBoard) state.matchPoints *= 1.1;
+
+    const largerBoard = state.boardData.boardSize.columns >= 29;
+    if (largerBoard) state.matchPoints *= 1.2;
+
+    state.points += Math.round(state.matchPoints * state.matches);
+    state.matchPoints = 0;
+    return state;
+  }
+
   function matchHasEnded(state: IGameState) {
     return state.boardData.feedbacks.every((feedback) => {
       return feedback.found === true;
@@ -182,6 +207,7 @@ function SearchWordGameController() {
   return {
     getBoardData,
     processWord,
+    processEndedMatch,
     matchHasEnded,
     gameHasEnded,
   };

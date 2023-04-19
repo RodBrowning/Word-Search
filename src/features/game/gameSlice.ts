@@ -25,23 +25,7 @@ export const gameSlice = createSlice({
     processWord: (state: IGameState, payloadAction: { payload: { word: string; color: string } }) => {
       state = SWGC.processWord(state, payloadAction.payload);
       if (SWGC.matchHasEnded(state)) {
-        state.boardData.matchEnded = true;
-        if (state.useReverse)
-          state.matchPoints = Math.ceil(
-            state.matchPoints * state.difficulty.parameters[state.difficulty.current].reverseWordsExtraPoints
-          );
-        if (state.hideFeedbacks)
-          state.matchPoints = Math.ceil(
-            state.matchPoints * state.difficulty.parameters[state.difficulty.current].hiddenWordsExtraPoints
-          );
-        if (state.boardData.boardSize.columns >= 16 && state.boardData.boardSize.columns <= 28) {
-          state.matchPoints *= 1.1;
-        }
-        if (state.boardData.boardSize.columns >= 29) {
-          state.matchPoints *= 1.2;
-        }
-        state.points += Math.round(state.matchPoints * state.matches);
-        state.matchPoints = 0;
+        state = SWGC.processEndedMatch(state);
       }
       if (SWGC.gameHasEnded(state)) {
         state.gameEnded = true;
