@@ -43,6 +43,7 @@ const initialState: IGameState = {
   matchPoints: 0,
   matches: 1,
   matchesLimit: 100,
+  round: 1,
   gameEnded: false,
   boardData: {
     board: [],

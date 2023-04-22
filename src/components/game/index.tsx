@@ -32,6 +32,7 @@ const Game: React.FC = () => {
   const [isConfigModalOpen, setIsConfigModalOpen] = useState(false);
   const [isFeedbacksHidden, setIsFeedbacksHidden] = useState(false);
   const [isInformationModalOpen, setIsInformationModalOpen] = useState(false);
+  const [infoMessage, setInfoMessage] = useState<React.ReactNode>();
   const gameState = useSelector((state: RootState) => {
     return state.game;
   });
@@ -60,11 +61,25 @@ const Game: React.FC = () => {
 
   useEffect(() => {
     setLocalStorageValue(gameState);
-    if (gameState.gameEnded) {
-      // ! Reset matches to 1
-      alert('Ended');
+    if (gameState.boardData.matchEnded && !gameState.gameEnded) {
+      setInfoMessage(
+        <>
+          <h4>Parabéns!!!</h4>
+          <br />
+          <h5>Você completou o {gameState.matches + (gameState.round - 1) * gameState.matchesLimit}º nivel</h5>
+        </>
+      );
+      setIsInformationModalOpen(true);
     }
-    if (gameState.boardData.matchEnded) {
+    if (gameState.gameEnded) {
+      setInfoMessage(
+        <>
+          <h4>Parabéns!!!</h4>
+          <br />
+          <h5>Você completou o último nivel da {gameState.round - 1}ª rodada</h5>
+          <h5>Iniciando a {gameState.round}ª rodada</h5>
+        </>
+      );
       setIsInformationModalOpen(true);
     }
   }, [gameState]);
@@ -180,7 +195,8 @@ const Game: React.FC = () => {
           <div className="nivel">
             <span>Nível</span>{' '}
             <span>
-              {String(gameState.matches).padStart(2, '0')}/{String(gameState.matchesLimit).padStart(2, '0')}
+              {String(gameState.matches + (gameState.round - 1) * gameState.matchesLimit).padStart(2, '0')}/
+              {String(gameState.matchesLimit * gameState.round)}
             </span>
           </div>
         </div>
@@ -188,20 +204,18 @@ const Game: React.FC = () => {
           isOpen={isInformationModalOpen}
           setOpenModal={setIsInformationModalOpen}
           callbackAction={() => {
-            dispatch(generateNewBoardData());
             dispatch(setNextMatch());
+            dispatch(generateNewBoardData());
           }}
         >
           <InformationComponent
             setOpenModal={setIsInformationModalOpen}
             callbackAction={() => {
-              dispatch(generateNewBoardData());
               dispatch(setNextMatch());
+              dispatch(generateNewBoardData());
             }}
           >
-            <h4>Parabéns!!!</h4>
-            <br />
-            <h5>Você completou o nivel {gameState.matches}</h5>
+            {infoMessage}
           </InformationComponent>
         </InformationModal>
       </main>

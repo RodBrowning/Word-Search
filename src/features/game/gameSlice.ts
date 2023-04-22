@@ -29,6 +29,8 @@ export const gameSlice = createSlice({
       }
       if (SWGC.gameHasEnded(state)) {
         state.gameEnded = true;
+        state.round += 1;
+        state.matches = 0;
       }
     },
     setAvailableSpace: (state: IGameState, payloadAction: { payload: number }) => {

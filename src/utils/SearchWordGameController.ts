@@ -189,7 +189,7 @@ function SearchWordGameController() {
     const largerBoard = state.boardData.boardSize.columns >= 29;
     if (largerBoard) state.matchPoints *= 1.2;
 
-    state.points += Math.round(state.matchPoints * state.matches);
+    state.points += Math.round(state.matchPoints * (state.matches % state.matchesLimit));
     state.matchPoints = 0;
     return state;
   }
@@ -201,7 +201,7 @@ function SearchWordGameController() {
   }
 
   function gameHasEnded(state: IGameState) {
-    return state.matches > state.matchesLimit;
+    return state.matches === state.matchesLimit;
   }
 
   return {

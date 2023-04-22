@@ -26,6 +26,7 @@ export default interface IGameState {
   matchPoints: number;
   matches: number;
   matchesLimit: number;
+  round: number;
   gameEnded: boolean;
   boardData: {
     board: string[][];
