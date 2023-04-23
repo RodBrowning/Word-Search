@@ -77,7 +77,11 @@ const CustomWordListConfig: React.FC<Props> = ({
         rows={rows}
         value={customWordListDisplay}
         onChange={(event) => {
-          handleChangeCustomWords(event.target);
+          const regex = /^[a-zA-Z, ]+$/;
+          const words = event.target.value;
+          if (regex.test(words)) {
+            handleChangeCustomWords(event.target);
+          }
         }}
       />
     </div>
