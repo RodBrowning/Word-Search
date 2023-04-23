@@ -76,8 +76,8 @@ const Game: React.FC = () => {
         <>
           <h4>Parabéns!!!</h4>
           <br />
-          <h5>Você completou o último nivel da {gameState.round - 1}ª rodada</h5>
-          <h5>Iniciando a {gameState.round}ª rodada</h5>
+          <h5>Você completou a {gameState.round - 1}ª rodada</h5>
+          <h5>Iniciando {gameState.round}ª rodada</h5>
         </>
       );
       setIsInformationModalOpen(true);
