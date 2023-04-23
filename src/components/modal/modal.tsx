@@ -23,7 +23,8 @@ const Modal: React.FC<Props> = ({ children, isOpen, setOpenModal }) => {
     }
   };
 
-  const handleKeyDown = (event: React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement>) => {
+  const handleKeyDown = (event: React.KeyboardEvent<HTMLDivElement>) => {
+    if (event.target.id !== 'modal-wrapper') return;
     if (event.key === 'Enter' || event.key === ' ') {
       closeModal();
     }
