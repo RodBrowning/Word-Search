@@ -21,7 +21,8 @@ function SearchWordGameController() {
     };
 
     const availableColumns = maxColumnNumber - defaultInicialSize.columns;
-    const columnsToAdd = Math.floor((state.matches - 1) / (matchesLimit / availableColumns));
+    const columnsToAdd =
+      availableColumns < 0 ? availableColumns : Math.floor((state.matches - 1) / (matchesLimit / availableColumns));
     const availableRows = maxRowNumber - defaultInicialSize.rows;
     const rowsToAdd = Math.floor((state.matches - 1) / (matchesLimit / availableRows));
 
