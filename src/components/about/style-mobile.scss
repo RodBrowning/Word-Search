@@ -1,24 +1,20 @@
 @use '../../scss/index' as mainStyle;
 
-@media only screen and (max-width: 768px) {
+@media only screen and (max-width: 820px) {
   .inner-panel-about {
     row-gap: 19px;
-    span.under-bar {
-      display: none;
-    }
-    padding-top: 32px;
-    padding-bottom: 40px;
     .about-text {
       grid-column: 1 / 13;
-    }
-    .about-sample {
-      grid-column: 1 / 13;
-      order: -1;
-      span.under-bar {
-        display: block;
-      }
-      .sample-board {
-        margin: auto;
+      .about-sample {
+        float: unset;
+        margin-block: 2.5rem;
+        margin-inline: 0;
+        .sample-board {
+          margin: auto;
+          .desk #board-selection-wrapper {
+            margin: auto;
+          }
+        }
       }
     }
   }

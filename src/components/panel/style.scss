@@ -9,12 +9,13 @@
   grid-column-gap: 20px;
   align-content: flex-start;
   align-items: center;
-  padding: 0 24px;
-  min-height: 690px;
+  min-height: 100%;
   background: mainStyle.$main-bg-gradient;
   z-index: 0;
+  padding-inline: 24px;
+  padding-top: 3em;
+  padding-bottom: 4em;
   .inner-panel {
-    grid-column-gap: 20px;
     z-index: mainStyle.$zFirstLayer;
     display: grid;
     grid-template-columns: repeat(12, 1fr);
@@ -25,15 +26,16 @@
       &::before {
         position: absolute;
         content: '';
-        width: 30%;
+        min-width: 190px;
+        width: 15%;
         height: 6px;
         left: 0;
-        bottom: -24px;
+        bottom: -15px;
         border-radius: 8px;
         background-color: mainStyle.$primary;
       }
       h1 {
-        margin-bottom: 56px;
+        margin-bottom: clamp(60px, 6vw, 4rem);
       }
     }
   }

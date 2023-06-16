@@ -2,7 +2,8 @@
 
 $heading-font: 'Lato';
 $text-font: 'Work Sans';
-$text-font-size: 21px;
+$text-font-size: 1.2rem;
+$nav-text-font-size: 1rem;
 
 $h1-size: 49px;
 $h2-size: 39px;
@@ -14,10 +15,10 @@ $h6-size: 16px;
 p {
   font-family: $text-font;
   font-style: normal;
-  font-weight: 400;
+  font-weight: 500;
   font-size: $text-font-size;
   line-height: 32px;
-  color: colors.$black;
+  color: colors.$black-75;
 }
 
 h1,
@@ -28,13 +29,14 @@ h5,
 h6 {
   font-family: $heading-font;
   font-style: normal;
-  line-height: 30px;
   color: colors.$black;
+  line-height: 30px;
   margin: 0;
 }
 h1 {
   font-weight: 700;
   font-size: $h1-size;
+  line-height: $h1-size;
 }
 h2 {
   font-weight: 700;
@@ -63,10 +65,10 @@ h6 {
 
 a {
   font-family: $heading-font;
-  font-size: $h6-size;
+  font-size: $text-font-size;
   font-weight: 700;
   text-decoration: none;
-  color: colors.$black;
+  color: colors.$black-75;
   &:hover {
     color: colors.$primary;
   }

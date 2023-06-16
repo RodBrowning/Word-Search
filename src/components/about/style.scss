@@ -1,19 +1,22 @@
 @use '../../scss/index' as mainStyle;
 
 .inner-panel-about {
-  padding-top: 92px;
-  padding-bottom: 92px;
   .about-text {
-    grid-column: 2 / 7;
-  }
-  .about-sample {
-    grid-column: 8 / 12;
-    align-self: center;
-    span.under-bar {
-      display: none;
+    grid-column: 2 / -2;
+    display: block;
+    p {
+      text-align: justify;
     }
-    .mobile {
-      display: none;
+    .about-sample {
+      float: right;
+      margin-left: 3rem;
+      margin-bottom: 1.5rem;
+      span.under-bar {
+        display: none;
+      }
+      .mobile {
+        display: none;
+      }
     }
   }
 }

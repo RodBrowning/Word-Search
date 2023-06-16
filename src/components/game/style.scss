@@ -1,8 +1,6 @@
 @use '../../scss/index' as mainStyle;
 
 .inner-panel-game {
-  padding-top: 40px;
-  padding-bottom: 120px;
   aside {
     grid-column: 1 / 4;
     height: 100%;

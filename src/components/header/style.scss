@@ -31,6 +31,7 @@ header {
       a {
         position: relative;
         color: mainStyle.$tertiary;
+        font-size: mainStyle.$nav-text-font-size;
         padding: 0 8px;
         z-index: 0;
         transition: all 0.5s ease-in-out;
