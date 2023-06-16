@@ -34,6 +34,7 @@
       }
     }
     .contact-form {
+      grid-template-columns: 1fr;
       grid-template-areas:
         'username'
         'email'

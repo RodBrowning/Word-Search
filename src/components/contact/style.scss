@@ -13,12 +13,14 @@
   .contact-form {
     grid-column: 8 / 12;
     display: grid;
+    grid-template-columns: 1fr 1fr;
     grid-template-areas:
       'username email'
       'message message'
       'submit submit';
     grid-column-gap: 12px;
     grid-row-gap: 24px;
+    align-items: start;
     label {
       display: inline-grid;
       gap: 8px;
@@ -39,6 +41,17 @@
     }
     button[type='submit'] {
       grid-area: submit;
+    }
+    .errorMsg {
+      position: relative;
+      font-size: 0.8rem;
+      color: #ffe8c6;
+      text-align: center;
+      font-weight: 600;
+      letter-spacing: 2px;
+      background-color: mainStyle.$error;
+      padding: 5px;
+      border-radius: 4px;
     }
   }
 }

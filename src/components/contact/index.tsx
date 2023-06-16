@@ -1,9 +1,28 @@
 import './style.scss';
 import './style-mobile.scss';
 
+import { SubmitHandler, useForm } from 'react-hook-form';
+
 import React from 'react';
 
+type TInputs = {
+  name: string;
+  email: string;
+  message: string;
+};
+
 const Contact: React.FC = () => {
+  const {
+    register,
+    handleSubmit,
+    // watch,
+    trigger,
+    formState: { errors },
+  } = useForm<TInputs>();
+  const onSubmit: SubmitHandler<TInputs> = (data) => console.log(data);
+
+  // console.log(watch('name'));
+
   return (
     <div className="inner-panel inner-panel-contact">
       <div className="contact-text">
@@ -20,18 +39,51 @@ const Contact: React.FC = () => {
         </p>
         <p>Entre em contato para fazer qualquer pergunta ou sugestão.</p>
       </div>
-      <form action="" className="contact-form">
-        <label htmlFor="nome">
+      <form action="" className="contact-form" onSubmit={handleSubmit(onSubmit)}>
+        <label htmlFor="name">
           Nome
-          <input type="text" size={10} name="nome" />
+          <input
+            type="text"
+            size={10}
+            {...register('name', {
+              required: '* Nome obrigatório',
+              pattern: { value: /^[a-zA-ZÀ-ÿ']{3,}( [a-zA-ZÀ-ÿ']+)*$/, message: 'Nome inválido' },
+              onBlur: async () => {
+                const result = await trigger('name', { shouldFocus: true });
+              },
+            })}
+          />
+          {errors.name && <span className="errorMsg">{errors.name.message}</span>}
         </label>
         <label htmlFor="email">
           E-mail
-          <input type="email" size={10} name="email" />
+          <input
+            type="email"
+            size={10}
+            {...register('email', {
+              required: '* E-mail obrigatório',
+              pattern: { value: /^[a-zA-Z0-9._%+-]{3,}@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/, message: 'E-mail inválido' },
+              onBlur: async () => {
+                const result = await trigger('email', { shouldFocus: true });
+              },
+            })}
+          />
+          {errors.email && <span className="errorMsg">{errors.email.message}</span>}
         </label>
-        <label htmlFor="mensagem">
+        <label htmlFor="message">
           Mensagem
-          <textarea rows={10} cols={10} name="mensagem" />
+          <textarea
+            rows={10}
+            cols={10}
+            {...register('message', {
+              required: '* Mensagem obrigatória',
+              pattern: { value: /^[a-zA-Z0-9.,!?'"()\[\]{}\s]{3,}$/, message: 'Mensagem inválida' },
+              onBlur: async () => {
+                const result = await trigger('message', { shouldFocus: true });
+              },
+            })}
+          />
+          {errors.message && <span className="errorMsg">{errors.message.message}</span>}
         </label>
         <button type="submit">
           <span>
