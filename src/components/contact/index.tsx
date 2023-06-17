@@ -4,6 +4,7 @@ import './style-mobile.scss';
 import { SubmitHandler, useForm } from 'react-hook-form';
 
 import React from 'react';
+import { SendMsg } from '../../utils/fetchFunctions/sendEmail';
 
 type TInputs = {
   name: string;
@@ -15,13 +16,19 @@ const Contact: React.FC = () => {
   const {
     register,
     handleSubmit,
-    // watch,
     trigger,
+    reset,
     formState: { errors },
   } = useForm<TInputs>();
-  const onSubmit: SubmitHandler = (data: TInputs) => console.log(data);
-
-  // console.log(watch('name'));
+  const onSubmit: SubmitHandler<TInputs> = async (data: TInputs) => {
+    const res = await SendMsg(data.name, data.email, data.message);
+    if (res.data === 'OK') {
+      alert('Mensagem enviada com sucesso. Aguarde sua resposta.');
+      reset();
+    } else {
+      alert('O correu um erro. Mensagem não enviada.');
+    }
+  };
 
   return (
     <div className="inner-panel inner-panel-contact">
