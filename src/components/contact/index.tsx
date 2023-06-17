@@ -30,7 +30,6 @@ const Contact: React.FC = () => {
       toast.success(
         <>
           <p>Mensagem enviada com sucesso</p>
-          <p>Aguarde sua resposta em breve</p>
         </>,
         {
           autoClose: 10000,
@@ -39,7 +38,7 @@ const Contact: React.FC = () => {
     } else {
       toast.error(
         <>
-          <p>O correu um erro</p>
+          <p>Ocorreu um erro</p>
           <p>Mensagem não enviada</p>
         </>,
         {
