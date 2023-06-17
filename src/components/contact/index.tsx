@@ -19,7 +19,7 @@ const Contact: React.FC = () => {
     trigger,
     formState: { errors },
   } = useForm<TInputs>();
-  const onSubmit: SubmitHandler<TInputs> = (data) => console.log(data);
+  const onSubmit: SubmitHandler = (data: TInputs) => console.log(data);
 
   // console.log(watch('name'));
 
@@ -46,8 +46,8 @@ const Contact: React.FC = () => {
             type="text"
             size={10}
             {...register('name', {
-              required: '* Nome obrigatório',
-              pattern: { value: /^[a-zA-ZÀ-ÿ']{3,}( [a-zA-ZÀ-ÿ']+)*$/, message: 'Nome inválido' },
+              required: 'OBRIGATÓRIO',
+              pattern: { value: /^[a-zA-ZÀ-ÿ']{3,}( [a-zA-ZÀ-ÿ']+)*$/, message: 'INVÁLIDO' },
               onBlur: async () => {
                 const result = await trigger('name', { shouldFocus: true });
               },
@@ -61,8 +61,8 @@ const Contact: React.FC = () => {
             type="email"
             size={10}
             {...register('email', {
-              required: '* E-mail obrigatório',
-              pattern: { value: /^[a-zA-Z0-9._%+-]{3,}@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/, message: 'E-mail inválido' },
+              required: 'OBRIGATÓRIO',
+              pattern: { value: /^[a-zA-Z0-9._%+-]{3,}@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/, message: 'INVÁLIDO' },
               onBlur: async () => {
                 const result = await trigger('email', { shouldFocus: true });
               },
@@ -76,8 +76,8 @@ const Contact: React.FC = () => {
             rows={10}
             cols={10}
             {...register('message', {
-              required: '* Mensagem obrigatória',
-              pattern: { value: /^[a-zA-Z0-9.,!?'"()\[\]{}\s]{3,}$/, message: 'Mensagem inválida' },
+              required: 'OBRIGATÓRIA',
+              pattern: { value: /^[a-zA-Z0-9.,!?'"()\[\]{}\s]{3,}$/, message: 'INVÁLIDA' },
               onBlur: async () => {
                 const result = await trigger('message', { shouldFocus: true });
               },
