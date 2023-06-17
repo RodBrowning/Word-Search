@@ -73,3 +73,27 @@ a {
     color: colors.$primary;
   }
 }
+
+body {
+  .Toastify__toast-container {
+    border-radius: 3px;
+    width: 100%;
+    .Toastify__toast {
+      max-width: 400px;
+      margin: auto;
+      .Toastify__toast-body {
+        text-align: center;
+        p {
+          font-family: $heading-font;
+          font-style: normal;
+          font-weight: 500;
+          line-height: 20px;
+          font-size: $nav-text-font-size;
+          color: white;
+          margin: 0;
+          margin-bottom: 0.4em;
+        }
+      }
+    }
+  }
+}

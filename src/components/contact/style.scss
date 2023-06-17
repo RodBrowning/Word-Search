@@ -27,7 +27,7 @@
       flex-grow: 1;
       font-family: mainStyle.$heading-font;
       font-weight: normal;
-      font-size: mainStyle.$h5-size;
+      font-size: mainStyle.$nav-text-font-size;
       color: mainStyle.$black-75;
       &:first-child {
         grid-area: username;

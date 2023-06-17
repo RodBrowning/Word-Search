@@ -12,6 +12,7 @@
 }
 @media only screen and (max-width: 768px) {
   .inner-panel-contact {
+    row-gap: 2em;
     .contact-text {
       grid-column: 1 / 13;
       br {

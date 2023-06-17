@@ -1,10 +1,13 @@
 import './style.scss';
 import './style-mobile.scss';
+import 'react-toastify/dist/ReactToastify.css';
 
 import { SubmitHandler, useForm } from 'react-hook-form';
+import { ToastContainer, toast } from 'react-toastify';
 
 import React from 'react';
 import { SendMsg } from '../../utils/fetchFunctions/sendEmail';
+import ToastPortal from '../toastPortal';
 
 type TInputs = {
   name: string;
@@ -23,10 +26,26 @@ const Contact: React.FC = () => {
   const onSubmit: SubmitHandler<TInputs> = async (data: TInputs) => {
     const res = await SendMsg(data.name, data.email, data.message);
     if (res.data === 'OK') {
-      alert('Mensagem enviada com sucesso. Aguarde sua resposta.');
       reset();
+      toast.success(
+        <>
+          <p>Mensagem enviada com sucesso</p>
+          <p>Aguarde sua resposta em breve</p>
+        </>,
+        {
+          autoClose: 10000,
+        }
+      );
     } else {
-      alert('O correu um erro. Mensagem não enviada.');
+      toast.error(
+        <>
+          <p>O correu um erro</p>
+          <p>Mensagem não enviada</p>
+        </>,
+        {
+          autoClose: 5000,
+        }
+      );
     }
   };
 
@@ -54,9 +73,9 @@ const Contact: React.FC = () => {
             size={10}
             {...register('name', {
               required: 'OBRIGATÓRIO',
-              pattern: { value: /^[a-zA-ZÀ-ÿ']{3,}( [a-zA-ZÀ-ÿ']+)*$/, message: 'INVÁLIDO' },
+              pattern: { value: /^[a-zA-ZÀ-ÿ'0-9]{3,}( [a-zA-ZÀ-ÿ'0-9]+)*$/, message: 'INVÁLIDO' },
               onBlur: async () => {
-                const result = await trigger('name', { shouldFocus: true });
+                await trigger('name', { shouldFocus: true });
               },
             })}
           />
@@ -71,7 +90,7 @@ const Contact: React.FC = () => {
               required: 'OBRIGATÓRIO',
               pattern: { value: /^[a-zA-Z0-9._%+-]{3,}@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/, message: 'INVÁLIDO' },
               onBlur: async () => {
-                const result = await trigger('email', { shouldFocus: true });
+                await trigger('email', { shouldFocus: true });
               },
             })}
           />
@@ -86,7 +105,7 @@ const Contact: React.FC = () => {
               required: 'OBRIGATÓRIA',
               pattern: { value: /^[a-zA-Z0-9.,!?'"()\[\]{}\s]{3,}$/, message: 'INVÁLIDA' },
               onBlur: async () => {
-                const result = await trigger('message', { shouldFocus: true });
+                await trigger('message', { shouldFocus: true });
               },
             })}
           />
@@ -106,6 +125,19 @@ const Contact: React.FC = () => {
           </span>
         </button>
       </form>
+      <ToastPortal>
+        <ToastContainer
+          position="top-center"
+          limit={3}
+          hideProgressBar
+          newestOnTop
+          closeOnClick
+          pauseOnFocusLoss
+          draggable
+          theme="colored"
+          icon={false}
+        />
+      </ToastPortal>
     </div>
   );
 };

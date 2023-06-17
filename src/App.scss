@@ -1,6 +1,11 @@
 @use '/src/scss/variables/colors' as colors;
 @use '/src/scss/fonts';
 
+html:root {
+  --toastify-color-success: #ff8c1a;
+  --toastify-color-error: #ff0d0d;
+}
+
 .App {
   height: 100%;
 }
