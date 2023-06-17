@@ -56,14 +56,17 @@ const Contact: React.FC = () => {
           <h1>Contacte me</h1>
         </span>
         <p>
-          Oi. Eu sou Rodrigo Moura e estudo desenvolvedor web desde 2017. Este é um dos meus projetos de portfólio. Você
-          poderá encontrar mais detalhes do seu desenvolvimento no Github:
-          <br />
+          Sou Rodrigo Moura, um desenvolvedor web com experiência desde 2017. Gostaria de apresentar a você um dos
+          projetos do meu portfólio, um "Caça Palavras" em javascript. Para obter mais detalhes sobre o seu
+          desenvolvimento, convido-o(a) a visitar o meu perfil no GitHub:{' '}
           <a href="https://github.com/RodBrowning/Word-Search" target="_black">
             https://github.com/RodBrowning/Word-Search
           </a>
         </p>
-        <p>Entre em contato para fazer qualquer pergunta ou sugestão.</p>
+        <p>
+          Estou à disposição para responder a qualquer pergunta ou sugestão que possa ter. Sinta-se à vontade para
+          entrar em contato e compartilhar suas ideias.
+        </p>
       </div>
       <form action="" className="contact-form" onSubmit={handleSubmit(onSubmit)}>
         <label htmlFor="name">
