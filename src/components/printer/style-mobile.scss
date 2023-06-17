@@ -58,3 +58,17 @@
     }
   }
 }
+
+@media only screen and (min-width: 1840px) {
+  .printer-component {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    max-width: 1500px;
+    width: 100%;
+    margin: auto;
+    .printer-config-board,
+    .boards-to-print {
+      grid-column: 2/12;
+    }
+  }
+}
