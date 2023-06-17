@@ -57,7 +57,7 @@ const Contact: React.FC = () => {
         </span>
         <p>
           Sou Rodrigo Moura, um desenvolvedor web com experiência desde 2017. Gostaria de apresentar a você um dos
-          projetos do meu portfólio, um "Caça Palavras" em javascript. Para obter mais detalhes sobre o seu
+          projetos do meu portfólio, um "Caça Palavras" em Javascript. Para obter mais detalhes sobre o seu
           desenvolvimento, convido-o(a) a visitar o meu perfil no GitHub:{' '}
           <a href="https://github.com/RodBrowning/Word-Search" target="_black">
             https://github.com/RodBrowning/Word-Search
