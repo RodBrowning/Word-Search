@@ -1,5 +1,13 @@
 @use '../../scss/index' as mainStyle;
 
+@media only screen and (max-width: 1300px) {
+  .inner-panel-game {
+    main {
+      grid-column: 4/13;
+    }
+  }
+}
+
 @media only screen and (max-width: 768px) {
   .inner-panel-game {
     aside {
@@ -52,14 +60,12 @@
 }
 
 @media only screen and (min-width: 1840px) {
-  .panel {
-    .inner-panel.inner-panel-game {
-      > aside {
-        grid-column: 2/4;
-      }
-      > main {
-        grid-column: 4/12;
-      }
+  .inner-panel-game {
+    > aside {
+      grid-column: 2/4;
+    }
+    > main {
+      grid-column: 4/12;
     }
   }
 }
