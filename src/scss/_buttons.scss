@@ -48,7 +48,8 @@ button[type='submit'] {
   border: 1px solid colors.$secondary;
   border-radius: 8px;
   width: 100%;
-  height: 48px;
+  height: 40px;
+  display: inline-flex;
   cursor: pointer;
   span {
     margin-right: 8px;

@@ -19,8 +19,9 @@
       'message message'
       'submit submit';
     grid-column-gap: 12px;
-    grid-row-gap: 24px;
-    align-items: start;
+    grid-row-gap: 20px;
+    align-items: baseline;
+    height: fit-content;
     label {
       display: inline-grid;
       gap: 8px;
