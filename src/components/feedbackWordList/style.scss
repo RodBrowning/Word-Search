@@ -31,17 +31,13 @@
           font-size: 1.2rem;
           line-height: 1.7rem;
         }
-        &.found::before {
-          position: absolute;
-          left: -1px;
-          top: 50%;
-          transform: translateY(-50%);
-          content: '';
-          width: 105%;
-          height: 5px;
-          background-color: mainStyle.$secondary;
-          border-radius: 15px;
-          z-index: -1;
+        &.found {
+          h5 {
+            text-decoration: line-through;
+            text-decoration-color: mainStyle.$primary;
+            text-decoration-style: wavy;
+            text-decoration-thickness: 2px;
+          }
         }
         &.blur-feedbacks {
           filter: blur(5px);
