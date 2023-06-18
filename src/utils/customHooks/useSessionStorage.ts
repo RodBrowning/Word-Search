@@ -1,6 +1,6 @@
-import { Dispatch, SetStateAction, useEffect, useState } from 'react';
+import { Dispatch, SetStateAction, useState } from 'react';
 
-type UseSessionStorageReturnType<T> = [T, Dispatch<SetStateAction<T>>, boolean, Error | null];
+type UseSessionStorageReturnType<T> = [T, Dispatch<T>, boolean, Error | null];
 
 const useSessionStorage = <T>(key: string, initialValue: T): UseSessionStorageReturnType<T> => {
   const [value, setValue] = useState<T>(() => {
@@ -15,33 +15,10 @@ const useSessionStorage = <T>(key: string, initialValue: T): UseSessionStorageRe
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState<Error | null>(null);
 
-  useEffect(() => {
-    const storageListener = (event: StorageEvent) => {
-      if (event.storageArea === window.sessionStorage && event.key === key) {
-        setIsLoading(true);
-        try {
-          setValue(JSON.parse(event.newValue!));
-          setIsLoading(false);
-          setError(null);
-        } catch (error) {
-          console.error(error);
-          setIsLoading(false);
-          setError(error as SetStateAction<Error | null>);
-        }
-      }
-    };
-
-    window.addEventListener('storage', storageListener);
-
-    return () => {
-      window.removeEventListener('storage', storageListener);
-    };
-  }, [key]);
-
-  const setSessionStorageValue: Dispatch<SetStateAction<T>> = (newValue: SetStateAction<T>) => {
+  const setSessionStorageValue: Dispatch<T> = (newValue: T) => {
     setIsLoading(true);
     try {
-      const valueToStore = newValue instanceof Function ? newValue(value) : newValue;
+      const valueToStore = newValue;
       window.sessionStorage.setItem(key, JSON.stringify(valueToStore));
       setValue(valueToStore);
       setIsLoading(false);
