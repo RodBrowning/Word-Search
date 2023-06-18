@@ -67,7 +67,14 @@ const Contact: React.FC = () => {
           entrar em contato e compartilhar suas ideias.
         </p>
       </div>
-      <form action="" className="contact-form" onSubmit={handleSubmit(onSubmit)}>
+      <form
+        className="contact-form"
+        onSubmit={(e) => {
+          e.preventDefault();
+          trigger();
+          handleSubmit(onSubmit);
+        }}
+      >
         <label htmlFor="name">
           Nome
           <input
