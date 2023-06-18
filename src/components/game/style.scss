@@ -52,7 +52,7 @@
         }
       }
     }
-    .words .word-list li span:not(.found) {
+    .words .word-list li span:is(.blur-feedbacks) {
       user-select: none;
     }
   }
