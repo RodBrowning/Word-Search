@@ -181,8 +181,11 @@ function SearchWordsGame() {
     return { column, row };
   }
 
-  function setFeedback(initPos: { row: number; column: number }, direction: string, word: string) {
-    const lastLetterPosition = getLastLetterPosition(initPos, direction, word);
+  function setFeedback(
+    initPos: { row: number; column: number },
+    lastLetterPosition: { row: number; column: number },
+    word: string
+  ) {
     feedbacks.push({
       word: word.charAt(0) + word.slice(1).toLowerCase(),
       found: false,
@@ -282,7 +285,7 @@ function SearchWordsGame() {
       let tries = 0;
       while (!isPosToPlace && tries <= maxTries) {
         const direction = directions[Math.floor(Math.random() * directions.length)];
-        let currentWord = word;
+        let currentWord = word.replaceAll(' ', '');
 
         const isReverse = Math.floor(Math.random() * 101) <= chanceToBeReversed;
         if (config.useReverse && isReverse) currentWord = currentWord.split('').reverse().join('');
@@ -295,7 +298,8 @@ function SearchWordsGame() {
             currentWord = currentWord.split('').reverse().join('');
             placedReverseWords += 1;
           }
-          setFeedback(initPos, direction, currentWord);
+          const lastPos = getLastLetterPosition(initPos, direction, currentWord);
+          setFeedback(initPos, lastPos, word);
           placedWords += 1;
         }
         tries += 1;
