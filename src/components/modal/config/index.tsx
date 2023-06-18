@@ -23,9 +23,10 @@ import ThemesSelector from '../../configThemesSelector';
 
 interface Props {
   setOpenModal: React.Dispatch<React.SetStateAction<boolean>>;
+  setPanelHeight: React.Dispatch<React.SetStateAction<number>>;
 }
 
-const ConfigModal: React.FC<Props> = ({ setOpenModal }) => {
+const ConfigModal: React.FC<Props> = ({ setOpenModal, setPanelHeight }) => {
   const gameState = useSelector((state: RootState) => {
     return state.game;
   });
@@ -47,6 +48,7 @@ const ConfigModal: React.FC<Props> = ({ setOpenModal }) => {
   const useReverseRef = useRef(gameState.useReverse);
   const themes = Object.keys(gameState.themes);
   const loadThemesRef = useRef(gameState.loadThemes);
+  const configPanelRef = useRef<HTMLDivElement>(null);
 
   const dispatch = useDispatch();
 
@@ -132,6 +134,9 @@ const ConfigModal: React.FC<Props> = ({ setOpenModal }) => {
   };
 
   useEffect(() => {
+    const configPanelHeight = configPanelRef.current?.offsetHeight;
+    setPanelHeight(configPanelHeight as number);
+
     return () => {
       if (thereAreSomeChanges()) {
         dispatchConfigChanges();
@@ -139,11 +144,12 @@ const ConfigModal: React.FC<Props> = ({ setOpenModal }) => {
       if (wasCustomWordsChanged()) {
         dispatchCustomWordsChanges();
       }
+      setPanelHeight(0);
     };
   }, []);
 
   return (
-    <div className="config-panel show-config">
+    <div className="config-panel show-config" ref={configPanelRef}>
       <div className="difficulty">
         <h5>Dificuldade</h5>
         <label

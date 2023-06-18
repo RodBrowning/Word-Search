@@ -28,6 +28,7 @@ import useLocalStorage from '../../utils/customHooks/useLocalStorage';
 const userLocale = navigator.language;
 
 const Game: React.FC = () => {
+  const [panelMinHeight, setPanelMinHeight] = useState(0);
   const availableSizeRef = useRef<HTMLElement>() as React.MutableRefObject<HTMLInputElement>;
   const [isConfigModalOpen, setIsConfigModalOpen] = useState(false);
   const [isFeedbacksHidden, setIsFeedbacksHidden] = useState(false);
@@ -91,7 +92,7 @@ const Game: React.FC = () => {
   }
 
   return (
-    <div className="inner-panel inner-panel-game">
+    <div className="inner-panel inner-panel-game" style={{ minHeight: panelMinHeight + 'px' }}>
       <aside>
         <menu>
           <button
@@ -110,7 +111,7 @@ const Game: React.FC = () => {
             </svg>
           </button>
           <Modal isOpen={isConfigModalOpen} setOpenModal={setIsConfigModalOpen}>
-            <ConfigModal setOpenModal={setIsConfigModalOpen} />
+            <ConfigModal setOpenModal={setIsConfigModalOpen} setPanelHeight={setPanelMinHeight} />
           </Modal>
           <button
             className="game-menu-action-button refresh-btn"
