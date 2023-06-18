@@ -27,6 +27,10 @@
       span {
         position: relative;
         display: inline-block;
+        h5 {
+          font-size: 1.2rem;
+          line-height: 1.7rem;
+        }
         &.found::before {
           position: absolute;
           left: -1px;
