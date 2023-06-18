@@ -6,11 +6,11 @@ import SearchWordGameController from '../../utils/SearchWordGameController';
 import { createSlice } from '@reduxjs/toolkit';
 // eslint-disable-next-line import/order
 import defaultInitialState from './initialState';
+import { getInitialGameState } from './Utils';
 
 const SWGC = SearchWordGameController();
 
-const item = window.localStorage.getItem('gameState');
-const initialState = item ? JSON.parse(item) : defaultInitialState;
+const initialState = getInitialGameState(defaultInitialState);
 
 export const gameSlice = createSlice({
   name: 'gameState',
