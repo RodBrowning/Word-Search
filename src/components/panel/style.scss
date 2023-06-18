@@ -21,6 +21,7 @@
     grid-template-columns: repeat(12, 1fr);
     grid-column: 1 / 13;
     grid-column-gap: 20px;
+    grid-template-rows: max-content;
     .under-bar {
       position: relative;
       &::before {
