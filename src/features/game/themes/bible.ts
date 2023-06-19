@@ -144,7 +144,6 @@ const Bible = () => {
       'Visao',
       'Zeloso',
       'Zion',
-      'Zona',
     ],
   };
 };
