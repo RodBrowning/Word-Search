@@ -1,6 +1,6 @@
-import IGameState from '../../interfaces/state';
-import ITheme from '../../interfaces/theme';
-import IUserContext from '../../interfaces/userContext';
+import IGameState from '../interfaces/state';
+import ITheme from '../interfaces/theme';
+import IUserContext from '../interfaces/userContext';
 
 export const getInitialGameState = (initialGameState: IGameState) => {
   const storedUserContext = window.localStorage.getItem('userContextState');
