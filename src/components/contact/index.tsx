@@ -107,7 +107,7 @@ const Contact: React.FC = () => {
             cols={10}
             {...register('message', {
               required: 'OBRIGATÓRIA',
-              pattern: { value: /^[a-zA-Z0-9.,!?'"()\[\]{}\s]{3,}$/, message: 'INVÁLIDA' },
+              pattern: { value: /^.{3,}$/s, message: 'INVÁLIDA' },
               onBlur: async () => {
                 await trigger('message');
               },
