@@ -23,6 +23,7 @@ const Contact: React.FC = () => {
     reset,
     formState: { errors },
   } = useForm<TInputs>();
+
   const onSubmit: SubmitHandler<TInputs> = async (data: TInputs) => {
     const res = await SendMsg(data.name, data.email, data.message);
     if (res.data === 'OK') {
@@ -67,14 +68,8 @@ const Contact: React.FC = () => {
           entrar em contato e compartilhar suas ideias.
         </p>
       </div>
-      <form
-        className="contact-form"
-        onSubmit={(e) => {
-          e.preventDefault();
-          trigger();
-          handleSubmit(onSubmit);
-        }}
-      >
+
+      <form className="contact-form" onSubmit={handleSubmit(onSubmit)}>
         <label htmlFor="name">
           Nome
           <input
@@ -84,7 +79,7 @@ const Contact: React.FC = () => {
               required: 'OBRIGATÓRIO',
               pattern: { value: /^[a-zA-ZÀ-ÿ'0-9]{3,}( [a-zA-ZÀ-ÿ'0-9]+)*$/, message: 'INVÁLIDO' },
               onBlur: async () => {
-                await trigger('name', { shouldFocus: true });
+                await trigger('name');
               },
             })}
           />
@@ -99,7 +94,7 @@ const Contact: React.FC = () => {
               required: 'OBRIGATÓRIO',
               pattern: { value: /^[a-zA-Z0-9._%+-]{3,}@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/, message: 'INVÁLIDO' },
               onBlur: async () => {
-                await trigger('email', { shouldFocus: true });
+                await trigger('email');
               },
             })}
           />
@@ -114,7 +109,7 @@ const Contact: React.FC = () => {
               required: 'OBRIGATÓRIA',
               pattern: { value: /^[a-zA-Z0-9.,!?'"()\[\]{}\s]{3,}$/, message: 'INVÁLIDA' },
               onBlur: async () => {
-                await trigger('message', { shouldFocus: true });
+                await trigger('message');
               },
             })}
           />
