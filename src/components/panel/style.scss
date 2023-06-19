@@ -24,6 +24,7 @@
     grid-template-rows: max-content;
     .under-bar {
       position: relative;
+      display: block;
       &::before {
         position: absolute;
         content: '';
