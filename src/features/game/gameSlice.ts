@@ -1,12 +1,12 @@
 /* eslint-disable no-param-reassign */
 
-import IGameState from '../../types/state';
+import IGameState from '../../interfaces/state';
 import SearchWordGameController from '../../utils/SearchWordGameController';
 // eslint-disable-next-line import/order
 import { createSlice } from '@reduxjs/toolkit';
 // eslint-disable-next-line import/order
 import defaultInitialState from './initialState';
-import { getInitialGameState } from './Utils';
+import { getInitialGameState } from './utils';
 
 const SWGC = SearchWordGameController();
 
@@ -17,10 +17,10 @@ export const gameSlice = createSlice({
   initialState,
   reducers: {
     generateNewBoardData: (state: IGameState) => {
-      state.boardData.matchEnded = false;
-      state.gameEnded = false;
-      state.matchPoints = 0;
-      state.boardData = SWGC.getBoardData(state);
+      state.context.user.boardData.hasMatchEnded = false;
+      state.context.game.hasEnded = false;
+      state.context.user.matchPoints = 0;
+      state.context.user.boardData = SWGC.getBoardData(state);
     },
     processWord: (state: IGameState, payloadAction: { payload: { word: string; color: string } }) => {
       state = SWGC.processWord(state, payloadAction.payload);
@@ -28,45 +28,45 @@ export const gameSlice = createSlice({
         state = SWGC.processEndedMatch(state);
       }
       if (SWGC.gameHasEnded(state)) {
-        state.gameEnded = true;
-        state.round += 1;
-        state.matches = 0;
+        state.context.game.hasEnded = true;
+        state.context.user.round += 1;
+        state.context.user.matches = 0;
       }
     },
     setAvailableSpace: (state: IGameState, payloadAction: { payload: number }) => {
-      state.availableSpace = payloadAction.payload;
+      state.context.game.availableSpace = payloadAction.payload;
     },
     setDifficulty: (state: IGameState, payloadAction: { payload: 'easy' | 'normal' | 'hard' }) => {
-      state.difficulty.current = payloadAction.payload;
+      state.context.user.currentDifficulty = payloadAction.payload;
     },
     setCustomWords: (state: IGameState, payloadAction: { payload: string[] }) => {
-      state.customWords = payloadAction.payload;
+      state.context.user.customWords = payloadAction.payload;
     },
     setUseCustom: (state: IGameState, payloadAction: { payload: boolean }) => {
-      state.useCustom = payloadAction.payload;
+      state.context.user.useCustom = payloadAction.payload;
     },
     setUseReverse: (state: IGameState, payloadAction: { payload: boolean }) => {
-      state.useReverse = payloadAction.payload;
+      state.context.user.useReverse = payloadAction.payload;
     },
     setLoadThemes: (state: IGameState, payloadAction: { payload: string[] }) => {
-      state.loadThemes = payloadAction.payload;
+      state.context.user.loadThemes = payloadAction.payload;
     },
     setNextMatch: (state: IGameState) => {
-      state.matches += 1;
+      state.context.user.matches += 1;
     },
     setHiddenWords: (state: IGameState, payloadAction: { payload: boolean }) => {
-      state.hideFeedbacks = payloadAction.payload;
+      state.context.user.hideFeedbacks = payloadAction.payload;
     },
     setMatchPoints: (state: IGameState, payloadAction: { payload: number }) => {
-      state.matchPoints += payloadAction.payload;
+      state.context.user.matchPoints += payloadAction.payload;
     },
     clearMatchPoints: (state: IGameState) => {
-      state.matchPoints = 0;
+      state.context.user.matchPoints = 0;
     },
     resetGame: (state: IGameState) => {
-      state.points = 0;
-      state.matchPoints = 0;
-      state.matches = 1;
+      state.context.user.points = 0;
+      state.context.user.matchPoints = 0;
+      state.context.user.matches = 1;
     },
   },
 });

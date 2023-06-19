@@ -1,23 +1,26 @@
-import IGameState from '../../types/state';
-import ITheme from '../../types/theme';
+import IGameState from '../../interfaces/state';
+import ITheme from '../../interfaces/theme';
+import IUserContext from '../../interfaces/userContext';
 
-export const getInitialGameState = (defaultInitialGameState: IGameState) => {
-  const localState = window.localStorage.getItem('gameState');
-  let currentGameState = localState ? JSON.parse(localState) : defaultInitialGameState;
+export const getInitialGameState = (initialGameState: IGameState) => {
+  const storedUserContext = window.localStorage.getItem('userContextState');
+  let userContext = storedUserContext ? JSON.parse(storedUserContext) : initialGameState.context.user;
+  const gameThemes = initialGameState.context.game.themes;
 
-  currentGameState = ensureItHasSomeThemeToLoad(currentGameState, defaultInitialGameState.themes);
+  userContext = ensureItHasSomeThemeToLoad(userContext, gameThemes);
+  initialGameState.context.user = userContext;
 
-  return { ...currentGameState, themes: defaultInitialGameState.themes };
+  return initialGameState;
 };
 
-const ensureItHasSomeThemeToLoad = (gameState: IGameState, currentGameThemes: ITheme) => {
-  const notHaveRequiredThemesToLoad = !gameState.loadThemes.some((themeToLoad: string) => {
-    return currentGameThemes.hasOwnProperty(themeToLoad);
+const ensureItHasSomeThemeToLoad = (userContext: IUserContext, gameThemes: ITheme) => {
+  const notHaveRequiredThemesToLoad = !userContext.loadThemes.some((themeToLoad: string) => {
+    return gameThemes.hasOwnProperty(themeToLoad);
   });
 
   if (notHaveRequiredThemesToLoad) {
-    gameState.loadThemes.push(Object.keys(currentGameThemes)[0]);
+    userContext.loadThemes.push(Object.keys(gameThemes)[0]);
   }
 
-  return gameState;
+  return userContext;
 };
