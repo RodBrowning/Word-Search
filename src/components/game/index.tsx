@@ -15,7 +15,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import Board from '../board';
 import BoardSelector from '../boardSelector';
 import ConfigModal from '../modal/config';
-import IFeedback from '../../types/feedback';
+import IFeedback from '../../interfaces/feedback';
 import InformationComponent from '../modal/info/informationComponent';
 import InformationModal from '../modal/info/informationModal';
 // eslint-disable-next-line import/order
@@ -38,47 +38,51 @@ const Game: React.FC = () => {
     return state.game;
   });
   const dispatch = useDispatch();
-  const [, setLocalStorageValue] = useLocalStorage('gameState', gameState);
 
-  const remainingWordsReducer = (total: number, feedback: IFeedback) => {
+  const userContext = gameState.context.user;
+  const gameContext = gameState.context.game;
+  const [, setLocalStorageValue] = useLocalStorage('userContextState', userContext);
+
+  const remainingWordsReducer = (total: number, feedback: IFeedback): number => {
     return feedback.found ? total - 1 : total;
   };
-  const remainingWords = gameState.boardData.feedbacks.reduce(
+
+  const remainingWords = [...userContext.boardData.feedbacks].reduce<number>(
     remainingWordsReducer,
-    gameState.boardData.feedbacks.length
+    userContext.boardData.feedbacks.length
   );
 
   useEffect(() => {
     const availableSpace = availableSizeRef.current?.getBoundingClientRect().width;
     dispatch(setAvailableSpace(availableSpace));
-    if (gameState.boardData.board.length === 0) {
+    if (userContext.boardData.board.length === 0) {
       dispatch(generateNewBoardData());
     }
   }, []);
 
   useLayoutEffect(() => {
-    setIsFeedbacksHidden(gameState.hideFeedbacks);
+    setIsFeedbacksHidden(userContext.hideFeedbacks);
   }, []);
 
   useEffect(() => {
-    setLocalStorageValue(gameState);
-    if (gameState.boardData.matchEnded && !gameState.gameEnded) {
+    setLocalStorageValue(userContext);
+    if (userContext.boardData.hasMatchEnded && !gameContext.hasEnded) {
       setInfoMessage(
         <>
           <h4>Parabéns!!!</h4>
           <br />
-          <h5>Você completou o {gameState.matches + (gameState.round - 1) * gameState.matchesLimit}º nivel</h5>
+          <h5>Você completou o {userContext.matches + (userContext.round - 1) * gameContext.matchesLimit}º nivel</h5>
         </>
       );
       setIsInformationModalOpen(true);
     }
-    if (gameState.gameEnded) {
+    if (gameContext.hasEnded) {
       setInfoMessage(
         <>
           <h4>Parabéns!!!</h4>
           <br />
-          <h5>Você completou a {gameState.round - 1}ª rodada</h5>
-          <h5>Iniciando {gameState.round}ª rodada</h5>
+          <h5>Você completou a {userContext.round - 1}ª rodada</h5>
+          <h5>Iniciando {userContext.round}ª rodada</h5>
         </>
       );
       setIsInformationModalOpen(true);
@@ -129,11 +133,11 @@ const Game: React.FC = () => {
           <button
             className={`game-menu-action-button ${isFeedbacksHidden ? 'active' : ''}`}
             title={`Adicione mais complexidade ofuscando as palavras do gabarito e ganhe pontos extra. No modo Fácil ganhe ${Math.round(
-              (gameState.difficulty.parameters.easy.hiddenWordsExtraPoints - 1) * 100
+              (gameContext.difficulty.parameters.easy.hiddenWordsExtraPoints - 1) * 100
             )}%, no Médio ${Math.round(
-              (gameState.difficulty.parameters.normal.hiddenWordsExtraPoints - 1) * 100
+              (gameContext.difficulty.parameters.normal.hiddenWordsExtraPoints - 1) * 100
             )}% e no Difícil ${Math.round(
-              (gameState.difficulty.parameters.hard.hiddenWordsExtraPoints - 1) * 100
+              (gameContext.difficulty.parameters.hard.hiddenWordsExtraPoints - 1) * 100
             )}% sobre o total de pontos ganhos em cada partida.`}
             type="button"
             onClick={() => {
@@ -174,30 +178,31 @@ const Game: React.FC = () => {
           <h3>
             {remainingWords > 0 ? `${remainingWords} ${remainingWords > 1 ? 'Palavras' : 'Palavra'}` : 'Palavras'}
           </h3>
-          <WordList feedbacks={gameState.boardData.feedbacks} blurFeedbaks={isFeedbacksHidden} />
+          <WordList feedbacks={userContext.boardData.feedbacks} blurFeedbaks={isFeedbacksHidden} />
         </div>
       </aside>
       <main ref={availableSizeRef}>
         <BoardSelector
-          board={gameState.boardData.board}
-          feedbacks={gameState.boardData.feedbacks}
+          board={userContext.boardData.board}
+          feedbacks={userContext.boardData.feedbacks}
           handleFoundWord={(word: string, color: string) => {
             dispatch(processWord({ word, color }));
           }}
         >
-          <Board board={gameState.boardData.board} />
+          <Board board={userContext.boardData.board} />
         </BoardSelector>
         <div className="placar">
           <div className="pontos">
             <h4>
-              <span>{(gameState.points + gameState.matchPoints).toLocaleString(userLocale)}</span> <span>Pontos</span>
+              <span>{(userContext.points + userContext.matchPoints).toLocaleString(userLocale)}</span>{' '}
+              <span>Pontos</span>
             </h4>
           </div>
           <div className="nivel">
             <span>Nível</span>{' '}
             <span>
-              {String(gameState.matches + (gameState.round - 1) * gameState.matchesLimit).padStart(2, '0')}/
-              {String(gameState.matchesLimit * gameState.round)}
+              {String(userContext.matches + (userContext.round - 1) * gameContext.matchesLimit).padStart(2, '0')}/
+              {String(gameContext.matchesLimit * userContext.round)}
             </span>
           </div>
         </div>

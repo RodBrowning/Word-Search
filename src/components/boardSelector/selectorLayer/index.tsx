@@ -4,7 +4,7 @@ import { Layer, Stage } from 'react-konva';
 import React, { useLayoutEffect, useState } from 'react';
 import { getDirection, getWordLength } from '../utils/utils';
 
-import IFeedback from '../../../types/feedback';
+import IFeedback from '../../../interfaces/feedback';
 import Selector from '../selectors/selector';
 // eslint-disable-next-line import/order
 import colors from './colors';

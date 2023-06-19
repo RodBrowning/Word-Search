@@ -3,7 +3,7 @@ import './style.scss';
 import React, { ReactNode, useEffect, useRef, useState } from 'react';
 
 import FoundWordsStage from './foundWordsLayer';
-import IFeedback from '../../types/feedback';
+import IFeedback from '../../interfaces/feedback';
 // eslint-disable-next-line import/order
 import SelectorStage from './selectorLayer';
 

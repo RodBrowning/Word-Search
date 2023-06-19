@@ -4,15 +4,16 @@ import './style-mobile.scss';
 import React, { useEffect, useLayoutEffect, useState } from 'react';
 
 import CustomWordListConfig from '../../configCustomWordList';
-import IFeedback from '../../../types/feedback';
-import IPrintConfig from '../../../types/printConfig';
+import IFeedback from '../../../interfaces/feedback';
+import IPrintConfig from '../../../interfaces/printConfig';
 import RangeInputComponent from '../../rangeInputComponent';
 import { RootState } from '../../../app/store';
 import SearchWordsGame from '../../../utils/SearchWordGame';
 import ThemesSelector from '../../configThemesSelector';
-// eslint-disable-next-line import/order
 import { useSelector } from 'react-redux';
 import useSessionStorage from '../../../utils/customHooks/useSessionStorage';
+
+// eslint-disable-next-line import/order
 
 type setBoardsToPrintParam = {
   board: string[][];
@@ -38,7 +39,7 @@ const PrinterConfigPanel: React.FC<Props> = ({
   const gameState = useSelector((state: RootState) => {
     return state.game;
   });
-  const { themes } = gameState;
+  const { themes } = gameState.context.game;
   const themesTitles = Object.keys(themes);
   const minCustomWordsLength = 1;
 

@@ -5,7 +5,7 @@ import React, { useEffect, useRef, useState } from 'react';
 
 import Board from '../board';
 import FeedbackBoard from '../feedbackBoard';
-import IFeedback from '../../types/feedback';
+import IFeedback from '../../interfaces/feedback';
 // eslint-disable-next-line import/order
 import PrinterConfigPanel from './configPanel';
 import WordList from '../feedbackWordList';

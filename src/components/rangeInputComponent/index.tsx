@@ -48,6 +48,7 @@ const RangeInputComponent: React.FC<Props> = ({ name, labelText, min, max, defau
         </h5>
         <div className="input-range">
           <input
+            id={name}
             type="range"
             onChange={(e) => {
               return handleChange(e.target);

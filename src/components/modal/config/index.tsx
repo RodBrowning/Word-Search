@@ -30,30 +30,32 @@ const ConfigModal: React.FC<Props> = ({ setOpenModal, setPanelHeight }) => {
   const gameState = useSelector((state: RootState) => {
     return state.game;
   });
+  const gameContext = gameState.context.game;
+  const userContext = gameState.context.user;
   const minCustomWordsLength = 10;
 
   const [openResetConfirmationModal, setOpenResetConfirmationModal] = useState(false);
   const [configState, setConfigState] = useState({
-    difficulty: gameState.difficulty.current,
-    customWordList: gameState.customWords,
-    customWordListDisplay: gameState.customWords.join(', '),
-    useCustom: gameState.useCustom,
-    useReverse: gameState.useReverse,
-    loadThemes: gameState.loadThemes,
+    difficulty: userContext.currentDifficulty,
+    customWordList: userContext.customWords,
+    customWordListDisplay: userContext.customWords.join(', '),
+    useCustom: userContext.useCustom,
+    useReverse: userContext.useReverse,
+    loadThemes: userContext.loadThemes,
   });
 
-  const difficultyRef = useRef(gameState.difficulty.current);
-  const customWordListRef = useRef(gameState.customWords);
-  const useCustomRef = useRef(gameState.useCustom);
-  const useReverseRef = useRef(gameState.useReverse);
-  const themes = Object.keys(gameState.themes);
-  const loadThemesRef = useRef(gameState.loadThemes);
+  const difficultyRef = useRef(userContext.currentDifficulty);
+  const customWordListRef = useRef(userContext.customWords);
+  const useCustomRef = useRef(userContext.useCustom);
+  const useReverseRef = useRef(userContext.useReverse);
+  const themes = Object.keys(gameContext.themes);
+  const loadThemesRef = useRef(userContext.loadThemes);
   const configPanelRef = useRef<HTMLDivElement>(null);
 
   const dispatch = useDispatch();
 
   const dispatchConfigChanges = () => {
-    if (gameState.difficulty.current !== difficultyRef.current) {
+    if (userContext.currentDifficulty !== difficultyRef.current) {
       dispatch(reduxSetDifficulty(difficultyRef.current));
     }
     dispatch(reduxSetUseCustomState(useCustomRef.current));
@@ -123,14 +125,14 @@ const ConfigModal: React.FC<Props> = ({ setOpenModal, setPanelHeight }) => {
 
   const thereAreSomeChanges = () => {
     return (
-      gameState.difficulty.current !== difficultyRef.current ||
-      gameState.useCustom !== useCustomRef.current ||
-      gameState.useReverse !== useReverseRef.current ||
-      JSON.stringify(gameState.loadThemes) !== JSON.stringify(loadThemesRef.current)
+      userContext.currentDifficulty !== difficultyRef.current ||
+      userContext.useCustom !== useCustomRef.current ||
+      userContext.useReverse !== useReverseRef.current ||
+      JSON.stringify(userContext.loadThemes) !== JSON.stringify(loadThemesRef.current)
     );
   };
   const wasCustomWordsChanged = () => {
-    return JSON.stringify(gameState.customWords) !== JSON.stringify(customWordListRef.current);
+    return JSON.stringify(userContext.customWords) !== JSON.stringify(customWordListRef.current);
   };
 
   useEffect(() => {
@@ -154,7 +156,7 @@ const ConfigModal: React.FC<Props> = ({ setOpenModal, setPanelHeight }) => {
         <h5>Dificuldade</h5>
         <label
           htmlFor="easy"
-          title={`Ganhe ${gameState.difficulty.parameters.easy.pointsByFoundWord} ponto por palavra encontrata.`}
+          title={`Ganhe ${gameContext.difficulty.parameters.easy.pointsByFoundWord} ponto por palavra encontrata.`}
         >
           <input
             type="radio"
@@ -170,7 +172,7 @@ const ConfigModal: React.FC<Props> = ({ setOpenModal, setPanelHeight }) => {
         </label>
         <label
           htmlFor="normal"
-          title={`Ganhe ${gameState.difficulty.parameters.normal.pointsByFoundWord} ponto por palavra encontrata.`}
+          title={`Ganhe ${gameContext.difficulty.parameters.normal.pointsByFoundWord} ponto por palavra encontrata.`}
         >
           <input
             type="radio"
@@ -186,7 +188,7 @@ const ConfigModal: React.FC<Props> = ({ setOpenModal, setPanelHeight }) => {
         </label>
         <label
           htmlFor="hard"
-          title={`Ganhe ${gameState.difficulty.parameters.hard.pointsByFoundWord} ponto por palavra encontrata.`}
+          title={`Ganhe ${gameContext.difficulty.parameters.hard.pointsByFoundWord} ponto por palavra encontrata.`}
         >
           <input
             type="radio"
@@ -206,11 +208,11 @@ const ConfigModal: React.FC<Props> = ({ setOpenModal, setPanelHeight }) => {
         <label
           htmlFor="use-reverse"
           title={`Adicione mais complexidade com palavras invertidas e ganhe pontos extra. No o modo Fácil ganhe ${Math.round(
-            (gameState.difficulty.parameters.easy.reverseWordsExtraPoints - 1) * 100
+            (gameContext.difficulty.parameters.easy.reverseWordsExtraPoints - 1) * 100
           )}%, no Médio ${Math.round(
-            (gameState.difficulty.parameters.normal.reverseWordsExtraPoints - 1) * 100
+            (gameContext.difficulty.parameters.normal.reverseWordsExtraPoints - 1) * 100
           )}% e no Difícil ${Math.round(
-            (gameState.difficulty.parameters.hard.reverseWordsExtraPoints - 1) * 100
+            (gameContext.difficulty.parameters.hard.reverseWordsExtraPoints - 1) * 100
           )}% sobre o total de pontos ganhos em cada partida. A quantidade aumenta com o decorrer do jogo.`}
         >
           <input

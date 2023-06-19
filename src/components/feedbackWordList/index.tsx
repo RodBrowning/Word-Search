@@ -1,7 +1,7 @@
 import './style.scss';
 import './style-mobile.scss';
 
-import IFeedback from '../../types/feedback';
+import IFeedback from '../../interfaces/feedback';
 // eslint-disable-next-line import/order
 import React from 'react';
 

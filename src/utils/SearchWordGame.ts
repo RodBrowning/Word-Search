@@ -1,6 +1,6 @@
 /* eslint-disable no-param-reassign */
-import IConfig from '../types/configInterface';
-import IFeedback from '../types/feedback';
+import IConfig from '../interfaces/configInterface';
+import IFeedback from '../interfaces/feedback';
 
 function SearchWordsGame() {
   const directions = ['horizontal', 'vertical', 'crossedUp', 'crossedDown'];
