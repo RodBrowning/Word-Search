@@ -13,7 +13,7 @@
   background: mainStyle.$main-bg-gradient;
   z-index: 0;
   padding-inline: 24px;
-  padding-top: 3em;
+  padding-top: clamp(3em, 5vw, 5em);
   padding-bottom: 4em;
   .inner-panel {
     z-index: mainStyle.$zFirstLayer;
