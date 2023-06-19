@@ -14,7 +14,7 @@
   }
   p {
     margin: 0;
-    font-size: mainStyle.$h6-size;
+    font-size: clamp(0.7125rem, 3vw, 0.9rem);
     font-weight: 400;
     color: mainStyle.$black-75;
     line-height: 32px;
