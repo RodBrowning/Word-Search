@@ -5,7 +5,7 @@ export const store = configureStore({
   reducer: {
     game: gameReducer,
   },
-  devTools: process.env.NODE_ENV === 'development',
+  devTools: import.meta.env.DEV,
 });
 
 export type RootState = ReturnType<typeof store.getState>;
