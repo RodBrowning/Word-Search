@@ -253,7 +253,6 @@ const SelectorStage: React.FC<Props> = ({
     <Stage
       ontouchstart={handleOnMouseDownEvent}
       onmousedown={handleOnMouseDownEvent}
-      id="konva-stage"
       width={stageWidth}
       height={stageHeight}
     >
