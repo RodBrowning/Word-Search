@@ -85,9 +85,9 @@ const About: React.FC = () => {
           </div>
         </div>
         <p>
-          Bem-vindo ao <strong>incrível</strong> mundo de <strong>caça-palavras!</strong> Nossa plataforma é o lugar
-          perfeito para desafiar sua mente e se divertir ao mesmo tempo. Com uma variedade de opções{' '}
-          <strong>personalizáveis</strong>, você pode criar e jogar caça-palavras de acordo com suas preferências.
+          Bem-vindo ao <strong>incrível</strong> mundo dos <strong>Caça-palavras!</strong> Este é o lugar perfeito para
+          desafiar sua mente e se divertir ao mesmo tempo. Com uma variedade de opções <strong>personalizáveis</strong>,
+          você pode criar e jogar Caça-palavras de acordo com suas preferências.
         </p>
         <p>
           Na <strong>página de jogo</strong>, você tem <strong>controle total</strong> sobre a experiência. É possível
@@ -103,7 +103,7 @@ const About: React.FC = () => {
         </p>
         <p>
           Para tornar a experiência ainda mais pessoal, é possível que você insira suas próprias{' '}
-          <strong>palavras personalizadas</strong> nos jogos. Assim, você pode criar caça-palavras com nomes de pessoas
+          <strong>palavras personalizadas</strong> nos jogos. Assim, você pode criar Caça-palavras com nomes de pessoas
           especiais, lugares significativos ou termos exclusivos que fazem parte da sua vida. Deixe sua{' '}
           <strong>imaginação</strong> correr solta e crie desafios únicos para si mesmo ou para compartilhar com amigos
           e familiares.
@@ -111,7 +111,7 @@ const About: React.FC = () => {
         <p>
           Se você gosta de um pouco mais de <strong>mistério</strong>, também existe a opção de{' '}
           <strong>ocultar o gabarito</strong>. Dessa forma, você pode testar suas habilidades sem ter todas as respostas
-          à vista. Desvendar cada palavra escondida se torna uma pequena vitória a cada vez.
+          à vista. Desvendar cada palavra escondida se torna uma pequena vitória.
         </p>
         <p>
           Ao jogar, você encontrará um <strong>quadro de letras</strong> com palavras escondidas. Basta selecionar as
@@ -130,13 +130,13 @@ const About: React.FC = () => {
           experiência de jogo <strong>contínua</strong> e estimulante.
         </p>
         <p>
-          Além disso, ofereço uma <strong>página exclusiva</strong> para <strong>impressão dos jogos</strong>. Nessa
-          página, você encontrará um <strong>painel de configuração</strong> totalmente personalizável, permitindo que
-          você ajuste todos os aspectos do jogo antes de imprimi-lo. Dessa forma, você pode levar o desafio com você
-          para onde quer que vá e compartilhá-lo com outras pessoas.
+          Além disso, a plataforma ofereçe uma <strong>página exclusiva</strong> para{' '}
+          <strong>impressão dos jogos</strong>. Nessa página, você encontrará um <strong>painel de configuração</strong>{' '}
+          totalmente personalizável, permitindo que você ajuste todos os aspectos do jogo antes de imprimi-lo. Dessa
+          forma, você pode levar o desafio com você para onde quer que vá e compartilhá-lo com outras pessoas.
         </p>
         <p>
-          Estou <strong>empolgados</strong> em fazer parte da sua jornada de <strong>caça-palavras</strong>.{' '}
+          Estou <strong>empolgado</strong> em fazer parte da sua jornada nos <strong>Caça-palavras</strong>.{' '}
           <strong>Explore</strong> nossa plataforma, crie jogos desafiadores e mergulhe na <strong>diversão</strong> de
           descobrir palavras ocultas. <strong>Divirta-se</strong>, desafie sua mente e aproveite todas as{' '}
           <strong>possibilidades</strong>.
