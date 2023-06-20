@@ -17,5 +17,9 @@
       'customWords'
       'themes'
       'actions';
+    grid-row-gap: 0;
+    > div:not(:first-child, :last-child) {
+      margin-bottom: 1.5em;
+    }
   }
 }

@@ -41,14 +41,6 @@
   .printer-component {
     grid-column: 1/13;
     width: 100%;
-    .sizes-container,
-    .amount-container {
-      .input-range-container {
-        &:first-child {
-          margin-bottom: 24px;
-        }
-      }
-    }
     .boards-to-print {
       .print-board {
         .board-container {
