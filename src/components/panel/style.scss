@@ -15,6 +15,7 @@
   padding-inline: 24px;
   padding-top: clamp(3em, 5vw, 5em);
   padding-bottom: 4em;
+  flex: 1;
   .inner-panel {
     z-index: mainStyle.$zFirstLayer;
     display: grid;

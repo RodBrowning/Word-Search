@@ -191,14 +191,14 @@ const Game: React.FC = () => {
         >
           <Board board={userContext.boardData.board} />
         </BoardSelector>
-        <div className="placar">
-          <div className="pontos">
+        <div className="score">
+          <div className="points">
             <h4>
               <span>{(userContext.points + userContext.matchPoints).toLocaleString(userLocale)}</span>{' '}
               <span>Pontos</span>
             </h4>
           </div>
-          <div className="nivel">
+          <div className="level">
             <span>Nível</span>{' '}
             <span>
               {String(userContext.matches + (userContext.round - 1) * gameContext.matchesLimit).padStart(2, '0')}/

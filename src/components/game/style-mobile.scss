@@ -44,19 +44,45 @@
     }
     main {
       grid-column: 1 / 13;
-      .placar {
-        width: fit-content;
-        margin: auto;
-        margin-top: 54px;
+
+      display: flex;
+      flex-direction: column-reverse;
+      gap: 1rem;
+      .score {
+        margin: 0;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
         text-align: left;
         &::before {
-          left: -29px;
+          left: unset;
+          right: -18px;
+        }
+        .points > h4,
+        .level {
+          display: flex;
+          flex-direction: column;
+        }
+        .points > h4 span {
+          &:last-child {
+            font-size: mainStyle.$h5-size;
+          }
+        }
+        .level {
+          margin-top: 0;
+          align-items: flex-end;
+          span {
+            &:first-child {
+              font-size: mainStyle.$h5-size;
+            }
+          }
         }
       }
     }
   }
 }
-@media only screen and (max-width: 360px) {
+
+@media only screen and (max-width: 425px) {
 }
 
 @media only screen and (min-width: 1840px) {
