@@ -225,7 +225,7 @@ function SearchWordsGame() {
     for (let i = 0; i < board.length; i++) {
       for (let j = 0; j < board[i].length; j++) {
         if (!board[i][j]) {
-          const letter = String.fromCharCode(Math.random() * (90 - 65) + 65);
+          const letter = String.fromCharCode(Math.round(Math.random() * 25) + 65);
           board[i][j] = letter;
         }
       }
