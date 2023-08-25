@@ -150,7 +150,7 @@ const PrinterConfigPanel: React.FC<Props> = ({
           name="numOfColumns"
           labelText="Numero de colunas"
           min={10}
-          max={40}
+          max={38}
           defaultValue={printSession.columns}
           setInputValue={(columns: number) => {
             setColumns(columns);
